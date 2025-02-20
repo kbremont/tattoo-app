@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tattooapp.v1;
+
+option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
+
+message User {
+    int32 user_id = 1;
+    bool is_artist = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+}

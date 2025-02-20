@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package tattooapp.v1;
+
+import "tattooapp/v1/user.proto";
+
+option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
+
+service ArtistService {
+    rpc LinkInstagramAccount(LinkInstagramAccountRequest) returns (LinkInstagramAccountResponse);
+}
+
+message LinkInstagramAccountRequest {
+    User user = 1;
+    string instagram_handle = 2;
+}
+
+message LinkInstagramAccountResponse {
+    string instagram_handle = 1;
+}
