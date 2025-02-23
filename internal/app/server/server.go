@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"golang.org/x/net/http2"
@@ -20,16 +21,19 @@ type (
 	}
 
 	// Config stores configuration options for a Server.
-	Config struct{}
+	Config struct {
+		// Port is the port on which the server will listen.
+		Port int
+	}
 )
 
 // New creates a new *Server.
-func New(ctx context.Context, path string, handler http.Handler) (*Server, error) {
+func New(ctx context.Context, path string, handler http.Handler, cfg *Config) (*Server, error) {
 	mux := http.NewServeMux()
 	mux.Handle(path, handler)
 	srv := &Server{
 		server: &http.Server{
-			Addr:    "localhost:8000",
+			Addr:    fmt.Sprintf(":%d", cfg.Port),
 			Handler: h2c.NewHandler(mux, &http2.Server{}),
 		},
 	}
