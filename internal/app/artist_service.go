@@ -13,8 +13,8 @@ type ArtistService struct{}
 
 var _ pbconnect.ArtistServiceHandler = new(ArtistService)
 
-func NewArtistService(ctx context.Context) (*ArtistService, error) {
-	return &ArtistService{}, nil
+func NewArtistService(ctx context.Context) *ArtistService {
+	return &ArtistService{}
 }
 
 // LinkInstagramAccount implements tattooapp.v1.ArtistService.LinkInstagramAccount.

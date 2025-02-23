@@ -16,8 +16,8 @@ var _ pbconnect.UserServiceHandler = new(UserService)
 var count = 0
 var users = make(map[int]*v1pb.User)
 
-func NewUserService(ctx context.Context) (*UserService, error) {
-	return &UserService{}, nil
+func NewUserService(ctx context.Context) *UserService {
+	return &UserService{}
 }
 
 // CreateUser implements tattooapp.v1.UserService.CreateUser.
