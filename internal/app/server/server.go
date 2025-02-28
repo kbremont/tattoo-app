@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/kbremont/tattoo-app/internal/pkg/log"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )
@@ -28,7 +29,7 @@ type (
 )
 
 // New creates a new *Server.
-func New(ctx context.Context, path string, handler http.Handler, cfg *Config) (*Server, error) {
+func New(ctx context.Context, path string, handler http.Handler, cfg *Config, l log.Logger) (*Server, error) {
 	mux := http.NewServeMux()
 	mux.Handle(path, handler)
 	srv := &Server{
@@ -39,12 +40,16 @@ func New(ctx context.Context, path string, handler http.Handler, cfg *Config) (*
 	}
 
 	srv.Serve = func(cctx context.Context) error {
+		l.Info(cctx, "STARTING server!!!!!!!!!!!!!!")
+		logger := log.GetLogger(cctx)
+		logger.Info(cctx, "NEW LOGGER!!!")
 		go func() {
 			err := srv.server.ListenAndServe()
 			if err != nil {
-				// TODO: log error
-				panic(err)
+				l.Fatal(ctx, "ERROR STARTING SERVER", log.Error(err))
 			}
+			l.Info(ctx, "SERVER STARTED!!!!!!!!!!!!!!")
+			logger.Info(ctx, "NEW LOGGER IN GO ROUTINE!")
 		}()
 
 		return nil

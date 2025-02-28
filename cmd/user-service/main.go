@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/kbremont/tattoo-app/internal/pkg/config"
+	"github.com/kbremont/tattoo-app/internal/pkg/log"
 )
 
 func main() {
@@ -21,6 +22,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	ctx = log.WithLogger(ctx, app.logger)
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
