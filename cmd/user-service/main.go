@@ -2,12 +2,16 @@ package main
 
 import (
 	"context"
+	"embed"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/kbremont/tattoo-app/internal/pkg/config"
 )
+
+//go:embed migrations/*
+var filesys embed.FS
 
 func main() {
 	ctx := context.Background()
@@ -20,6 +24,14 @@ func main() {
 	app, err := newApp(ctx, cfg)
 	if err != nil {
 		panic(err)
+	}
+
+	if cfg.MigrateMode { // run DB migrations and exit
+		if err := app.migrate(ctx); err != nil {
+			panic(err)
+		}
+
+		return
 	}
 
 	done := make(chan os.Signal, 1)
