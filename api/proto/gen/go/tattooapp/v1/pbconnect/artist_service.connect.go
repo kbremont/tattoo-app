@@ -36,11 +36,15 @@ const (
 	// ArtistServiceLinkInstagramAccountProcedure is the fully-qualified name of the ArtistService's
 	// LinkInstagramAccount RPC.
 	ArtistServiceLinkInstagramAccountProcedure = "/tattooapp.v1.ArtistService/LinkInstagramAccount"
+	// ArtistServiceCreateArtistProcedure is the fully-qualified name of the ArtistService's
+	// CreateArtist RPC.
+	ArtistServiceCreateArtistProcedure = "/tattooapp.v1.ArtistService/CreateArtist"
 )
 
 // ArtistServiceClient is a client for the tattooapp.v1.ArtistService service.
 type ArtistServiceClient interface {
 	LinkInstagramAccount(context.Context, *connect.Request[v1.LinkInstagramAccountRequest]) (*connect.Response[v1.LinkInstagramAccountResponse], error)
+	CreateArtist(context.Context, *connect.Request[v1.CreateArtistRequest]) (*connect.Response[v1.CreateArtistResponse], error)
 }
 
 // NewArtistServiceClient constructs a client for the tattooapp.v1.ArtistService service. By
@@ -60,12 +64,19 @@ func NewArtistServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(artistServiceMethods.ByName("LinkInstagramAccount")),
 			connect.WithClientOptions(opts...),
 		),
+		createArtist: connect.NewClient[v1.CreateArtistRequest, v1.CreateArtistResponse](
+			httpClient,
+			baseURL+ArtistServiceCreateArtistProcedure,
+			connect.WithSchema(artistServiceMethods.ByName("CreateArtist")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // artistServiceClient implements ArtistServiceClient.
 type artistServiceClient struct {
 	linkInstagramAccount *connect.Client[v1.LinkInstagramAccountRequest, v1.LinkInstagramAccountResponse]
+	createArtist         *connect.Client[v1.CreateArtistRequest, v1.CreateArtistResponse]
 }
 
 // LinkInstagramAccount calls tattooapp.v1.ArtistService.LinkInstagramAccount.
@@ -73,9 +84,15 @@ func (c *artistServiceClient) LinkInstagramAccount(ctx context.Context, req *con
 	return c.linkInstagramAccount.CallUnary(ctx, req)
 }
 
+// CreateArtist calls tattooapp.v1.ArtistService.CreateArtist.
+func (c *artistServiceClient) CreateArtist(ctx context.Context, req *connect.Request[v1.CreateArtistRequest]) (*connect.Response[v1.CreateArtistResponse], error) {
+	return c.createArtist.CallUnary(ctx, req)
+}
+
 // ArtistServiceHandler is an implementation of the tattooapp.v1.ArtistService service.
 type ArtistServiceHandler interface {
 	LinkInstagramAccount(context.Context, *connect.Request[v1.LinkInstagramAccountRequest]) (*connect.Response[v1.LinkInstagramAccountResponse], error)
+	CreateArtist(context.Context, *connect.Request[v1.CreateArtistRequest]) (*connect.Response[v1.CreateArtistResponse], error)
 }
 
 // NewArtistServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewArtistServiceHandler(svc ArtistServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(artistServiceMethods.ByName("LinkInstagramAccount")),
 		connect.WithHandlerOptions(opts...),
 	)
+	artistServiceCreateArtistHandler := connect.NewUnaryHandler(
+		ArtistServiceCreateArtistProcedure,
+		svc.CreateArtist,
+		connect.WithSchema(artistServiceMethods.ByName("CreateArtist")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/tattooapp.v1.ArtistService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ArtistServiceLinkInstagramAccountProcedure:
 			artistServiceLinkInstagramAccountHandler.ServeHTTP(w, r)
+		case ArtistServiceCreateArtistProcedure:
+			artistServiceCreateArtistHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedArtistServiceHandler struct{}
 
 func (UnimplementedArtistServiceHandler) LinkInstagramAccount(context.Context, *connect.Request[v1.LinkInstagramAccountRequest]) (*connect.Response[v1.LinkInstagramAccountResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tattooapp.v1.ArtistService.LinkInstagramAccount is not implemented"))
+}
+
+func (UnimplementedArtistServiceHandler) CreateArtist(context.Context, *connect.Request[v1.CreateArtistRequest]) (*connect.Response[v1.CreateArtistResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tattooapp.v1.ArtistService.CreateArtist is not implemented"))
 }

@@ -13,6 +13,7 @@ service UserService {
     rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
 }
 
+// information required to create a new user
 message CreateUserRequest {
     string email = 1;
     string password = 2;
@@ -20,18 +21,22 @@ message CreateUserRequest {
     string last_name = 4;
 }
 
+// information returned after creating a new user
 message CreateUserResponse {
     int32 user_id = 1;
 }
 
+// information required to get a user
 message GetUserRequest {
     int32 user_id = 1;
 }
 
+// information returned after getting a user
 message GetUserResponse {
     User user = 1;
 }
 
+// information required to update a user
 message UpdateUserRequest {
     int32 user_id = 1;
     string email = 2;
@@ -40,14 +45,15 @@ message UpdateUserRequest {
     string last_name = 5;
 }
 
+// information returned after updating a user
 message UpdateUserResponse {
     User user = 1;
 }
 
+// information required to delete a user
 message DeleteUserRequest {
     int32 user_id = 1;
 }
 
-message DeleteUserResponse {
-    int32 user_id = 1;
-}
+// information returned after deleting a user
+message DeleteUserResponse {}
