@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"embed"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -37,6 +38,7 @@ func main() {
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
+	log.Println("starting server")
 	if err := app.start(ctx); err != nil {
 		panic(err)
 	}
