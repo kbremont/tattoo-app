@@ -77,5 +77,5 @@ func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.
 		return nil, err
 	}
 
-	return connect.NewResponse(&v1pb.DeleteUserResponse{UserId: req.Msg.UserId}), nil
+	return connect.NewResponse(&v1pb.DeleteUserResponse{}), nil
 }
