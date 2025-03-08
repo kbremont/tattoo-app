@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/kbremont/tattoo-app/internal/pkg/config"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/config"
 )
 
 //go:embed migrations/*

@@ -5,7 +5,7 @@ import (
 	"database/sql"
 
 	v1pb "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1"
-	"github.com/kbremont/tattoo-app/internal/app"
+	"github.com/kbremont/tattoo-app/backend/internal/app"
 )
 
 type UserRepository struct{ db *sql.DB }
