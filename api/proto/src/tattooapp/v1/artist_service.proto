@@ -8,6 +8,7 @@ option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v
 
 service ArtistService {
     rpc LinkInstagramAccount(LinkInstagramAccountRequest) returns (LinkInstagramAccountResponse);
+    rpc CreateArtist(CreateArtistRequest) returns (CreateArtistResponse);
 }
 
 message LinkInstagramAccountRequest {
@@ -17,4 +18,15 @@ message LinkInstagramAccountRequest {
 
 message LinkInstagramAccountResponse {
     string instagram_handle = 1;
+}
+
+// information needed to create an artist
+message CreateArtistRequest {
+    int32 user_id = 1;
+    string style = 2;
+}
+
+// response to creating an artist
+message CreateArtistResponse {
+    int32 artist_id = 1;
 }

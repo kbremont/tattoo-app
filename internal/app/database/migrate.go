@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"io/fs"
+	"log"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
@@ -29,9 +30,13 @@ func Migrate(ctx context.Context, db *sql.DB, filesys fs.FS, path string) error 
 
 	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
 		return err
-	} // else if err == migrate.ErrNoChange {
-	// 	// no changes to apply
-	// }
+	} else if err == migrate.ErrNoChange {
+		// no changes to apply
+		log.Println("no changes to apply")
+	} else {
+		// migrations successfully applied
+		log.Println("applied migrations")
+	}
 
 	return nil
 }
