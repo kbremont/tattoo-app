@@ -6,10 +6,10 @@ import (
 	"log"
 
 	"github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1/pbconnect"
-	coreapp "github.com/kbremont/tattoo-app/internal/app"
-	"github.com/kbremont/tattoo-app/internal/app/database"
-	"github.com/kbremont/tattoo-app/internal/app/server"
-	"github.com/kbremont/tattoo-app/internal/pkg/config"
+	coreapp "github.com/kbremont/tattoo-app/backend/internal/app"
+	"github.com/kbremont/tattoo-app/backend/internal/app/database"
+	"github.com/kbremont/tattoo-app/backend/internal/app/server"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/config"
 )
 
 type app struct {
@@ -58,18 +58,19 @@ func newApp(ctx context.Context, cfg *config.Config) (*app, error) {
 		return nil, err
 	}
 
+	// setting up server
 	srv, err := newServer(ctx, cfg, db)
 	if err != nil {
 		// TODO: log error
 		return nil, err
 	}
 
-	return &app{server: srv, database: db}, nil
+	return &app{database: db, server: srv}, nil
 }
 
 func newServer(ctx context.Context, cfg *config.Config, db *sql.DB) (*server.Server, error) {
-	svc := coreapp.NewArtistService(ctx, database.NewArtistRepository(db))
-	path, handler := pbconnect.NewArtistServiceHandler(svc)
+	svc := coreapp.NewUserService(ctx, database.NewUserRepository(db))
+	path, handler := pbconnect.NewUserServiceHandler(svc)
 
 	srvCfg := &server.Config{
 		Port: cfg.ServicePort,
