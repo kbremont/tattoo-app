@@ -28,7 +28,7 @@ func main() {
 	}
 
 	if cfg.MigrateMode { // run DB migrations and exit
-		if err := app.migrate(ctx); err != nil {
+		if err := app.migrate(ctx, cfg.MigrateDown); err != nil {
 			panic(err)
 		}
 

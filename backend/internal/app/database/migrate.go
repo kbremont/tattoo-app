@@ -12,7 +12,7 @@ import (
 )
 
 // Migrate applies migration files at the specified path in the fs to db.
-func Migrate(ctx context.Context, db *sql.DB, filesys fs.FS, path string) error {
+func Migrate(ctx context.Context, db *sql.DB, filesys fs.FS, path string, migrateDown bool) error {
 	sourceDriver, err := iofs.New(filesys, path)
 	if err != nil {
 		return err
@@ -28,7 +28,17 @@ func Migrate(ctx context.Context, db *sql.DB, filesys fs.FS, path string) error 
 		return err
 	}
 
-	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+	// apply migrations
+	if migrateDown {
+		log.Println("migrating down")
+		err = m.Down()
+	} else {
+		log.Println("migrating up")
+		err = m.Up()
+	}
+
+	// handle errors
+	if err != nil && err != migrate.ErrNoChange {
 		return err
 	} else if err == migrate.ErrNoChange {
 		// no changes to apply
