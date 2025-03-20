@@ -36,9 +36,9 @@ func (a *app) shutdown(ctx context.Context) {
 	// TODO: log success
 }
 
-func (a *app) migrate(ctx context.Context) error {
+func (a *app) migrate(ctx context.Context, migrateDown bool) error {
 	log.Println("starting db migrations")
-	if err := database.Migrate(ctx, a.database, filesys, "migrations"); err != nil {
+	if err := database.Migrate(ctx, a.database, filesys, "migrations", migrateDown); err != nil {
 		return err
 	}
 
