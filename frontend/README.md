@@ -1,16 +1,13 @@
-# frontend
+# Frontend
 
-A new Flutter project.
+The frontend is a Flutter app which uses the [ConnectRPC framework](https://connectrpc.com/docs/introduction) to generate a
+client to make requests to the backend.
 
-## Getting Started
+## Project Architecture
 
-This project is a starting point for a Flutter application.
+This project follows the [Riverpod Architecture](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/)
+outlined by Andrea Bizzotto.
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This repo follows a [feature-first structure](https://codewithandrea.com/articles/flutter-project-structure/), which is also outlined by Andrea Bizzotto.
