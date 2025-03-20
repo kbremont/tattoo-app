@@ -16,6 +16,10 @@ type Config struct {
 	// command or as a server. This control is in place to facilitate applying any
 	// database schema changes required before the server is run.
 	MigrateMode bool `env:"MIGRATE_MODE" envDefault:"false"`
+	// MigrateDown controls whether the binary will apply the down migration instead
+	// of the up migration. This control is in place to facilitate rolling back database
+	// schema changes.
+	MigrateDown bool `env:"MIGRATE_DOWN" envDefault:"false"`
 	// StopIstioOnExit controls whether the binary will POST a quit message to the
 	// Istio sidecar on successful process exit.  This facilitats the use of the binary in
 	// k8s Jobs running with MigrateMode=true such that the Job will complete exit.
