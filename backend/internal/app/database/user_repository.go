@@ -4,8 +4,9 @@ import (
 	"context"
 	"database/sql"
 
-	v1pb "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1"
+	"github.com/google/uuid"
 	"github.com/kbremont/tattoo-app/backend/internal/app"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/models"
 )
 
 type UserRepository struct{ db *sql.DB }
@@ -15,29 +16,22 @@ var _ app.UserRepository = new(UserRepository)
 // NewUserRepository returns a *UserRepository configured to use db
 func NewUserRepository(db *sql.DB) *UserRepository { return &UserRepository{db: db} }
 
-func (r *UserRepository) CreateUser(ctx context.Context, u *v1pb.User) (*v1pb.User, error) {
+func (r *UserRepository) CreateUser(ctx context.Context, u *models.User) error {
 	const exec = `INSERT INTO "users"
-  (email, first_name, last_name)
-  VALUES ($1, $2, $3)
-  RETURNING id;`
-	id := int32(0)
+  (id, first_name, last_name, created_at, updated_at)
+  VALUES ($1, $2, $3, NOW(), NOW());`
 
-	err := r.db.QueryRowContext(ctx, exec, u.Email, u.FirstName, u.LastName).Scan(&id)
-	if err != nil {
-		return nil, err
-	}
-
-	u.UserId = id
-	return u, nil
+	_, err := r.db.ExecContext(ctx, exec, u.ID, u.FirstName, u.LastName)
+	return err
 }
 
-func (r *UserRepository) GetUser(ctx context.Context, id int32) (*v1pb.User, error) {
-	const exec = `SELECT id, email, first_name, last_name
+func (r *UserRepository) GetUser(ctx context.Context, id uuid.UUID) (*models.User, error) {
+	const exec = `SELECT id, first_name, last_name, created_at, updated_at
   FROM "users"
   WHERE id = $1;`
 
-	var u v1pb.User
-	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.UserId, &u.Email, &u.FirstName, &u.LastName)
+	var u models.User
+	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.ID, &u.FirstName, &u.LastName)
 	if err != nil {
 		return nil, err
 	}
@@ -45,22 +39,16 @@ func (r *UserRepository) GetUser(ctx context.Context, id int32) (*v1pb.User, err
 	return &u, nil
 }
 
-func (r *UserRepository) UpdateUser(ctx context.Context, u *v1pb.User) (*v1pb.User, error) {
+func (r *UserRepository) UpdateUser(ctx context.Context, u *models.User) error {
 	const exec = `UPDATE "users"
-  SET email = $1, first_name = $2, last_name = $3
-  WHERE id = $4
-  RETURNING id;`
+  SET first_name = $1, last_name = $2, updated_at = NOW()
+  WHERE id = $3;`
 
-	var id int32
-	err := r.db.QueryRowContext(ctx, exec, u.Email, u.FirstName, u.LastName, u.UserId).Scan(&id)
-	if err != nil {
-		return nil, err
-	}
-
-	return u, nil
+	_, err := r.db.ExecContext(ctx, exec, u.FirstName, u.LastName, u.ID)
+	return err
 }
 
-func (r *UserRepository) DeleteUser(ctx context.Context, id int32) error {
+func (r *UserRepository) DeleteUser(ctx context.Context, id uuid.UUID) error {
 	const exec = `DELETE FROM "users" WHERE id = $1;`
 	_, err := r.db.ExecContext(ctx, exec, id)
 	return err

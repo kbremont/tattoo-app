@@ -69,7 +69,7 @@ func newApp(ctx context.Context, cfg *config.Config) (*app, error) {
 }
 
 func newServer(ctx context.Context, cfg *config.Config, db *sql.DB) (*server.Server, error) {
-	svc := coreapp.NewUserService(ctx, database.NewUserRepository(db))
+	svc := coreapp.NewUserService(database.NewUserRepository(db))
 	path, handler := pbconnect.NewUserServiceHandler(svc)
 
 	srvCfg := &server.Config{
