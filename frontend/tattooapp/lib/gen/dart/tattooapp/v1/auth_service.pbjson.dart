@@ -20,13 +20,16 @@ const SignUpRequest$json = {
   '1': 'SignUpRequest',
   '2': [
     {'1': 'credentials', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.v1.UserCredentials', '10': 'credentials'},
+    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
   ],
 };
 
 /// Descriptor for `SignUpRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List signUpRequestDescriptor = $convert.base64Decode(
     'Cg1TaWduVXBSZXF1ZXN0Ej8KC2NyZWRlbnRpYWxzGAEgASgLMh0udGF0dG9vYXBwLnYxLlVzZX'
-    'JDcmVkZW50aWFsc1ILY3JlZGVudGlhbHM=');
+    'JDcmVkZW50aWFsc1ILY3JlZGVudGlhbHMSHQoKZmlyc3RfbmFtZRgCIAEoCVIJZmlyc3ROYW1l'
+    'EhsKCWxhc3RfbmFtZRgDIAEoCVIIbGFzdE5hbWU=');
 
 @$core.Deprecated('Use signUpResponseDescriptor instead')
 const SignUpResponse$json = {

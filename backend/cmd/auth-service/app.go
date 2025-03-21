@@ -69,7 +69,7 @@ func newApp(ctx context.Context, cfg *config.Config) (*app, error) {
 }
 
 func newServer(ctx context.Context, cfg *config.Config, db *sql.DB) (*server.Server, error) {
-	svc := coreapp.NewAuthService(database.NewAuthRepository(db), cfg.JWTSecret)
+	svc := coreapp.NewAuthService(database.NewAuthRepository(db), cfg.JWTSecret, coreapp.NewUserServiceClient())
 	path, handler := pbconnect.NewAuthServiceHandler(svc)
 
 	srvCfg := &server.Config{

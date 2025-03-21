@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -16,8 +17,9 @@ import (
 
 // AuthService is the implementation of tattooapp.v1.AuthService.
 type AuthService struct {
-	repository AuthRepository
-	jwtSecret  string
+	repository  AuthRepository
+	jwtSecret   string
+	userService IUserServiceClient
 }
 
 // AuthRepository is the interface that allows stateful operations on auth_accounts.
@@ -27,12 +29,13 @@ type AuthRepository interface {
 	SaveRefreshToken(ctx context.Context, userID uuid.UUID, token string, expiresAt time.Time) error
 	GetRefreshToken(ctx context.Context, token string) (uuid.UUID, error)
 	DeleteRefreshToken(ctx context.Context, token string) error
+	DeleteAuthAccount(ctx context.Context, userID uuid.UUID) error
 }
 
 var _ pbconnect.AuthServiceHandler = new(AuthService)
 
-func NewAuthService(repo AuthRepository, jwt string) *AuthService {
-	return &AuthService{repository: repo, jwtSecret: jwt}
+func NewAuthService(repo AuthRepository, jwt string, us IUserServiceClient) *AuthService {
+	return &AuthService{repository: repo, jwtSecret: jwt, userService: us}
 }
 
 // SignUp implements tattooapp.v1.AuthService.SignUp.
@@ -41,6 +44,8 @@ func (s *AuthService) SignUp(ctx context.Context, req *connect.Request[v1pb.Sign
 
 	email := req.Msg.GetCredentials().GetEmail()
 	password := req.Msg.GetCredentials().GetPassword()
+	firstName := req.Msg.GetFirstName()
+	lastName := req.Msg.GetLastName()
 	hashedPassword, err := utils.HashPassword(password)
 	if err != nil {
 		return nil, err
@@ -58,6 +63,22 @@ func (s *AuthService) SignUp(ctx context.Context, req *connect.Request[v1pb.Sign
 	err = s.repository.CreateAuthAccount(ctx, account)
 	if err != nil {
 		return nil, err
+	}
+
+	// retry loop for calling CreateUser
+	maxRetries := 3
+	for i := 0; i < maxRetries; i++ {
+		err = s.userService.CreateUser(ctx, userID.String(), firstName, lastName)
+		if err == nil {
+			break
+		}
+		time.Sleep((1 + 1) * time.Second) // exponential backoff
+	}
+
+	if err != nil {
+		// Manual rollback: delete auth account since user profile creation failed
+		_ = s.repository.DeleteAuthAccount(ctx, userID)
+		return nil, fmt.Errorf("failed to create user profile: %w", err)
 	}
 
 	tokenPair, err := utils.IssueTokens(userID, []byte(s.jwtSecret))

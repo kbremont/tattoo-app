@@ -8,6 +8,8 @@ class SignUpScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
@@ -19,6 +21,16 @@ class SignUpScreen extends ConsumerWidget {
           key: formKey,
           child: Column(
             children: [
+              TextFormField(
+                controller: firstNameController,
+                decoration: const InputDecoration(labelText: 'First Name'),
+                obscureText: false,
+              ),
+              TextFormField(
+                controller: lastNameController,
+                decoration: const InputDecoration(labelText: 'Last Name'),
+                obscureText: false,
+              ),
               TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
@@ -34,6 +46,8 @@ class SignUpScreen extends ConsumerWidget {
                   if (formKey.currentState!.validate()) {
                     final signUpUseCase = ref.read(signUpUseCaseProvider);
                     await signUpUseCase.execute(
+                      firstName: firstNameController.text.trim(),
+                      lastName: lastNameController.text.trim(),
                       email: emailController.text.trim(),
                       password: passwordController.text.trim(),
                     );

@@ -7,9 +7,11 @@ class SignUpUseCase {
   SignUpUseCase(this._repository);
 
   Future<SignUpResponse> execute({
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
   }) {
-    return _repository.signUp(email, password);
+    return _repository.signUp(firstName, lastName, email, password);
   }
 }
