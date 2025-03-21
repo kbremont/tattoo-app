@@ -1,4 +1,5 @@
-APP_NAME=tattoo-app=
+APP_NAME=tattoo-app
+DATABASE_URI?=postgres://postgres:password@localhost:5432/postgres
 
 ######### protobuf #########
 
@@ -42,7 +43,7 @@ vendor:
 ######### go run #########
 
 run-auth:
-	PORT_SERVICE=9000 DATABASE_URI=postgresql://tattoo_app_postgresql_user:cYc9tLVzCBYqr0PWJzPQ3OBMlfmwswTF@dpg-cut5c5fnoe9s7396vni0-a.oregon-postgres.render.com/tattoo_app_postgresql JWT_SECRET=super-secret-key-change-me ./bin/auth-service
+	PORT_SERVICE=9000 DATABASE_URI=$(DATABASE_URI) ./bin/auth-service
 
 run-user:
-	PORT_SERVICE=9001 DATABASE_URI=postgresql://tattoo_app_postgresql_user:cYc9tLVzCBYqr0PWJzPQ3OBMlfmwswTF@dpg-cut5c5fnoe9s7396vni0-a.oregon-postgres.render.com/tattoo_app_postgresql ./bin/user-service
+	PORT_SERVICE=9001 DATABASE_URI=$(DATABASE_URI) ./bin/user-service
