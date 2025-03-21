@@ -30,6 +30,8 @@ type Config struct {
 	ServicePort int `env:"PORT_SERVICE" envDefault:"9000"`
 	// DatabaseURI is the Postgres URI for the database.
 	DatabaseURI string `env:"DATABASE_URI" envDefault:"postgres://postgres:password@localhost:5432/postgres"`
+	// JWTSecret is the secret key used to sign JWT tokens.
+	JWTSecret string `env:"JWT_SECRET" envDefault:"supersecretkey"`
 }
 
 // Parse attempts to read configuration settings from the environment into a

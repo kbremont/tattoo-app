@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package tattooapp.v1;
+
+import "tattooapp/v1/auth.proto";
+
+option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
+
+service AuthService {
+    rpc SignUp(SignUpRequest) returns (SignUpResponse);
+    rpc LogIn(LogInRequest) returns (LogInResponse);
+    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+    rpc LogOut(LogOutRequest) returns (LogOutResponse);
+}
+
+// information required to sign up a new user
+message SignUpRequest {
+    UserCredentials credentials = 1;
+}
+
+// information returned after signing up a new user
+message SignUpResponse {
+    UserId user = 1;
+    AuthToken token = 2;
+}
+
+// information required to log in a user
+message LogInRequest {
+    UserCredentials credentials = 1;
+}
+
+// information returned after logging in a user
+message LogInResponse {
+    UserId user = 1;
+    AuthToken token = 2;
+}
+
+// information required to refresh an access token
+message RefreshTokenRequest {
+    string refresh_token = 1;
+}
+
+// information returned after refreshing an access token
+message RefreshTokenResponse {
+    AuthToken token = 1;
+}
+
+// information required to log out a user
+message LogOutRequest {
+    string refresh_token = 1;
+}
+
+// information returned after logging out a user
+message LogOutResponse {
+    bool success = 1;
+}
