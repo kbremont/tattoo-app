@@ -13,48 +13,47 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'user.pbjson.dart' as $0;
+import 'user.pbjson.dart' as $2;
 
 @$core.Deprecated('Use createUserRequestDescriptor instead')
 const CreateUserRequest$json = {
   '1': 'CreateUserRequest',
   '2': [
-    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
-    {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
-    {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
   ],
 };
 
 /// Descriptor for `CreateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createUserRequestDescriptor = $convert.base64Decode(
-    'ChFDcmVhdGVVc2VyUmVxdWVzdBIUCgVlbWFpbBgBIAEoCVIFZW1haWwSGgoIcGFzc3dvcmQYAi'
-    'ABKAlSCHBhc3N3b3JkEh0KCmZpcnN0X25hbWUYAyABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25h'
-    'bWUYBCABKAlSCGxhc3ROYW1l');
+    'ChFDcmVhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSHQoKZmlyc3RfbmFtZRgCIAEoCV'
+    'IJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgDIAEoCVIIbGFzdE5hbWU=');
 
 @$core.Deprecated('Use createUserResponseDescriptor instead')
 const CreateUserResponse$json = {
   '1': 'CreateUserResponse',
   '2': [
-    {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.v1.User', '10': 'user'},
   ],
 };
 
 /// Descriptor for `CreateUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createUserResponseDescriptor = $convert.base64Decode(
-    'ChJDcmVhdGVVc2VyUmVzcG9uc2USFwoHdXNlcl9pZBgBIAEoBVIGdXNlcklk');
+    'ChJDcmVhdGVVc2VyUmVzcG9uc2USJgoEdXNlchgBIAEoCzISLnRhdHRvb2FwcC52MS5Vc2VyUg'
+    'R1c2Vy');
 
 @$core.Deprecated('Use getUserRequestDescriptor instead')
 const GetUserRequest$json = {
   '1': 'GetUserRequest',
   '2': [
-    {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
   ],
 };
 
 /// Descriptor for `GetUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getUserRequestDescriptor = $convert.base64Decode(
-    'Cg5HZXRVc2VyUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgFUgZ1c2VySWQ=');
+    'Cg5HZXRVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQ=');
 
 @$core.Deprecated('Use getUserResponseDescriptor instead')
 const GetUserResponse$json = {
@@ -73,19 +72,16 @@ final $typed_data.Uint8List getUserResponseDescriptor = $convert.base64Decode(
 const UpdateUserRequest$json = {
   '1': 'UpdateUserRequest',
   '2': [
-    {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
-    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
-    {'1': 'password', '3': 3, '4': 1, '5': 9, '10': 'password'},
-    {'1': 'first_name', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
   ],
 };
 
 /// Descriptor for `UpdateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode(
-    'ChFVcGRhdGVVc2VyUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgFUgZ1c2VySWQSFAoFZW1haWwYAi'
-    'ABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGAMgASgJUghwYXNzd29yZBIdCgpmaXJzdF9uYW1lGAQg'
-    'ASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAUgASgJUghsYXN0TmFtZQ==');
+    'ChFVcGRhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSHQoKZmlyc3RfbmFtZRgCIAEoCV'
+    'IJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgDIAEoCVIIbGFzdE5hbWU=');
 
 @$core.Deprecated('Use updateUserResponseDescriptor instead')
 const UpdateUserResponse$json = {
@@ -104,22 +100,25 @@ final $typed_data.Uint8List updateUserResponseDescriptor = $convert.base64Decode
 const DeleteUserRequest$json = {
   '1': 'DeleteUserRequest',
   '2': [
-    {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
   ],
 };
 
 /// Descriptor for `DeleteUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteUserRequestDescriptor = $convert.base64Decode(
-    'ChFEZWxldGVVc2VyUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgFUgZ1c2VySWQ=');
+    'ChFEZWxldGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQ=');
 
 @$core.Deprecated('Use deleteUserResponseDescriptor instead')
 const DeleteUserResponse$json = {
   '1': 'DeleteUserResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
 };
 
 /// Descriptor for `DeleteUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteUserResponseDescriptor = $convert.base64Decode(
-    'ChJEZWxldGVVc2VyUmVzcG9uc2U=');
+    'ChJEZWxldGVVc2VyUmVzcG9uc2USGAoHc3VjY2VzcxgBIAEoCFIHc3VjY2Vzcw==');
 
 const $core.Map<$core.String, $core.dynamic> UserServiceBase$json = {
   '1': 'UserService',
@@ -135,9 +134,9 @@ const $core.Map<$core.String, $core.dynamic> UserServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UserServiceBase$messageJson = {
   '.tattooapp.v1.CreateUserRequest': CreateUserRequest$json,
   '.tattooapp.v1.CreateUserResponse': CreateUserResponse$json,
+  '.tattooapp.v1.User': $2.User$json,
   '.tattooapp.v1.GetUserRequest': GetUserRequest$json,
   '.tattooapp.v1.GetUserResponse': GetUserResponse$json,
-  '.tattooapp.v1.User': $0.User$json,
   '.tattooapp.v1.UpdateUserRequest': UpdateUserRequest$json,
   '.tattooapp.v1.UpdateUserResponse': UpdateUserResponse$json,
   '.tattooapp.v1.DeleteUserRequest': DeleteUserRequest$json,
