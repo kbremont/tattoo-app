@@ -64,3 +64,10 @@ func (r *AuthRepository) DeleteRefreshToken(ctx context.Context, token string) e
 	_, err := r.db.ExecContext(ctx, exec, token)
 	return err
 }
+
+func (r *AuthRepository) DeleteAuthAccount(ctx context.Context, userID uuid.UUID) error {
+	const exec = `DELETE FROM auth_accounts
+  WHERE user_id = $1;`
+	_, err := r.db.ExecContext(ctx, exec, userID)
+	return err
+}
