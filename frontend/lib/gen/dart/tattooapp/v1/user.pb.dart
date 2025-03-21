@@ -15,27 +15,27 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class User extends $pb.GeneratedMessage {
   factory User({
-    $core.int? userId,
-    $core.bool? isArtist,
-    $core.String? email,
+    $core.String? id,
     $core.String? firstName,
     $core.String? lastName,
+    $core.String? createdAt,
+    $core.String? updatedAt,
   }) {
     final $result = create();
-    if (userId != null) {
-      $result.userId = userId;
-    }
-    if (isArtist != null) {
-      $result.isArtist = isArtist;
-    }
-    if (email != null) {
-      $result.email = email;
+    if (id != null) {
+      $result.id = id;
     }
     if (firstName != null) {
       $result.firstName = firstName;
     }
     if (lastName != null) {
       $result.lastName = lastName;
+    }
+    if (createdAt != null) {
+      $result.createdAt = createdAt;
+    }
+    if (updatedAt != null) {
+      $result.updatedAt = updatedAt;
     }
     return $result;
   }
@@ -44,11 +44,11 @@ class User extends $pb.GeneratedMessage {
   factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
-    ..aOB(2, _omitFieldNames ? '' : 'isArtist')
-    ..aOS(3, _omitFieldNames ? '' : 'email')
-    ..aOS(4, _omitFieldNames ? '' : 'firstName')
-    ..aOS(5, _omitFieldNames ? '' : 'lastName')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'firstName')
+    ..aOS(3, _omitFieldNames ? '' : 'lastName')
+    ..aOS(4, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(5, _omitFieldNames ? '' : 'updatedAt')
     ..hasRequiredFields = false
   ;
 
@@ -74,49 +74,49 @@ class User extends $pb.GeneratedMessage {
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userId => $_getIZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userId($core.int v) { $_setSignedInt32(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserId() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.bool get isArtist => $_getBF(1);
+  $core.String get firstName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set isArtist($core.bool v) { $_setBool(1, v); }
+  set firstName($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasIsArtist() => $_has(1);
+  $core.bool hasFirstName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearIsArtist() => clearField(2);
+  void clearFirstName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get email => $_getSZ(2);
+  $core.String get lastName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set email($core.String v) { $_setString(2, v); }
+  set lastName($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasEmail() => $_has(2);
+  $core.bool hasLastName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearEmail() => clearField(3);
+  void clearLastName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get firstName => $_getSZ(3);
+  $core.String get createdAt => $_getSZ(3);
   @$pb.TagNumber(4)
-  set firstName($core.String v) { $_setString(3, v); }
+  set createdAt($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasFirstName() => $_has(3);
+  $core.bool hasCreatedAt() => $_has(3);
   @$pb.TagNumber(4)
-  void clearFirstName() => clearField(4);
+  void clearCreatedAt() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get lastName => $_getSZ(4);
+  $core.String get updatedAt => $_getSZ(4);
   @$pb.TagNumber(5)
-  set lastName($core.String v) { $_setString(4, v); }
+  set updatedAt($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasLastName() => $_has(4);
+  $core.bool hasUpdatedAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearLastName() => clearField(5);
+  void clearUpdatedAt() => clearField(5);
 }
 
 
