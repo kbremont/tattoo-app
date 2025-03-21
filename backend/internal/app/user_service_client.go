@@ -10,9 +10,15 @@ import (
 	"github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1/pbconnect"
 )
 
+type IUserServiceClient interface {
+	CreateUser(ctx context.Context, userID string, firstName string, lastName string) error
+}
+
 type UserServiceClient struct {
 	client pbconnect.UserServiceClient
 }
+
+var _ IUserServiceClient = new(UserServiceClient)
 
 func NewUserServiceClient() *UserServiceClient {
 	userServiceURL := os.Getenv("USER_SERVICE_URL")

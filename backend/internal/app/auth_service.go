@@ -19,7 +19,7 @@ import (
 type AuthService struct {
 	repository  AuthRepository
 	jwtSecret   string
-	userService *UserServiceClient
+	userService IUserServiceClient
 }
 
 // AuthRepository is the interface that allows stateful operations on auth_accounts.
@@ -34,7 +34,7 @@ type AuthRepository interface {
 
 var _ pbconnect.AuthServiceHandler = new(AuthService)
 
-func NewAuthService(repo AuthRepository, jwt string, us *UserServiceClient) *AuthService {
+func NewAuthService(repo AuthRepository, jwt string, us IUserServiceClient) *AuthService {
 	return &AuthService{repository: repo, jwtSecret: jwt, userService: us}
 }
 
