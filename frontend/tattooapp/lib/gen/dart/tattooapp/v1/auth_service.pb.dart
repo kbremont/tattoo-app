@@ -20,10 +20,18 @@ import 'auth.pb.dart' as $0;
 class SignUpRequest extends $pb.GeneratedMessage {
   factory SignUpRequest({
     $0.UserCredentials? credentials,
+    $core.String? firstName,
+    $core.String? lastName,
   }) {
     final $result = create();
     if (credentials != null) {
       $result.credentials = credentials;
+    }
+    if (firstName != null) {
+      $result.firstName = firstName;
+    }
+    if (lastName != null) {
+      $result.lastName = lastName;
     }
     return $result;
   }
@@ -33,6 +41,8 @@ class SignUpRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SignUpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
     ..aOM<$0.UserCredentials>(1, _omitFieldNames ? '' : 'credentials', subBuilder: $0.UserCredentials.create)
+    ..aOS(2, _omitFieldNames ? '' : 'firstName')
+    ..aOS(3, _omitFieldNames ? '' : 'lastName')
     ..hasRequiredFields = false
   ;
 
@@ -67,6 +77,24 @@ class SignUpRequest extends $pb.GeneratedMessage {
   void clearCredentials() => clearField(1);
   @$pb.TagNumber(1)
   $0.UserCredentials ensureCredentials() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get firstName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set firstName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFirstName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFirstName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get lastName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set lastName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLastName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastName() => clearField(3);
 }
 
 /// information returned after signing up a new user
