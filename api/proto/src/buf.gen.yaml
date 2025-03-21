@@ -7,8 +7,8 @@ plugins:
     out: ../gen/go
     opt: paths=source_relative
   - remote: buf.build/connectrpc/dart
-    out: ../../../frontend/lib/gen/dart
+    out: ../../../frontend/tattooapp/lib/gen/dart
   - remote: buf.build/protocolbuffers/dart
-    out: ../../../frontend/lib/gen/dart
+    out: ../../../frontend/tattooapp/lib/gen/dart
     include_wkt: true
     include_imports: true
