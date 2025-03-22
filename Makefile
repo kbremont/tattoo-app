@@ -42,8 +42,14 @@ vendor:
 
 ######### go run #########
 
-run-auth:
-	PORT_SERVICE=9000 DATABASE_URI=$(DATABASE_URI) ./bin/auth-service
-
 run-user:
 	PORT_SERVICE=9001 DATABASE_URI=$(DATABASE_URI) ./bin/user-service
+
+
+######### db migrations #########
+
+migrate-down-user:
+	DATABASE_URI=$(DATABASE_URI) MIGRATE_MODE=true MIGRATE_DOWN=true ./bin/user-service
+
+migrate-up-user:
+	DATABASE_URI=$(DATABASE_URI) MIGRATE_MODE=true MIGRATE_DOWN=false ./bin/user-service
