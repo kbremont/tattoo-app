@@ -67,6 +67,11 @@ func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.Get
 	logger := log.FromContext(ctx)
 	logger.Info(ctx, "handling GetUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
 
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+		return nil, connect.NewError(connect.CodePermissionDenied, err)
+	}
+
 	u, err := s.repository.GetUser(ctx, req.Msg.GetAuth0UserId())
 	if err != nil {
 		logger.WithError(err).Error(ctx, "failed to get user", "auth0_user_id", req.Msg.GetAuth0UserId())
@@ -85,6 +90,11 @@ func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.Get
 func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.UpdateUserRequest]) (*connect.Response[v1pb.UpdateUserResponse], error) {
 	logger := log.FromContext(ctx)
 	logger.Info(ctx, "handling UpdateUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+		return nil, connect.NewError(connect.CodePermissionDenied, err)
+	}
 
 	u := &models.User{
 		Auth0UserID: req.Msg.GetAuth0UserId(),
@@ -109,6 +119,11 @@ func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.
 func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.DeleteUserRequest]) (*connect.Response[v1pb.DeleteUserResponse], error) {
 	logger := log.FromContext(ctx)
 	logger.Info(ctx, "handling DeleteUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+		return nil, connect.NewError(connect.CodePermissionDenied, err)
+	}
 
 	if err := s.repository.DeleteUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
 		logger.WithError(err).Error(ctx, "failed to delete user", "auth0_user_id", req.Msg.GetAuth0UserId())
