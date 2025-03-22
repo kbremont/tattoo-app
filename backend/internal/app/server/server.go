@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )
@@ -28,21 +29,24 @@ type (
 )
 
 // New creates a new *Server.
-func New(ctx context.Context, path string, handler http.Handler, cfg *Config) (*Server, error) {
+func New(ctx context.Context, path string, handler http.Handler, cfg *Config, logger log.Logger) (*Server, error) {
 	mux := http.NewServeMux()
 	mux.Handle(path, handler)
+	svcAddr := fmt.Sprintf(":%d", cfg.Port)
 	srv := &Server{
 		server: &http.Server{
-			Addr:    fmt.Sprintf(":%d", cfg.Port),
+			Addr:    svcAddr,
 			Handler: h2c.NewHandler(mux, &http2.Server{}),
 		},
 	}
 
 	srv.Serve = func(cctx context.Context) error {
+		logger.Info(cctx, "listening on svcAddr", "svcAddr", svcAddr)
+
 		go func() {
 			err := srv.server.ListenAndServe()
 			if err != nil {
-				// TODO: log error
+				logger.WithError(err).Error(cctx, "failed to listen and serve")
 				panic(err)
 			}
 		}()

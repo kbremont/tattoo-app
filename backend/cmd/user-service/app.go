@@ -3,78 +3,83 @@ package main
 import (
 	"context"
 	"database/sql"
-	"log"
 
 	"github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1/pbconnect"
 	coreapp "github.com/kbremont/tattoo-app/backend/internal/app"
 	"github.com/kbremont/tattoo-app/backend/internal/app/database"
 	"github.com/kbremont/tattoo-app/backend/internal/app/server"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/config"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
 )
 
 type app struct {
 	server   *server.Server
 	database *sql.DB
+	logger   log.Logger
 }
 
 func (a *app) start(ctx context.Context) error {
+	a.logger.Info(ctx, "starting app server")
 	if err := a.server.Serve(ctx); err != nil {
-		// TODO: log error
+		a.logger.WithError(err).Error(ctx, "failed to start app server")
 		return err
 	}
 
-	// TODO: log success
+	a.logger.Info(ctx, "app server started successfully")
 	return nil
 }
 
 func (a *app) shutdown(ctx context.Context) {
+	a.logger.Info(ctx, "shutting down app server")
 	if err := a.server.Shutdown(ctx); err != nil {
-		// TODO: log error
+		a.logger.WithError(err).Error(ctx, "failed to shutdown app server")
 		panic(err)
 	}
 
-	// TODO: log success
+	a.logger.Info(ctx, "app server shutdown successfully")
 }
 
 func (a *app) migrate(ctx context.Context, migrateDown bool) error {
-	log.Println("starting db migrations")
+	a.logger.Info(ctx, "starting database migrations")
 	if err := database.Migrate(ctx, a.database, filesys, "migrations", migrateDown); err != nil {
 		return err
 	}
 
+	a.logger.Info(ctx, "database migrations completed successfully")
 	return nil
 }
 
-func newApp(ctx context.Context, cfg *config.Config) (*app, error) {
-	// TODO: setup logger
-
-	// setting up DB
+func newApp(ctx context.Context, cfg *config.Config, logger log.Logger) (*app, error) {
 	maxPings := database.DefaultMaxPings
 	pingInterval := database.DefaultPingInterval
 
+	logger.Info(ctx, "creating database connection", "db_uri", cfg.DatabaseURI)
 	db, err := database.New(cfg.DatabaseURI, database.WithPingTimeout(maxPings, pingInterval))
 	if err != nil {
-		// TODO log error
+		logger.WithError(err).Error(ctx, "failed to create database", "uri", cfg.DatabaseURI)
 		return nil, err
 	}
 
-	// setting up server
-	srv, err := newServer(ctx, cfg, db)
+	srv, err := newServer(ctx, cfg, logger, db)
 	if err != nil {
-		// TODO: log error
+		logger.WithError(err).Error(ctx, "failed to create app")
 		return nil, err
 	}
 
-	return &app{database: db, server: srv}, nil
+	logger.Info(ctx, "app created successfully")
+	return &app{logger: logger, database: db, server: srv}, nil
 }
 
-func newServer(ctx context.Context, cfg *config.Config, db *sql.DB) (*server.Server, error) {
-	svc := coreapp.NewUserService(database.NewUserRepository(db))
+func newServer(ctx context.Context, cfg *config.Config, l log.Logger, db *sql.DB) (*server.Server, error) {
+	svc := coreapp.NewUserService(l, database.NewUserRepository(db))
 	path, handler := pbconnect.NewUserServiceHandler(svc)
 
 	srvCfg := &server.Config{
 		Port: cfg.ServicePort,
 	}
 
-	return server.New(ctx, path, handler, srvCfg)
+	// Wrap ConnectRPC handler with LoggerMiddleware
+	handlerWithLogging := log.LoggerMiddleware(l)(handler)
+
+	return server.New(ctx, path, handlerWithLogging, srvCfg, l)
 }
