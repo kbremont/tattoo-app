@@ -3,11 +3,13 @@ package main
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1/pbconnect"
 	coreapp "github.com/kbremont/tattoo-app/backend/internal/app"
 	"github.com/kbremont/tattoo-app/backend/internal/app/database"
 	"github.com/kbremont/tattoo-app/backend/internal/app/server"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/auth"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/config"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
 )
@@ -78,8 +80,17 @@ func newServer(ctx context.Context, cfg *config.Config, l log.Logger, db *sql.DB
 		Port: cfg.ServicePort,
 	}
 
-	// Wrap ConnectRPC handler with LoggerMiddleware
-	handlerWithLogging := log.LoggerMiddleware(l)(handler)
+	// Setup JWKS fetcher
+	jwksURL := fmt.Sprintf("https://%s/.well-known/jwks.json", cfg.Auth0Domain)
+	jwksFetcher := auth.NewJWKSFetcher(jwksURL)
+	if err := jwksFetcher.FetchAndCache(ctx); err != nil {
+		return nil, fmt.Errorf("failed to fetch JWKS: %w", err)
+	}
 
-	return server.New(ctx, path, handlerWithLogging, srvCfg, l)
+	// Chain middlewares: Logger -> JWT -> Service Handler
+	handler = log.LoggerMiddleware(l)(
+		auth.JWTMiddleware(jwksFetcher, l)(handler),
+	)
+
+	return server.New(ctx, path, handler, srvCfg, l)
 }

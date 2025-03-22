@@ -15,15 +15,15 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class User extends $pb.GeneratedMessage {
   factory User({
-    $core.String? id,
+    $core.String? auth0UserId,
     $core.String? firstName,
     $core.String? lastName,
     $core.String? createdAt,
     $core.String? updatedAt,
   }) {
     final $result = create();
-    if (id != null) {
-      $result.id = id;
+    if (auth0UserId != null) {
+      $result.auth0UserId = auth0UserId;
     }
     if (firstName != null) {
       $result.firstName = firstName;
@@ -44,7 +44,7 @@ class User extends $pb.GeneratedMessage {
   factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
     ..aOS(2, _omitFieldNames ? '' : 'firstName')
     ..aOS(3, _omitFieldNames ? '' : 'lastName')
     ..aOS(4, _omitFieldNames ? '' : 'createdAt')
@@ -74,13 +74,13 @@ class User extends $pb.GeneratedMessage {
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  $core.String get auth0UserId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
+  set auth0UserId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasAuth0UserId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearAuth0UserId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get firstName => $_getSZ(1);

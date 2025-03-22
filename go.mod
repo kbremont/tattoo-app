@@ -5,6 +5,7 @@ go 1.23.3
 require (
 	connectrpc.com/connect v1.18.1
 	github.com/caarlos0/env/v6 v6.10.1
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/golang-migrate/migrate/v4 v4.18.2
 	github.com/google/uuid v1.6.0
 	github.com/lib/pq v1.10.9

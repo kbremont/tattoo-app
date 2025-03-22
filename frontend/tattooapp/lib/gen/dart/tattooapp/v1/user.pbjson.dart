@@ -17,7 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const User$json = {
   '1': 'User',
   '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'auth0_user_id', '3': 1, '4': 1, '5': 9, '10': 'auth0UserId'},
     {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
     {'1': 'created_at', '3': 4, '4': 1, '5': 9, '10': 'createdAt'},
@@ -27,7 +27,7 @@ const User$json = {
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBIdCgpmaXJzdF9uYW1lGAIgASgJUglmaXJzdE5hbWUSGw'
-    'oJbGFzdF9uYW1lGAMgASgJUghsYXN0TmFtZRIdCgpjcmVhdGVkX2F0GAQgASgJUgljcmVhdGVk'
-    'QXQSHQoKdXBkYXRlZF9hdBgFIAEoCVIJdXBkYXRlZEF0');
+    'CgRVc2VyEiIKDWF1dGgwX3VzZXJfaWQYASABKAlSC2F1dGgwVXNlcklkEh0KCmZpcnN0X25hbW'
+    'UYAiABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25hbWUYAyABKAlSCGxhc3ROYW1lEh0KCmNyZWF0'
+    'ZWRfYXQYBCABKAlSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAUgASgJUgl1cGRhdGVkQXQ=');
 
