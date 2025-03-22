@@ -32,6 +32,8 @@ type Config struct {
 	DatabaseURI string `env:"DATABASE_URI" envDefault:"postgres://postgres:password@localhost:5432/postgres"`
 	// JWTSecret is the secret key used to sign JWT tokens.
 	JWTSecret string `env:"JWT_SECRET" envDefault:"supersecretkey"`
+	// Auth0Domain is the domain of the Auth0 service.
+	Auth0Domain string `env:"AUTH0_DOMAIN" envDefault:"dev-pqjo5e7nvurmgv1u.us.auth0.com"`
 }
 
 // Parse attempts to read configuration settings from the environment into a

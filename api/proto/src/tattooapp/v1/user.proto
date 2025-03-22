@@ -5,7 +5,7 @@ package tattooapp.v1;
 option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
 
 message User {
-    string id = 1;
+    string auth0_user_id = 1;
     string first_name = 2;
     string last_name = 3;
     string created_at = 4;
