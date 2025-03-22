@@ -12,6 +12,7 @@ import (
 
 	"connectrpc.com/connect"
 	v1pb "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1"
+	"github.com/kbremont/tattoo-app/backend/internal/pkg/log/slog"
 )
 
 type mockUserRepo struct {
@@ -60,12 +61,12 @@ func TestCreateUser(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			repo := new(mockUserRepo)
-			service := NewUserService(repo)
+			logger := slog.New()
+			service := NewUserService(logger, repo)
 
 			tt.setupMock(repo)
 
 			resp, err := service.CreateUser(context.Background(), connect.NewRequest(&v1pb.CreateUserRequest{
-				Id:        uuid.New().String(),
 				FirstName: "Jane",
 				LastName:  "Doe",
 			}))
@@ -107,7 +108,8 @@ func TestGetUser(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			repo := new(mockUserRepo)
-			service := NewUserService(repo)
+			logger := slog.New()
+			service := NewUserService(logger, repo)
 			id := uuid.New()
 
 			tt.setupMock(repo, id)
@@ -153,7 +155,8 @@ func TestUpdateUser(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			repo := new(mockUserRepo)
-			service := NewUserService(repo)
+			logger := slog.New()
+			service := NewUserService(logger, repo)
 			id := uuid.New()
 
 			tt.setupMock(repo)
@@ -201,7 +204,8 @@ func TestDeleteUser(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			repo := new(mockUserRepo)
-			service := NewUserService(repo)
+			logger := slog.New()
+			service := NewUserService(logger, repo)
 			id := uuid.New()
 
 			tt.setupMock(repo, id)
