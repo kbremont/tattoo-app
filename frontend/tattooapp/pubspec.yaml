@@ -38,6 +38,7 @@ dependencies:
   auth0_flutter: ^1.9.0
   flutter_secure_storage: ^9.2.4
   flutter_riverpod: ^2.6.1
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
