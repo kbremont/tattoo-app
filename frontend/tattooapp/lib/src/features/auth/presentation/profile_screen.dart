@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -18,19 +19,26 @@ class ProfileScreen extends ConsumerWidget {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
+
+          final decoded = JwtDecoder.decode(snapshot.data!);
+          final email = decoded['email'] ?? 'N/A';
+          final name = decoded['name'] ?? 'N/A';
+          final sub = decoded['sub'] ?? 'N/A';
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Text(
-                  'ID Token:\n${snapshot.data}',
-                  style: const TextStyle(fontSize: 12),
-                ),
+                Text('Name: $name'),
+                Text('Email: $email'),
+                Text('Auth0 ID: $sub'),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
                     await logoutUseCase.execute();
-                    // Redirect to login screen after logout
+                    if (context.mounted) {
+                      Navigator.of(context).pushReplacementNamed('/');
+                    }
                   },
                   child: const Text('Log Out'),
                 ),

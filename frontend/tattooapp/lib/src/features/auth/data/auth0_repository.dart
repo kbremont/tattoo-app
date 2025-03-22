@@ -14,7 +14,7 @@ class Auth0Repository {
   }
 
   Future<void> logout() async {
-    await _auth0.webAuthentication().logout();
+    await _auth0.webAuthentication().logout(useHTTPS: true);
     await _storage.delete(key: 'access_token');
     await _storage.delete(key: 'id_token');
   }
