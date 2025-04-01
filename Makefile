@@ -43,7 +43,7 @@ vendor:
 ######### go run #########
 
 run-user:
-	PORT_SERVICE=9001 DATABASE_URI=$(DATABASE_URI) ./bin/user-service
+	PORT=9001 DATABASE_URI=$(DATABASE_URI) ./bin/user-service
 
 
 ######### db migrations #########

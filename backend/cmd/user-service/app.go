@@ -77,7 +77,7 @@ func newServer(ctx context.Context, cfg *config.Config, l log.Logger, db *sql.DB
 	path, handler := pbconnect.NewUserServiceHandler(svc)
 
 	srvCfg := &server.Config{
-		Port: cfg.ServicePort,
+		Port: cfg.Port,
 	}
 
 	// Setup JWKS fetcher

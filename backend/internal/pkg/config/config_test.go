@@ -15,7 +15,7 @@ func TestParseConfigDefaults(t *testing.T) {
 
 	cfg, err := Parse(context.Background())
 	assert.NoError(t, err)
-	assert.Equal(t, 9000, cfg.ServicePort)
+	assert.Equal(t, 9000, cfg.Port)
 	assert.Equal(t, "postgres://postgres:password@localhost:5432/postgres", cfg.DatabaseURI)
 }
 
@@ -26,7 +26,7 @@ func TestParseConfigOverrides(t *testing.T) {
 
 	cfg, err := Parse(context.Background())
 	assert.NoError(t, err)
-	assert.Equal(t, 8888, cfg.ServicePort)
+	assert.Equal(t, 8888, cfg.Port)
 	assert.Equal(t, "postgres://custom:custom@localhost:5432/customdb", cfg.DatabaseURI)
 	assert.Equal(t, "my-secret", cfg.JWTSecret)
 }

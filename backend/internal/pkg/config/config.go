@@ -20,14 +20,8 @@ type Config struct {
 	// of the up migration. This control is in place to facilitate rolling back database
 	// schema changes.
 	MigrateDown bool `env:"MIGRATE_DOWN" envDefault:"false"`
-	// StopIstioOnExit controls whether the binary will POST a quit message to the
-	// Istio sidecar on successful process exit.  This facilitats the use of the binary in
-	// k8s Jobs running with MigrateMode=true such that the Job will complete exit.
-	StopIstioOnExit bool `env:"STOP_ISTIO_ON_EXIT" envDefault:"false"`
-	// GatewayPort controls which port exposes the REST gateway server.
-	GatewayPort int `env:"PORT_GATEAWAY" envDefault:"8000"`
-	// ServicePort controls which port exposes the gRPC server.
-	ServicePort int `env:"PORT_SERVICE" envDefault:"9000"`
+	// Port controls which port exposes the server.
+	Port int `env:"PORT_SERVICE" envDefault:"9000"`
 	// DatabaseURI is the Postgres URI for the database.
 	DatabaseURI string `env:"DATABASE_URI" envDefault:"postgres://postgres:password@localhost:5432/postgres"`
 	// JWTSecret is the secret key used to sign JWT tokens.
