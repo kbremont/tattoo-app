@@ -19,12 +19,17 @@ test:
 
 build:
 	mkdir -p bin
-	for dir in ./backend/cmd/*; do \
+	cd backend && \
+	for dir in ./cmd/*; do \
 		if [ -d "$$dir" ]; then \
 			name=$$(basename $$dir); \
 			go build -o bin/$$name $$dir; \
 		fi; \
 	done
+
+build-user-service:
+	mkdir -p bin
+	cd backend && go build -o bin/user-service ./cmd/user-service
 
 ######### go formatting #########
 
@@ -43,7 +48,7 @@ vendor:
 ######### go run #########
 
 run-user:
-	PORT=9001 DATABASE_URI=$(DATABASE_URI) ./bin/user-service
+	PORT=9001 DATABASE_URI=$(DATABASE_URI) ./backend/bin/user-service
 
 
 ######### db migrations #########

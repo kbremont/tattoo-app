@@ -21,7 +21,7 @@ type Config struct {
 	// schema changes.
 	MigrateDown bool `env:"MIGRATE_DOWN" envDefault:"false"`
 	// Port controls which port exposes the server.
-	Port int `env:"PORT_SERVICE" envDefault:"9000"`
+	Port int `env:"PORT" envDefault:"9000"`
 	// DatabaseURI is the Postgres URI for the database.
 	DatabaseURI string `env:"DATABASE_URI" envDefault:"postgres://postgres:password@localhost:5432/postgres"`
 	// JWTSecret is the secret key used to sign JWT tokens.

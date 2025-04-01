@@ -9,7 +9,7 @@ import (
 )
 
 func TestParseConfigDefaults(t *testing.T) {
-	_ = os.Unsetenv("PORT_SERVICE")
+	_ = os.Unsetenv("PORT")
 	_ = os.Unsetenv("DATABASE_URI")
 	_ = os.Unsetenv("JWT_SECRET")
 
@@ -20,7 +20,7 @@ func TestParseConfigDefaults(t *testing.T) {
 }
 
 func TestParseConfigOverrides(t *testing.T) {
-	_ = os.Setenv("PORT_SERVICE", "8888")
+	_ = os.Setenv("PORT", "8888")
 	_ = os.Setenv("DATABASE_URI", "postgres://custom:custom@localhost:5432/customdb")
 	_ = os.Setenv("JWT_SECRET", "my-secret")
 
