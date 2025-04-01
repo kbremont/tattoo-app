@@ -1,5 +1,5 @@
 APP_NAME=tattoo-app
-DATABASE_URI?=postgres://postgres:password@localhost:5432/postgres
+DATABASE_URI?=postgresql://kyle.bremont@localhost:5432/tattoo_app?sslmode=disable
 
 ######### protobuf #########
 
