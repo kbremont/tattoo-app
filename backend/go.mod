@@ -1,4 +1,4 @@
-module github.com/kbremont/tattoo-app
+module github.com/kbremont/tattoo-app/backend
 
 go 1.23.3
 

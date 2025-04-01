@@ -4,7 +4,7 @@ package tattooapp.v1;
 
 import "tattooapp/v1/user.proto";
 
-option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1;pb";
 
 service UserService {
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
