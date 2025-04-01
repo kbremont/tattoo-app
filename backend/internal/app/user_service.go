@@ -35,16 +35,15 @@ func NewUserService(l log.Logger, repo UserRepository) *UserService {
 func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.CreateUserRequest]) (*connect.Response[v1pb.CreateUserResponse], error) {
 	logger := log.FromContext(ctx)
 
-	auth0UserID, err := auth.GetAuth0UserID(ctx)
-	if err != nil {
-		logger.Warn(ctx, "auth0_user_id not found in context")
-		return nil, connect.NewError(connect.CodeUnauthenticated, err)
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
-	logger.Info(ctx, "handling CreateUser request", "auth0_user_id", auth0UserID)
+	logger.Info(ctx, "handling CreateUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
 
 	u := &models.User{
-		Auth0UserID: auth0UserID,
+		Auth0UserID: req.Msg.GetAuth0UserId(),
 		FirstName:   req.Msg.GetFirstName(),
 		LastName:    req.Msg.GetLastName(),
 	}
@@ -54,7 +53,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	logger.Info(ctx, "user created successfully", "auth0_user_id", auth0UserID)
+	logger.Info(ctx, "user created successfully", "auth0_user_id", req.Msg.GetAuth0UserId())
 	return connect.NewResponse(&v1pb.CreateUserResponse{User: &v1pb.User{
 		Auth0UserId: u.Auth0UserID,
 		FirstName:   u.FirstName,

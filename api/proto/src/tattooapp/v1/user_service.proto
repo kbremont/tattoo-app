@@ -15,8 +15,9 @@ service UserService {
 
 // information required to create a new user
 message CreateUserRequest {
-    string first_name = 1;
-    string last_name = 2;
+    string auth0_user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
 }
 
 // information returned after creating a new user

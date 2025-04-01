@@ -5,7 +5,6 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:dev-pqjo5e7nvurmgv1u.us.auth0.com</string>
-		<string>webcredentials:dev-pqjo5e7nvurmgv1u.us.auth0.com</string>
 	</array>
 </dict>
 </plist>

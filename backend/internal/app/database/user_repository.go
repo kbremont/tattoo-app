@@ -30,7 +30,7 @@ func (r *UserRepository) GetUser(ctx context.Context, id string) (*models.User, 
   WHERE auth0_user_id = $1;`
 
 	var u models.User
-	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.Auth0UserID, &u.FirstName, &u.LastName)
+	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.Auth0UserID, &u.FirstName, &u.LastName, &u.CreatedAt, &u.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}

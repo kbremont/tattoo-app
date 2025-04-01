@@ -1,3 +1,4 @@
+import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:tattooapp/src/features/auth/data/auth0_repository.dart';
 
 class LoginUseCase {
@@ -5,7 +6,8 @@ class LoginUseCase {
 
   LoginUseCase(this._repository);
 
-  Future<void> execute() async {
-    await _repository.login();
+  Future<Credentials> execute() async {
+    return await _repository.getCredentialsSilently() ??
+        await _repository.login();
   }
 }

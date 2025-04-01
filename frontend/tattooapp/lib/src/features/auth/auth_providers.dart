@@ -1,12 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tattooapp/src/features/auth/data/auth0_repository.dart';
 import 'package:tattooapp/src/features/auth/application/login_use_case.dart';
 import 'package:tattooapp/src/features/auth/application/logout_use_case.dart';
-
-// FlutterSecureStorage
-final secureStorageProvider = Provider((ref) => const FlutterSecureStorage());
 
 // Auth0 instance
 final auth0Provider = Provider((ref) {
@@ -16,17 +12,19 @@ final auth0Provider = Provider((ref) {
   );
 });
 
+final accessTokenProvider = StateProvider<String?>((ref) => null);
+
+final auth0UserIdProvider = StateProvider<String?>((ref) => null);
+
 // Auth0 repository
 final auth0RepositoryProvider = Provider((ref) {
   final auth0 = ref.watch(auth0Provider);
-  final storage = ref.watch(secureStorageProvider);
-  return Auth0Repository(auth0, storage);
+  return Auth0Repository(auth0);
 });
 
-// Use cases
 final loginUseCaseProvider = Provider((ref) {
-  final repo = ref.watch(auth0RepositoryProvider);
-  return LoginUseCase(repo);
+  final repository = ref.read(auth0RepositoryProvider);
+  return LoginUseCase(repository);
 });
 
 final logoutUseCaseProvider = Provider((ref) {
