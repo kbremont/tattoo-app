@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"connectrpc.com/connect"
-	v1pb "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1"
-	"github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1/pbconnect"
+	v1pb "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1"
+	"github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1/pbconnect"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/auth"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/models"

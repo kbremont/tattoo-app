@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package tattooapp.v1;
 
-option go_package = "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1;pb";
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1;pb";
 
 message User {
     string auth0_user_id = 1;

@@ -1,14 +1,14 @@
 version: v2
 plugins:
   - remote: buf.build/protocolbuffers/go:v1.36.5
-    out: ../gen/go
+    out: ../../../backend/api/proto/gen/go
     opt: paths=source_relative
   - remote: buf.build/connectrpc/go:v1.18.1
-    out: ../gen/go
+    out: ../../../backend/api/proto/gen/go
     opt: paths=source_relative
   - remote: buf.build/connectrpc/dart
     out: ../../../frontend/tattooapp/lib/gen/dart
-  - remote: buf.build/protocolbuffers/dart
+  - remote: buf.build/protocolbuffers/dart:v21.1.2
     out: ../../../frontend/tattooapp/lib/gen/dart
     include_wkt: true
     include_imports: true
