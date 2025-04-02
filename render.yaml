@@ -9,7 +9,7 @@ services:
     autoDeploy: true
     region: oregon
     envVars:
-      - key: DATABASE_URL
+      - key: DATABASE_URI
         fromDatabase:
           name: tattoo-app-db
           property: connectionString
