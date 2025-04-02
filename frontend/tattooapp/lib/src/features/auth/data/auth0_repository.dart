@@ -13,7 +13,7 @@ class Auth0Repository {
     final redirectUrl =
         simulator
             ? 'tattooapp://callback'
-            : 'https://dev-pqjo5e7nvurmgv1u.us.auth0.com/ios/com.example.tattooapp/callback';
+            : 'com.kbremont.tattooapp://dev-pqjo5e7nvurmgv1u.us.auth0.com/ios/com.kbremont.tattooapp/callback';
 
     return redirectUrl;
   }
