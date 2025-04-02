@@ -4,6 +4,7 @@ services:
     plan: free
     runtime: docker
     rootDir: backend
+    dockerfilePath: build/package/Dockerfile
     branch: main
     autoDeploy: true
     region: oregon
