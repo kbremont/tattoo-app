@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: tattooapp/v1/user_service.proto
+//  source: tattooapp/user/v1/user_service.proto
 //
 // @dart = 2.12
 
@@ -20,7 +20,7 @@ const CreateUserRequest$json = {
   '1': 'CreateUserRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.v1.UserRole', '10': 'role'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.user.v1.UserRole', '10': 'role'},
     {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
   ],
@@ -28,22 +28,22 @@ const CreateUserRequest$json = {
 
 /// Descriptor for `CreateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createUserRequestDescriptor = $convert.base64Decode(
-    'ChFDcmVhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSKgoEcm9sZRgCIAEoDjIWLnRhdH'
-    'Rvb2FwcC52MS5Vc2VyUm9sZVIEcm9sZRIdCgpmaXJzdF9uYW1lGAMgASgJUglmaXJzdE5hbWUS'
-    'GwoJbGFzdF9uYW1lGAQgASgJUghsYXN0TmFtZQ==');
+    'ChFDcmVhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSLwoEcm9sZRgCIAEoDjIbLnRhdH'
+    'Rvb2FwcC51c2VyLnYxLlVzZXJSb2xlUgRyb2xlEh0KCmZpcnN0X25hbWUYAyABKAlSCWZpcnN0'
+    'TmFtZRIbCglsYXN0X25hbWUYBCABKAlSCGxhc3ROYW1l');
 
 @$core.Deprecated('Use createUserResponseDescriptor instead')
 const CreateUserResponse$json = {
   '1': 'CreateUserResponse',
   '2': [
-    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.v1.User', '10': 'user'},
+    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.user.v1.User', '10': 'user'},
   ],
 };
 
 /// Descriptor for `CreateUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createUserResponseDescriptor = $convert.base64Decode(
-    'ChJDcmVhdGVVc2VyUmVzcG9uc2USJgoEdXNlchgBIAEoCzISLnRhdHRvb2FwcC52MS5Vc2VyUg'
-    'R1c2Vy');
+    'ChJDcmVhdGVVc2VyUmVzcG9uc2USKwoEdXNlchgBIAEoCzIXLnRhdHRvb2FwcC51c2VyLnYxLl'
+    'VzZXJSBHVzZXI=');
 
 @$core.Deprecated('Use getUserRequestDescriptor instead')
 const GetUserRequest$json = {
@@ -61,14 +61,14 @@ final $typed_data.Uint8List getUserRequestDescriptor = $convert.base64Decode(
 const GetUserResponse$json = {
   '1': 'GetUserResponse',
   '2': [
-    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.v1.User', '10': 'user'},
+    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.user.v1.User', '10': 'user'},
   ],
 };
 
 /// Descriptor for `GetUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getUserResponseDescriptor = $convert.base64Decode(
-    'Cg9HZXRVc2VyUmVzcG9uc2USJgoEdXNlchgBIAEoCzISLnRhdHRvb2FwcC52MS5Vc2VyUgR1c2'
-    'Vy');
+    'Cg9HZXRVc2VyUmVzcG9uc2USKwoEdXNlchgBIAEoCzIXLnRhdHRvb2FwcC51c2VyLnYxLlVzZX'
+    'JSBHVzZXI=');
 
 @$core.Deprecated('Use updateUserRequestDescriptor instead')
 const UpdateUserRequest$json = {
@@ -89,14 +89,14 @@ final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode(
 const UpdateUserResponse$json = {
   '1': 'UpdateUserResponse',
   '2': [
-    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.v1.User', '10': 'user'},
+    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.user.v1.User', '10': 'user'},
   ],
 };
 
 /// Descriptor for `UpdateUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateUserResponseDescriptor = $convert.base64Decode(
-    'ChJVcGRhdGVVc2VyUmVzcG9uc2USJgoEdXNlchgBIAEoCzISLnRhdHRvb2FwcC52MS5Vc2VyUg'
-    'R1c2Vy');
+    'ChJVcGRhdGVVc2VyUmVzcG9uc2USKwoEdXNlchgBIAEoCzIXLnRhdHRvb2FwcC51c2VyLnYxLl'
+    'VzZXJSBHVzZXI=');
 
 @$core.Deprecated('Use deleteUserRequestDescriptor instead')
 const DeleteUserRequest$json = {
@@ -125,32 +125,33 @@ final $typed_data.Uint8List deleteUserResponseDescriptor = $convert.base64Decode
 const $core.Map<$core.String, $core.dynamic> UserServiceBase$json = {
   '1': 'UserService',
   '2': [
-    {'1': 'CreateUser', '2': '.tattooapp.v1.CreateUserRequest', '3': '.tattooapp.v1.CreateUserResponse'},
-    {'1': 'GetUser', '2': '.tattooapp.v1.GetUserRequest', '3': '.tattooapp.v1.GetUserResponse'},
-    {'1': 'UpdateUser', '2': '.tattooapp.v1.UpdateUserRequest', '3': '.tattooapp.v1.UpdateUserResponse'},
-    {'1': 'DeleteUser', '2': '.tattooapp.v1.DeleteUserRequest', '3': '.tattooapp.v1.DeleteUserResponse'},
+    {'1': 'CreateUser', '2': '.tattooapp.user.v1.CreateUserRequest', '3': '.tattooapp.user.v1.CreateUserResponse'},
+    {'1': 'GetUser', '2': '.tattooapp.user.v1.GetUserRequest', '3': '.tattooapp.user.v1.GetUserResponse'},
+    {'1': 'UpdateUser', '2': '.tattooapp.user.v1.UpdateUserRequest', '3': '.tattooapp.user.v1.UpdateUserResponse'},
+    {'1': 'DeleteUser', '2': '.tattooapp.user.v1.DeleteUserRequest', '3': '.tattooapp.user.v1.DeleteUserResponse'},
   ],
 };
 
 @$core.Deprecated('Use userServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UserServiceBase$messageJson = {
-  '.tattooapp.v1.CreateUserRequest': CreateUserRequest$json,
-  '.tattooapp.v1.CreateUserResponse': CreateUserResponse$json,
-  '.tattooapp.v1.User': $0.User$json,
-  '.tattooapp.v1.GetUserRequest': GetUserRequest$json,
-  '.tattooapp.v1.GetUserResponse': GetUserResponse$json,
-  '.tattooapp.v1.UpdateUserRequest': UpdateUserRequest$json,
-  '.tattooapp.v1.UpdateUserResponse': UpdateUserResponse$json,
-  '.tattooapp.v1.DeleteUserRequest': DeleteUserRequest$json,
-  '.tattooapp.v1.DeleteUserResponse': DeleteUserResponse$json,
+  '.tattooapp.user.v1.CreateUserRequest': CreateUserRequest$json,
+  '.tattooapp.user.v1.CreateUserResponse': CreateUserResponse$json,
+  '.tattooapp.user.v1.User': $0.User$json,
+  '.tattooapp.user.v1.GetUserRequest': GetUserRequest$json,
+  '.tattooapp.user.v1.GetUserResponse': GetUserResponse$json,
+  '.tattooapp.user.v1.UpdateUserRequest': UpdateUserRequest$json,
+  '.tattooapp.user.v1.UpdateUserResponse': UpdateUserResponse$json,
+  '.tattooapp.user.v1.DeleteUserRequest': DeleteUserRequest$json,
+  '.tattooapp.user.v1.DeleteUserResponse': DeleteUserResponse$json,
 };
 
 /// Descriptor for `UserService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List userServiceDescriptor = $convert.base64Decode(
-    'CgtVc2VyU2VydmljZRJPCgpDcmVhdGVVc2VyEh8udGF0dG9vYXBwLnYxLkNyZWF0ZVVzZXJSZX'
-    'F1ZXN0GiAudGF0dG9vYXBwLnYxLkNyZWF0ZVVzZXJSZXNwb25zZRJGCgdHZXRVc2VyEhwudGF0'
-    'dG9vYXBwLnYxLkdldFVzZXJSZXF1ZXN0Gh0udGF0dG9vYXBwLnYxLkdldFVzZXJSZXNwb25zZR'
-    'JPCgpVcGRhdGVVc2VyEh8udGF0dG9vYXBwLnYxLlVwZGF0ZVVzZXJSZXF1ZXN0GiAudGF0dG9v'
-    'YXBwLnYxLlVwZGF0ZVVzZXJSZXNwb25zZRJPCgpEZWxldGVVc2VyEh8udGF0dG9vYXBwLnYxLk'
-    'RlbGV0ZVVzZXJSZXF1ZXN0GiAudGF0dG9vYXBwLnYxLkRlbGV0ZVVzZXJSZXNwb25zZQ==');
+    'CgtVc2VyU2VydmljZRJZCgpDcmVhdGVVc2VyEiQudGF0dG9vYXBwLnVzZXIudjEuQ3JlYXRlVX'
+    'NlclJlcXVlc3QaJS50YXR0b29hcHAudXNlci52MS5DcmVhdGVVc2VyUmVzcG9uc2USUAoHR2V0'
+    'VXNlchIhLnRhdHRvb2FwcC51c2VyLnYxLkdldFVzZXJSZXF1ZXN0GiIudGF0dG9vYXBwLnVzZX'
+    'IudjEuR2V0VXNlclJlc3BvbnNlElkKClVwZGF0ZVVzZXISJC50YXR0b29hcHAudXNlci52MS5V'
+    'cGRhdGVVc2VyUmVxdWVzdBolLnRhdHRvb2FwcC51c2VyLnYxLlVwZGF0ZVVzZXJSZXNwb25zZR'
+    'JZCgpEZWxldGVVc2VyEiQudGF0dG9vYXBwLnVzZXIudjEuRGVsZXRlVXNlclJlcXVlc3QaJS50'
+    'YXR0b29hcHAudXNlci52MS5EZWxldGVVc2VyUmVzcG9uc2U=');
 

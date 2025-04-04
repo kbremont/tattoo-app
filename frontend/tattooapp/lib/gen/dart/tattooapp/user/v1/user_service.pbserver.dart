@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: tattooapp/v1/user_service.proto
+//  source: tattooapp/user/v1/user_service.proto
 //
 // @dart = 2.12
 
