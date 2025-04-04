@@ -1,6 +1,6 @@
-import 'package:tattooapp/gen/dart/tattooapp/v1/user_service.pb.dart';
-import 'package:tattooapp/gen/dart/tattooapp/v1/user.pb.dart';
-import 'package:tattooapp/gen/dart/tattooapp/v1/user_service.connect.client.dart';
+import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.pb.dart';
+import 'package:tattooapp/gen/dart/tattooapp/user/v1/user.pb.dart';
+import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.connect.client.dart';
 import 'package:tattooapp/src/core/utils/auth_headers.dart';
 
 class UserRepository {

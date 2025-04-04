@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: tattooapp/v1/user.proto
+//  source: tattooapp/user/v1/user.proto
 //
 // @dart = 2.12
 
@@ -33,7 +33,7 @@ const User$json = {
   '1': 'User',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.v1.UserRole', '10': 'role'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.user.v1.UserRole', '10': 'role'},
     {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
     {'1': 'created_at', '3': 5, '4': 1, '5': 9, '10': 'createdAt'},
@@ -43,8 +43,8 @@ const User$json = {
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBIqCgRyb2xlGAIgASgOMhYudGF0dG9vYXBwLnYxLlVzZX'
-    'JSb2xlUgRyb2xlEh0KCmZpcnN0X25hbWUYAyABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25hbWUY'
-    'BCABKAlSCGxhc3ROYW1lEh0KCmNyZWF0ZWRfYXQYBSABKAlSCWNyZWF0ZWRBdBIdCgp1cGRhdG'
-    'VkX2F0GAYgASgJUgl1cGRhdGVkQXQ=');
+    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBIvCgRyb2xlGAIgASgOMhsudGF0dG9vYXBwLnVzZXIudj'
+    'EuVXNlclJvbGVSBHJvbGUSHQoKZmlyc3RfbmFtZRgDIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3Rf'
+    'bmFtZRgEIAEoCVIIbGFzdE5hbWUSHQoKY3JlYXRlZF9hdBgFIAEoCVIJY3JlYXRlZEF0Eh0KCn'
+    'VwZGF0ZWRfYXQYBiABKAlSCXVwZGF0ZWRBdA==');
 

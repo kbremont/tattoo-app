@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"connectrpc.com/connect"
-	v1pb "github.com/kbremont/tattoo-app/api/proto/gen/go/tattooapp/v1"
+	v1pb "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/user/v1"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/log/slog"
 )
 

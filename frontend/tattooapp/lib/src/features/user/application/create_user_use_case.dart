@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/user/domain/user.dart';
-import 'package:tattooapp/gen/dart/tattooapp/v1/user.pb.dart' as proto;
+import 'package:tattooapp/gen/dart/tattooapp/user/v1/user.pb.dart' as proto;
 import 'package:tattooapp/src/features/user/data/user_repository.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
 

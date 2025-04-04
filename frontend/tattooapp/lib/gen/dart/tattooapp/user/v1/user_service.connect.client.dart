@@ -1,15 +1,15 @@
 //
 //  Generated code. Do not modify.
-//  source: tattooapp/v1/user_service.proto
+//  source: tattooapp/user/v1/user_service.proto
 //
 
 import "package:connectrpc/connect.dart" as connect;
-import "user_service.pb.dart" as tattooappv1user_service;
+import "user_service.pb.dart" as tattooappuserv1user_service;
 import "user_service.connect.spec.dart" as specs;
 
 extension type UserServiceClient (connect.Transport _transport) {
-  Future<tattooappv1user_service.CreateUserResponse> createUser(
-    tattooappv1user_service.CreateUserRequest input, {
+  Future<tattooappuserv1user_service.CreateUserResponse> createUser(
+    tattooappuserv1user_service.CreateUserRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
@@ -25,8 +25,8 @@ extension type UserServiceClient (connect.Transport _transport) {
     );
   }
 
-  Future<tattooappv1user_service.GetUserResponse> getUser(
-    tattooappv1user_service.GetUserRequest input, {
+  Future<tattooappuserv1user_service.GetUserResponse> getUser(
+    tattooappuserv1user_service.GetUserRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
@@ -42,8 +42,8 @@ extension type UserServiceClient (connect.Transport _transport) {
     );
   }
 
-  Future<tattooappv1user_service.UpdateUserResponse> updateUser(
-    tattooappv1user_service.UpdateUserRequest input, {
+  Future<tattooappuserv1user_service.UpdateUserResponse> updateUser(
+    tattooappuserv1user_service.UpdateUserRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
@@ -59,8 +59,8 @@ extension type UserServiceClient (connect.Transport _transport) {
     );
   }
 
-  Future<tattooappv1user_service.DeleteUserResponse> deleteUser(
-    tattooappv1user_service.DeleteUserRequest input, {
+  Future<tattooappuserv1user_service.DeleteUserResponse> deleteUser(
+    tattooappuserv1user_service.DeleteUserRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,

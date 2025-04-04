@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: tattooapp/v1/user.proto
+//  source: tattooapp/user/v1/user.proto
 //
 // @dart = 2.12
 
@@ -51,7 +51,7 @@ class User extends $pb.GeneratedMessage {
   factory User.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: UserRole.USER_ROLE_UNSPECIFIED, valueOf: UserRole.valueOf, enumValues: UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
