@@ -1,16 +1,23 @@
-package database
+package user
 
 import (
 	"context"
 	"database/sql"
 
-	"github.com/kbremont/tattoo-app/backend/internal/app"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/models"
 )
 
+// UserRepository is the interface that allows stateful operations on a users.
+type UserRepositoryInterface interface {
+	CreateUser(ctx context.Context, u *models.User) error
+	GetUser(ctx context.Context, id string) (*models.User, error)
+	UpdateUser(ctx context.Context, u *models.User) error
+	DeleteUser(ctx context.Context, id string) error
+}
+
 type UserRepository struct{ db *sql.DB }
 
-var _ app.UserRepository = new(UserRepository)
+var _ UserRepositoryInterface = new(UserRepository)
 
 // NewUserRepository returns a *UserRepository configured to use db
 func NewUserRepository(db *sql.DB) *UserRepository { return &UserRepository{db: db} }
