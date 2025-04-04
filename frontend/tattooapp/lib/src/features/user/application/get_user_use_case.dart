@@ -9,11 +9,11 @@ class GetUserUseCase {
 
   Future<User> execute({
     required String accessToken,
-    required String auth0UserId,
+    required String id,
   }) async {
     final protoUser = await _repository.getUser(
       accessToken: accessToken,
-      auth0UserId: auth0UserId,
+      id: id,
     );
 
     return _mapProtoUserToUser(protoUser);
@@ -34,7 +34,7 @@ User _mapProtoUserToUser(proto.User protoUser) {
   }
 
   return User(
-    auth0UserId: protoUser.auth0UserId,
+    id: protoUser.id,
     role: role,
     firstName: protoUser.firstName,
     lastName: protoUser.lastName,

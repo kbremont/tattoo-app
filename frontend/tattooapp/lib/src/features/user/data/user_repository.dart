@@ -14,7 +14,7 @@ class UserRepository {
   }) async {
     await _client.createUser(
       CreateUserRequest(
-        auth0UserId: user.auth0UserId,
+        id: user.id,
         role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -25,10 +25,10 @@ class UserRepository {
 
   Future<User> getUser({
     required String accessToken,
-    required String auth0UserId,
+    required String id,
   }) async {
     final response = await _client.getUser(
-      GetUserRequest(auth0UserId: auth0UserId),
+      GetUserRequest(id: id),
       headers: authHeaders(accessToken),
     );
 

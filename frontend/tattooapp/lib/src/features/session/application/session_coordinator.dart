@@ -27,16 +27,13 @@ class SessionCoordinator {
     final lastName = decoded['family_name'] as String?;
 
     try {
-      await _getUserUseCase.execute(
-        accessToken: accessToken,
-        auth0UserId: auth0UserId,
-      );
+      await _getUserUseCase.execute(accessToken: accessToken, id: auth0UserId);
       return (SessionDestination.profile, accessToken);
     } catch (_) {
       _ref
           .read(newUserStateProvider.notifier)
           .updateFull(
-            auth0UserId: auth0UserId,
+            id: auth0UserId,
             firstName: firstName,
             lastName: lastName,
           );

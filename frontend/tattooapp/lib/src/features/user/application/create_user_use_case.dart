@@ -35,7 +35,7 @@ proto.User _mapUserToProtoUser(User user) {
   }
 
   return proto.User(
-    auth0UserId: user.auth0UserId,
+    id: user.id,
     role: role,
     firstName: user.firstName,
     lastName: user.lastName,
