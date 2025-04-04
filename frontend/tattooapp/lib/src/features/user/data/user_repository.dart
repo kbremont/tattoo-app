@@ -10,15 +10,14 @@ class UserRepository {
 
   Future<void> createUser({
     required String accessToken,
-    required String auth0UserId,
-    required String firstName,
-    required String lastName,
+    required User user,
   }) async {
     await _client.createUser(
       CreateUserRequest(
-        auth0UserId: auth0UserId,
-        firstName: firstName,
-        lastName: lastName,
+        auth0UserId: user.auth0UserId,
+        role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName,
       ),
       headers: authHeaders(accessToken),
     );

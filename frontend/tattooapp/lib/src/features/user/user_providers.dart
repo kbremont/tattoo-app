@@ -59,6 +59,10 @@ class NewUserStateNotifier extends StateNotifier<NewUserState> {
     );
   }
 
+  void updateRole(UserRole role) {
+    state = state.copyWith(role: role);
+  }
+
   void updateName({required String firstName, required String lastName}) {
     state = state.copyWith(firstName: firstName, lastName: lastName);
   }
