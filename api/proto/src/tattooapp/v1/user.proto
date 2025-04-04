@@ -4,10 +4,17 @@ package tattooapp.v1;
 
 option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1;pb";
 
+enum UserRole {
+    USER_ROLE_UNSPECIFIED = 0;
+    USER_ROLE_ARTIST = 1;
+    USER_ROLE_CLIENT = 2;
+}
+
 message User {
     string auth0_user_id = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string created_at = 4;
-    string updated_at = 5;
+    UserRole role = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string created_at = 5;
+    string updated_at = 6;
 }

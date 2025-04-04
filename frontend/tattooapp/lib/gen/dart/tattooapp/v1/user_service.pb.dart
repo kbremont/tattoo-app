@@ -15,17 +15,22 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'user.pb.dart' as $0;
+import 'user.pbenum.dart' as $0;
 
 /// information required to create a new user
 class CreateUserRequest extends $pb.GeneratedMessage {
   factory CreateUserRequest({
     $core.String? auth0UserId,
+    $0.UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
   }) {
     final $result = create();
     if (auth0UserId != null) {
       $result.auth0UserId = auth0UserId;
+    }
+    if (role != null) {
+      $result.role = role;
     }
     if (firstName != null) {
       $result.firstName = firstName;
@@ -41,8 +46,9 @@ class CreateUserRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
-    ..aOS(2, _omitFieldNames ? '' : 'firstName')
-    ..aOS(3, _omitFieldNames ? '' : 'lastName')
+    ..e<$0.UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $0.UserRole.USER_ROLE_UNSPECIFIED, valueOf: $0.UserRole.valueOf, enumValues: $0.UserRole.values)
+    ..aOS(3, _omitFieldNames ? '' : 'firstName')
+    ..aOS(4, _omitFieldNames ? '' : 'lastName')
     ..hasRequiredFields = false
   ;
 
@@ -77,22 +83,31 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   void clearAuth0UserId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get firstName => $_getSZ(1);
+  $0.UserRole get role => $_getN(1);
   @$pb.TagNumber(2)
-  set firstName($core.String v) { $_setString(1, v); }
+  set role($0.UserRole v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasFirstName() => $_has(1);
+  $core.bool hasRole() => $_has(1);
   @$pb.TagNumber(2)
-  void clearFirstName() => clearField(2);
+  void clearRole() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get lastName => $_getSZ(2);
+  $core.String get firstName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set lastName($core.String v) { $_setString(2, v); }
+  set firstName($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasLastName() => $_has(2);
+  $core.bool hasFirstName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearLastName() => clearField(3);
+  void clearFirstName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get lastName => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set lastName($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasLastName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLastName() => clearField(4);
 }
 
 /// information returned after creating a new user

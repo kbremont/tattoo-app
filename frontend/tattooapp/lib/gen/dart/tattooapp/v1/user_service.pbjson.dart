@@ -20,16 +20,17 @@ const CreateUserRequest$json = {
   '1': 'CreateUserRequest',
   '2': [
     {'1': 'auth0_user_id', '3': 1, '4': 1, '5': 9, '10': 'auth0UserId'},
-    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.v1.UserRole', '10': 'role'},
+    {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
   ],
 };
 
 /// Descriptor for `CreateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createUserRequestDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVVc2VyUmVxdWVzdBIiCg1hdXRoMF91c2VyX2lkGAEgASgJUgthdXRoMFVzZXJJZB'
-    'IdCgpmaXJzdF9uYW1lGAIgASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAMgASgJUghsYXN0'
-    'TmFtZQ==');
+    'IqCgRyb2xlGAIgASgOMhYudGF0dG9vYXBwLnYxLlVzZXJSb2xlUgRyb2xlEh0KCmZpcnN0X25h'
+    'bWUYAyABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25hbWUYBCABKAlSCGxhc3ROYW1l');
 
 @$core.Deprecated('Use createUserResponseDescriptor instead')
 const CreateUserResponse$json = {

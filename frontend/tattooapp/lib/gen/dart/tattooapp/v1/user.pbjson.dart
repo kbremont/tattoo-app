@@ -13,21 +13,38 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use userRoleDescriptor instead')
+const UserRole$json = {
+  '1': 'UserRole',
+  '2': [
+    {'1': 'USER_ROLE_UNSPECIFIED', '2': 0},
+    {'1': 'USER_ROLE_ARTIST', '2': 1},
+    {'1': 'USER_ROLE_CLIENT', '2': 2},
+  ],
+};
+
+/// Descriptor for `UserRole`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List userRoleDescriptor = $convert.base64Decode(
+    'CghVc2VyUm9sZRIZChVVU0VSX1JPTEVfVU5TUEVDSUZJRUQQABIUChBVU0VSX1JPTEVfQVJUSV'
+    'NUEAESFAoQVVNFUl9ST0xFX0NMSUVOVBAC');
+
 @$core.Deprecated('Use userDescriptor instead')
 const User$json = {
   '1': 'User',
   '2': [
     {'1': 'auth0_user_id', '3': 1, '4': 1, '5': 9, '10': 'auth0UserId'},
-    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
-    {'1': 'created_at', '3': 4, '4': 1, '5': 9, '10': 'createdAt'},
-    {'1': 'updated_at', '3': 5, '4': 1, '5': 9, '10': 'updatedAt'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.v1.UserRole', '10': 'role'},
+    {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
+    {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'created_at', '3': 5, '4': 1, '5': 9, '10': 'createdAt'},
+    {'1': 'updated_at', '3': 6, '4': 1, '5': 9, '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEiIKDWF1dGgwX3VzZXJfaWQYASABKAlSC2F1dGgwVXNlcklkEh0KCmZpcnN0X25hbW'
-    'UYAiABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25hbWUYAyABKAlSCGxhc3ROYW1lEh0KCmNyZWF0'
-    'ZWRfYXQYBCABKAlSCWNyZWF0ZWRBdBIdCgp1cGRhdGVkX2F0GAUgASgJUgl1cGRhdGVkQXQ=');
+    'CgRVc2VyEiIKDWF1dGgwX3VzZXJfaWQYASABKAlSC2F1dGgwVXNlcklkEioKBHJvbGUYAiABKA'
+    '4yFi50YXR0b29hcHAudjEuVXNlclJvbGVSBHJvbGUSHQoKZmlyc3RfbmFtZRgDIAEoCVIJZmly'
+    'c3ROYW1lEhsKCWxhc3RfbmFtZRgEIAEoCVIIbGFzdE5hbWUSHQoKY3JlYXRlZF9hdBgFIAEoCV'
+    'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYBiABKAlSCXVwZGF0ZWRBdA==');
 

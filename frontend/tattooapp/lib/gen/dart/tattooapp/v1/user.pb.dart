@@ -13,9 +13,14 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'user.pbenum.dart';
+
+export 'user.pbenum.dart';
+
 class User extends $pb.GeneratedMessage {
   factory User({
     $core.String? auth0UserId,
+    UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
     $core.String? createdAt,
@@ -24,6 +29,9 @@ class User extends $pb.GeneratedMessage {
     final $result = create();
     if (auth0UserId != null) {
       $result.auth0UserId = auth0UserId;
+    }
+    if (role != null) {
+      $result.role = role;
     }
     if (firstName != null) {
       $result.firstName = firstName;
@@ -45,10 +53,11 @@ class User extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
-    ..aOS(2, _omitFieldNames ? '' : 'firstName')
-    ..aOS(3, _omitFieldNames ? '' : 'lastName')
-    ..aOS(4, _omitFieldNames ? '' : 'createdAt')
-    ..aOS(5, _omitFieldNames ? '' : 'updatedAt')
+    ..e<UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: UserRole.USER_ROLE_UNSPECIFIED, valueOf: UserRole.valueOf, enumValues: UserRole.values)
+    ..aOS(3, _omitFieldNames ? '' : 'firstName')
+    ..aOS(4, _omitFieldNames ? '' : 'lastName')
+    ..aOS(5, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(6, _omitFieldNames ? '' : 'updatedAt')
     ..hasRequiredFields = false
   ;
 
@@ -83,40 +92,49 @@ class User extends $pb.GeneratedMessage {
   void clearAuth0UserId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get firstName => $_getSZ(1);
+  UserRole get role => $_getN(1);
   @$pb.TagNumber(2)
-  set firstName($core.String v) { $_setString(1, v); }
+  set role(UserRole v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasFirstName() => $_has(1);
+  $core.bool hasRole() => $_has(1);
   @$pb.TagNumber(2)
-  void clearFirstName() => clearField(2);
+  void clearRole() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get lastName => $_getSZ(2);
+  $core.String get firstName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set lastName($core.String v) { $_setString(2, v); }
+  set firstName($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasLastName() => $_has(2);
+  $core.bool hasFirstName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearLastName() => clearField(3);
+  void clearFirstName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get createdAt => $_getSZ(3);
+  $core.String get lastName => $_getSZ(3);
   @$pb.TagNumber(4)
-  set createdAt($core.String v) { $_setString(3, v); }
+  set lastName($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCreatedAt() => $_has(3);
+  $core.bool hasLastName() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCreatedAt() => clearField(4);
+  void clearLastName() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get updatedAt => $_getSZ(4);
+  $core.String get createdAt => $_getSZ(4);
   @$pb.TagNumber(5)
-  set updatedAt($core.String v) { $_setString(4, v); }
+  set createdAt($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasUpdatedAt() => $_has(4);
+  $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
-  void clearUpdatedAt() => clearField(5);
+  void clearCreatedAt() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get updatedAt => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set updatedAt($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasUpdatedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUpdatedAt() => clearField(6);
 }
 
 
