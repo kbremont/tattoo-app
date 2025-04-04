@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1/pbconnect"
+	"github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/user/v1/pbconnect"
 	"github.com/kbremont/tattoo-app/backend/internal/app/database"
 	"github.com/kbremont/tattoo-app/backend/internal/app/server"
 	"github.com/kbremont/tattoo-app/backend/internal/app/user"
