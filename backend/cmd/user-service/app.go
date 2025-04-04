@@ -6,9 +6,9 @@ import (
 	"fmt"
 
 	"github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/v1/pbconnect"
-	coreapp "github.com/kbremont/tattoo-app/backend/internal/app"
 	"github.com/kbremont/tattoo-app/backend/internal/app/database"
 	"github.com/kbremont/tattoo-app/backend/internal/app/server"
+	"github.com/kbremont/tattoo-app/backend/internal/app/user"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/auth"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/config"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
@@ -73,7 +73,7 @@ func newApp(ctx context.Context, cfg *config.Config, logger log.Logger) (*app, e
 }
 
 func newServer(ctx context.Context, cfg *config.Config, l log.Logger, db *sql.DB) (*server.Server, error) {
-	svc := coreapp.NewUserService(l, database.NewUserRepository(db))
+	svc := user.NewUserService(l, user.NewUserRepository(db))
 	path, handler := pbconnect.NewUserServiceHandler(svc)
 
 	srvCfg := &server.Config{

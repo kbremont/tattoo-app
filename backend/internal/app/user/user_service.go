@@ -1,4 +1,4 @@
-package app
+package user
 
 import (
 	"context"
@@ -13,21 +13,13 @@ import (
 
 // UserService is the implementation of tattooapp.v1.UserService.
 type UserService struct {
-	repository UserRepository
+	repository UserRepositoryInterface
 	logger     log.Logger
-}
-
-// UserRepository is the interface that allows stateful operations on a users.
-type UserRepository interface {
-	CreateUser(ctx context.Context, u *models.User) error
-	GetUser(ctx context.Context, id string) (*models.User, error)
-	UpdateUser(ctx context.Context, u *models.User) error
-	DeleteUser(ctx context.Context, id string) error
 }
 
 var _ pbconnect.UserServiceHandler = new(UserService)
 
-func NewUserService(l log.Logger, repo UserRepository) *UserService {
+func NewUserService(l log.Logger, repo UserRepositoryInterface) *UserService {
 	return &UserService{logger: l, repository: repo}
 }
 
