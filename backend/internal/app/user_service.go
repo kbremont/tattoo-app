@@ -44,6 +44,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 
 	u := &models.User{
 		Auth0UserID: req.Msg.GetAuth0UserId(),
+		Role:        mapPbUserRoleToModelUserRole(req.Msg.GetRole()),
 		FirstName:   req.Msg.GetFirstName(),
 		LastName:    req.Msg.GetLastName(),
 	}
@@ -56,6 +57,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 	logger.Info(ctx, "user created successfully", "auth0_user_id", req.Msg.GetAuth0UserId())
 	return connect.NewResponse(&v1pb.CreateUserResponse{User: &v1pb.User{
 		Auth0UserId: u.Auth0UserID,
+		Role:        mapModelUserRoleToPbUserRole(u.Role),
 		FirstName:   u.FirstName,
 		LastName:    u.LastName,
 	}}), nil
@@ -80,6 +82,7 @@ func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.Get
 	logger.Info(ctx, "user retrieved successfully", "user_id", u.Auth0UserID)
 	return connect.NewResponse(&v1pb.GetUserResponse{User: &v1pb.User{
 		Auth0UserId: u.Auth0UserID,
+		Role:        mapModelUserRoleToPbUserRole(u.Role),
 		FirstName:   u.FirstName,
 		LastName:    u.LastName,
 	}}), nil
@@ -131,4 +134,26 @@ func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.
 
 	logger.Info(ctx, "user deleted successfully", "auth0_user_id", req.Msg.GetAuth0UserId())
 	return connect.NewResponse(&v1pb.DeleteUserResponse{Success: true}), nil
+}
+
+func mapPbUserRoleToModelUserRole(role v1pb.UserRole) models.UserRole {
+	switch role {
+	case v1pb.UserRole_USER_ROLE_ARTIST:
+		return models.UserRoleArtist
+	case v1pb.UserRole_USER_ROLE_CLIENT:
+		return models.UserRoleClient
+	default:
+		return models.UserRoleClient
+	}
+}
+
+func mapModelUserRoleToPbUserRole(role models.UserRole) v1pb.UserRole {
+	switch role {
+	case models.UserRoleArtist:
+		return v1pb.UserRole_USER_ROLE_ARTIST
+	case models.UserRoleClient:
+		return v1pb.UserRole_USER_ROLE_CLIENT
+	default:
+		return v1pb.UserRole_USER_ROLE_CLIENT
+	}
 }

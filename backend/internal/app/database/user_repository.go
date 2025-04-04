@@ -17,20 +17,20 @@ func NewUserRepository(db *sql.DB) *UserRepository { return &UserRepository{db: 
 
 func (r *UserRepository) CreateUser(ctx context.Context, u *models.User) error {
 	const exec = `INSERT INTO "users"
-  (auth0_user_id, first_name, last_name, created_at, updated_at)
-  VALUES ($1, $2, $3, NOW(), NOW());`
+  (auth0_user_id, role, first_name, last_name, created_at, updated_at)
+  VALUES ($1, $2, $3, $4, NOW(), NOW());`
 
-	_, err := r.db.ExecContext(ctx, exec, u.Auth0UserID, u.FirstName, u.LastName)
+	_, err := r.db.ExecContext(ctx, exec, u.Auth0UserID, u.Role, u.FirstName, u.LastName)
 	return err
 }
 
 func (r *UserRepository) GetUser(ctx context.Context, id string) (*models.User, error) {
-	const exec = `SELECT auth0_user_id, first_name, last_name, created_at, updated_at
+	const exec = `SELECT auth0_user_id, role, first_name, last_name, created_at, updated_at
   FROM "users"
   WHERE auth0_user_id = $1;`
 
 	var u models.User
-	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.Auth0UserID, &u.FirstName, &u.LastName, &u.CreatedAt, &u.UpdatedAt)
+	err := r.db.QueryRowContext(ctx, exec, id).Scan(&u.Auth0UserID, &u.Role, &u.FirstName, &u.LastName, &u.CreatedAt, &u.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}
