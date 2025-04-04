@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package tattooapp.artist.v1;
+
+import "tattooapp/artist/v1/artist_profile.proto";
+
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/artist/v1;pb";
+
+service ArtistService {
+    rpc CreateArtistProfile(CreateArtistProfileRequest) returns (CreateArtistProfileResponse);
+    rpc GetArtistProfile(GetArtistProfileRequest) returns (GetArtistProfileResponse);
+    rpc DeleteArtistProfile(DeleteArtistProfileRequest) returns (DeleteArtistProfileResponse);
+}
+
+message CreateArtistProfileRequest {
+    string user_id = 1;
+    string bio = 2;
+    string location = 3;
+    string tattoo_shop = 4;
+}
+
+message CreateArtistProfileResponse {
+    ArtistProfile artist_profile = 1;
+}
+
+message GetArtistProfileRequest {
+    string user_id = 1;
+}
+
+message GetArtistProfileResponse {
+    ArtistProfile artist_profile = 1;
+}
+
+message DeleteArtistProfileRequest {
+    string user_id = 1;
+}
+
+message DeleteArtistProfileResponse {
+    bool success = 1;
+}

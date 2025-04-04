@@ -13,7 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import 'user.pbjson.dart' as $0;
+import 'user.pbjson.dart' as $2;
 
 @$core.Deprecated('Use createUserRequestDescriptor instead')
 const CreateUserRequest$json = {
@@ -136,7 +136,7 @@ const $core.Map<$core.String, $core.dynamic> UserServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UserServiceBase$messageJson = {
   '.tattooapp.user.v1.CreateUserRequest': CreateUserRequest$json,
   '.tattooapp.user.v1.CreateUserResponse': CreateUserResponse$json,
-  '.tattooapp.user.v1.User': $0.User$json,
+  '.tattooapp.user.v1.User': $2.User$json,
   '.tattooapp.user.v1.GetUserRequest': GetUserRequest$json,
   '.tattooapp.user.v1.GetUserResponse': GetUserResponse$json,
   '.tattooapp.user.v1.UpdateUserRequest': UpdateUserRequest$json,

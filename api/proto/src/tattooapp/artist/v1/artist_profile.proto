@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tattooapp.artist.v1;
+
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/artist/v1;pb";
+
+message ArtistProfile {
+    string user_id = 1;
+    string bio = 2;
+    string location = 3;
+    string tattoo_shop = 4;
+    string created_at = 5;
+    string updated_at = 6;
+    // repeated string styles = 5; // List of tattoo styles the artist specializes in
+    // repeated string portfolio_images = 6; // List of URLs to portfolio images
+    // repeated string social_links = 7; // List of social media links
+}
