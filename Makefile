@@ -17,7 +17,7 @@ test:
 
 ######### go build #########
 
-build:
+build-all:
 	mkdir -p bin
 	cd backend && \
 	for dir in ./cmd/*; do \
@@ -30,6 +30,10 @@ build:
 build-user-service:
 	mkdir -p bin
 	cd backend && go build -o bin/user-service ./cmd/user-service
+
+build-artist-service:
+	mkdir -p bin
+	cd backend && go build -o bin/artist-service ./cmd/artist-service
 
 ######### go formatting #########
 
@@ -50,6 +54,8 @@ vendor:
 run-user:
 	PORT=9001 DATABASE_URI=$(DATABASE_URI) ./backend/bin/user-service
 
+run-artist:
+	PORT=9000 DATABASE_URI=$(DATABASE_URI) ./backend/bin/artist-service
 
 ######### db migrations #########
 
