@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
+import 'package:tattooapp/src/features/user/domain/user.dart';
 
 class StylePreferenceScreen extends ConsumerStatefulWidget {
   const StylePreferenceScreen({super.key});
@@ -29,14 +30,34 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
         .updateStylePreferences(_selectedStyles.toList());
     // get user state
     final userState = ref.read(newUserStateProvider);
+
+    // check if user state is complete
+    if (!userState.isComplete) {
+      // show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please complete all fields')),
+      );
+      return;
+    }
+
     // create user
-    ref.read(createUserUseCaseProvider).execute(userState);
+    final user = userState.toUser();
+    ref.read(createUserUseCaseProvider).execute(user);
     Navigator.of(context).pushReplacementNamed('/profile');
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final userState = ref.watch(newUserStateProvider);
+    final isArtist = userState.role == UserRole.artist;
+
+    final title =
+        isArtist
+            ? 'What styles do you specialize in?'
+            : 'What styles are you into?';
+
+    final button = isArtist ? 'Continue' : 'Finish Setup';
 
     return Scaffold(
       appBar: AppBar(title: const Text('Your Style Preferences')),
@@ -46,7 +67,7 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'What styles are you into?',
+              title,
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
@@ -75,7 +96,7 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
             ),
             ElevatedButton(
               onPressed: _selectedStyles.isNotEmpty ? _onContinue : null,
-              child: const Text('Continue'),
+              child: Text(button),
             ),
           ],
         ),
