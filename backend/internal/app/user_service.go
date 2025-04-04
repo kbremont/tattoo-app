@@ -35,18 +35,18 @@ func NewUserService(l log.Logger, repo UserRepository) *UserService {
 func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.CreateUserRequest]) (*connect.Response[v1pb.CreateUserResponse], error) {
 	logger := log.FromContext(ctx)
 
-	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
-		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
-	logger.Info(ctx, "handling CreateUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "handling CreateUser request", "auth0_user_id", req.Msg.GetId())
 
 	u := &models.User{
-		Auth0UserID: req.Msg.GetAuth0UserId(),
-		Role:        mapPbUserRoleToModelUserRole(req.Msg.GetRole()),
-		FirstName:   req.Msg.GetFirstName(),
-		LastName:    req.Msg.GetLastName(),
+		Id:        req.Msg.GetId(),
+		Role:      mapPbUserRoleToModelUserRole(req.Msg.GetRole()),
+		FirstName: req.Msg.GetFirstName(),
+		LastName:  req.Msg.GetLastName(),
 	}
 
 	if err := s.repository.CreateUser(ctx, u); err != nil {
@@ -54,85 +54,85 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	logger.Info(ctx, "user created successfully", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "user created successfully", "auth0_user_id", req.Msg.GetId())
 	return connect.NewResponse(&v1pb.CreateUserResponse{User: &v1pb.User{
-		Auth0UserId: u.Auth0UserID,
-		Role:        mapModelUserRoleToPbUserRole(u.Role),
-		FirstName:   u.FirstName,
-		LastName:    u.LastName,
+		Id:        u.Id,
+		Role:      mapModelUserRoleToPbUserRole(u.Role),
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
 	}}), nil
 }
 
 // GetUser implements tattooapp.v1.UserService.GetUser.
 func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.GetUserRequest]) (*connect.Response[v1pb.GetUserResponse], error) {
 	logger := log.FromContext(ctx)
-	logger.Info(ctx, "handling GetUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "handling GetUser request", "auth0_user_id", req.Msg.GetId())
 
-	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
-		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
-	u, err := s.repository.GetUser(ctx, req.Msg.GetAuth0UserId())
+	u, err := s.repository.GetUser(ctx, req.Msg.GetId())
 	if err != nil {
-		logger.WithError(err).Error(ctx, "failed to get user", "auth0_user_id", req.Msg.GetAuth0UserId())
+		logger.WithError(err).Error(ctx, "failed to get user", "auth0_user_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	logger.Info(ctx, "user retrieved successfully", "user_id", u.Auth0UserID)
+	logger.Info(ctx, "user retrieved successfully", "user_id", u.Id)
 	return connect.NewResponse(&v1pb.GetUserResponse{User: &v1pb.User{
-		Auth0UserId: u.Auth0UserID,
-		Role:        mapModelUserRoleToPbUserRole(u.Role),
-		FirstName:   u.FirstName,
-		LastName:    u.LastName,
+		Id:        u.Id,
+		Role:      mapModelUserRoleToPbUserRole(u.Role),
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
 	}}), nil
 }
 
 // UpdateUser implements tattooapp.v1.UserService.UpdateUser.
 func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.UpdateUserRequest]) (*connect.Response[v1pb.UpdateUserResponse], error) {
 	logger := log.FromContext(ctx)
-	logger.Info(ctx, "handling UpdateUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "handling UpdateUser request", "auth0_user_id", req.Msg.GetId())
 
-	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
-		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
 	u := &models.User{
-		Auth0UserID: req.Msg.GetAuth0UserId(),
-		FirstName:   req.Msg.GetFirstName(),
-		LastName:    req.Msg.GetLastName(),
+		Id:        req.Msg.GetId(),
+		FirstName: req.Msg.GetFirstName(),
+		LastName:  req.Msg.GetLastName(),
 	}
 
 	if err := s.repository.UpdateUser(ctx, u); err != nil {
-		logger.WithError(err).Error(ctx, "failed to update user", "auth0_user_id", req.Msg.GetAuth0UserId())
+		logger.WithError(err).Error(ctx, "failed to update user", "auth0_user_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	logger.Info(ctx, "user updated successfully", "user_id", u.Auth0UserID)
+	logger.Info(ctx, "user updated successfully", "user_id", u.Id)
 	return connect.NewResponse(&v1pb.UpdateUserResponse{User: &v1pb.User{
-		Auth0UserId: u.Auth0UserID,
-		FirstName:   u.FirstName,
-		LastName:    u.LastName,
+		Id:        u.Id,
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
 	}}), nil
 }
 
 // DeleteUser implements tattooapp.v1.UserService.DeleteUser.
 func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.DeleteUserRequest]) (*connect.Response[v1pb.DeleteUserResponse], error) {
 	logger := log.FromContext(ctx)
-	logger.Info(ctx, "handling DeleteUser request", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "handling DeleteUser request", "auth0_user_id", req.Msg.GetId())
 
-	if err := auth.EnsureSameUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
-		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetAuth0UserId())
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetId()); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
-	if err := s.repository.DeleteUser(ctx, req.Msg.GetAuth0UserId()); err != nil {
-		logger.WithError(err).Error(ctx, "failed to delete user", "auth0_user_id", req.Msg.GetAuth0UserId())
+	if err := s.repository.DeleteUser(ctx, req.Msg.GetId()); err != nil {
+		logger.WithError(err).Error(ctx, "failed to delete user", "auth0_user_id", req.Msg.GetId())
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	logger.Info(ctx, "user deleted successfully", "auth0_user_id", req.Msg.GetAuth0UserId())
+	logger.Info(ctx, "user deleted successfully", "auth0_user_id", req.Msg.GetId())
 	return connect.NewResponse(&v1pb.DeleteUserResponse{Success: true}), nil
 }
 
