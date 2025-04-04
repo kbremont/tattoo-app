@@ -15,7 +15,7 @@ service UserService {
 
 // information required to create a new user
 message CreateUserRequest {
-    string auth0_user_id = 1;
+    string id = 1;
     UserRole role = 2;
     string first_name = 3;
     string last_name = 4;
@@ -28,7 +28,7 @@ message CreateUserResponse {
 
 // information required to get a user
 message GetUserRequest {
-    string auth0_user_id = 1;
+    string id = 1;
 }
 
 // information returned after getting a user
@@ -38,7 +38,7 @@ message GetUserResponse {
 
 // information required to update a user
 message UpdateUserRequest {
-    string auth0_user_id = 1;
+    string id = 1;
     string first_name = 2;
     string last_name = 3;
 }
@@ -50,7 +50,7 @@ message UpdateUserResponse {
 
 // information required to delete a user
 message DeleteUserRequest {
-    string auth0_user_id = 1;
+    string id = 1;
 }
 
 // information returned after deleting a user

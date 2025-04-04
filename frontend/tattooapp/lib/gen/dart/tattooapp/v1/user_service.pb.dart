@@ -20,14 +20,14 @@ import 'user.pbenum.dart' as $0;
 /// information required to create a new user
 class CreateUserRequest extends $pb.GeneratedMessage {
   factory CreateUserRequest({
-    $core.String? auth0UserId,
+    $core.String? id,
     $0.UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
   }) {
     final $result = create();
-    if (auth0UserId != null) {
-      $result.auth0UserId = auth0UserId;
+    if (id != null) {
+      $result.id = id;
     }
     if (role != null) {
       $result.role = role;
@@ -45,7 +45,7 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   factory CreateUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<$0.UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $0.UserRole.USER_ROLE_UNSPECIFIED, valueOf: $0.UserRole.valueOf, enumValues: $0.UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
     ..aOS(4, _omitFieldNames ? '' : 'lastName')
@@ -74,13 +74,13 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   static CreateUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get auth0UserId => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set auth0UserId($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAuth0UserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAuth0UserId() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   $0.UserRole get role => $_getN(1);
@@ -166,11 +166,11 @@ class CreateUserResponse extends $pb.GeneratedMessage {
 /// information required to get a user
 class GetUserRequest extends $pb.GeneratedMessage {
   factory GetUserRequest({
-    $core.String? auth0UserId,
+    $core.String? id,
   }) {
     final $result = create();
-    if (auth0UserId != null) {
-      $result.auth0UserId = auth0UserId;
+    if (id != null) {
+      $result.id = id;
     }
     return $result;
   }
@@ -179,7 +179,7 @@ class GetUserRequest extends $pb.GeneratedMessage {
   factory GetUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false
   ;
 
@@ -205,13 +205,13 @@ class GetUserRequest extends $pb.GeneratedMessage {
   static GetUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get auth0UserId => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set auth0UserId($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAuth0UserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAuth0UserId() => clearField(1);
+  void clearId() => clearField(1);
 }
 
 /// information returned after getting a user
@@ -270,13 +270,13 @@ class GetUserResponse extends $pb.GeneratedMessage {
 /// information required to update a user
 class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest({
-    $core.String? auth0UserId,
+    $core.String? id,
     $core.String? firstName,
     $core.String? lastName,
   }) {
     final $result = create();
-    if (auth0UserId != null) {
-      $result.auth0UserId = auth0UserId;
+    if (id != null) {
+      $result.id = id;
     }
     if (firstName != null) {
       $result.firstName = firstName;
@@ -291,7 +291,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'firstName')
     ..aOS(3, _omitFieldNames ? '' : 'lastName')
     ..hasRequiredFields = false
@@ -319,13 +319,13 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   static UpdateUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get auth0UserId => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set auth0UserId($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAuth0UserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAuth0UserId() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get firstName => $_getSZ(1);
@@ -402,11 +402,11 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
 /// information required to delete a user
 class DeleteUserRequest extends $pb.GeneratedMessage {
   factory DeleteUserRequest({
-    $core.String? auth0UserId,
+    $core.String? id,
   }) {
     final $result = create();
-    if (auth0UserId != null) {
-      $result.auth0UserId = auth0UserId;
+    if (id != null) {
+      $result.id = id;
     }
     return $result;
   }
@@ -415,7 +415,7 @@ class DeleteUserRequest extends $pb.GeneratedMessage {
   factory DeleteUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false
   ;
 
@@ -441,13 +441,13 @@ class DeleteUserRequest extends $pb.GeneratedMessage {
   static DeleteUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get auth0UserId => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set auth0UserId($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAuth0UserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAuth0UserId() => clearField(1);
+  void clearId() => clearField(1);
 }
 
 /// information returned after deleting a user

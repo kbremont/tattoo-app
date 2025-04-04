@@ -21,15 +21,12 @@ final userRepositoryProvider = Provider((ref) {
 final userProvider = FutureProvider<User>((ref) async {
   final getUser = ref.read(getUserUseCaseProvider);
   final accessToken = ref.watch(accessTokenProvider);
-  final auth0UserId = ref.watch(auth0UserIdProvider);
+  final id = ref.watch(auth0UserIdProvider);
 
   if (accessToken == null) throw Exception('Missing accessToken');
-  if (auth0UserId == null) throw Exception('Missing auth0UserId');
+  if (id == null) throw Exception('Missing id');
 
-  return await getUser.execute(
-    accessToken: accessToken,
-    auth0UserId: auth0UserId,
-  );
+  return await getUser.execute(accessToken: accessToken, id: id);
 });
 
 // CreateUserUseCase Provider
@@ -47,16 +44,8 @@ final getUserUseCaseProvider = Provider((ref) {
 class NewUserStateNotifier extends StateNotifier<NewUserState> {
   NewUserStateNotifier() : super(const NewUserState());
 
-  void updateFull({
-    required String auth0UserId,
-    String? firstName,
-    String? lastName,
-  }) {
-    state = state.copyWith(
-      auth0UserId: auth0UserId,
-      firstName: firstName,
-      lastName: lastName,
-    );
+  void updateFull({required String id, String? firstName, String? lastName}) {
+    state = state.copyWith(id: id, firstName: firstName, lastName: lastName);
   }
 
   void updateRole(UserRole role) {

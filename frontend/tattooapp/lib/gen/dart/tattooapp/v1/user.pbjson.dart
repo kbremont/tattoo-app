@@ -32,7 +32,7 @@ final $typed_data.Uint8List userRoleDescriptor = $convert.base64Decode(
 const User$json = {
   '1': 'User',
   '2': [
-    {'1': 'auth0_user_id', '3': 1, '4': 1, '5': 9, '10': 'auth0UserId'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.v1.UserRole', '10': 'role'},
     {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
@@ -43,8 +43,8 @@ const User$json = {
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEiIKDWF1dGgwX3VzZXJfaWQYASABKAlSC2F1dGgwVXNlcklkEioKBHJvbGUYAiABKA'
-    '4yFi50YXR0b29hcHAudjEuVXNlclJvbGVSBHJvbGUSHQoKZmlyc3RfbmFtZRgDIAEoCVIJZmly'
-    'c3ROYW1lEhsKCWxhc3RfbmFtZRgEIAEoCVIIbGFzdE5hbWUSHQoKY3JlYXRlZF9hdBgFIAEoCV'
-    'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYBiABKAlSCXVwZGF0ZWRBdA==');
+    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBIqCgRyb2xlGAIgASgOMhYudGF0dG9vYXBwLnYxLlVzZX'
+    'JSb2xlUgRyb2xlEh0KCmZpcnN0X25hbWUYAyABKAlSCWZpcnN0TmFtZRIbCglsYXN0X25hbWUY'
+    'BCABKAlSCGxhc3ROYW1lEh0KCmNyZWF0ZWRfYXQYBSABKAlSCWNyZWF0ZWRBdBIdCgp1cGRhdG'
+    'VkX2F0GAYgASgJUgl1cGRhdGVkQXQ=');
 

@@ -19,7 +19,7 @@ export 'user.pbenum.dart';
 
 class User extends $pb.GeneratedMessage {
   factory User({
-    $core.String? auth0UserId,
+    $core.String? id,
     UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
@@ -27,8 +27,8 @@ class User extends $pb.GeneratedMessage {
     $core.String? updatedAt,
   }) {
     final $result = create();
-    if (auth0UserId != null) {
-      $result.auth0UserId = auth0UserId;
+    if (id != null) {
+      $result.id = id;
     }
     if (role != null) {
       $result.role = role;
@@ -52,7 +52,7 @@ class User extends $pb.GeneratedMessage {
   factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'auth0UserId')
+    ..aOS(1, _omitFieldNames ? '' : 'id')
     ..e<UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: UserRole.USER_ROLE_UNSPECIFIED, valueOf: UserRole.valueOf, enumValues: UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
     ..aOS(4, _omitFieldNames ? '' : 'lastName')
@@ -83,13 +83,13 @@ class User extends $pb.GeneratedMessage {
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get auth0UserId => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set auth0UserId($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasAuth0UserId() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearAuth0UserId() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   UserRole get role => $_getN(1);

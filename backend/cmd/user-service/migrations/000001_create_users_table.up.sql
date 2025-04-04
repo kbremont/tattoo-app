@@ -6,7 +6,7 @@ CREATE TYPE user_role AS ENUM (
 );
 
 CREATE TABLE IF NOT EXISTS users (
-    auth0_user_id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     role user_role NOT NULL DEFAULT 'client',
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
