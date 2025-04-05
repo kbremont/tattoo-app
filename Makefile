@@ -1,5 +1,7 @@
 APP_NAME=tattoo-app
 DATABASE_URI?=postgresql://kyle.bremont@localhost:5432/tattoo_app?sslmode=disable
+NGROK_TUNNELS_URL=http://localhost:4040/api/tunnels
+ENV_FILE=frontend/tattooapp/.env
 
 ######### protobuf #########
 
@@ -64,3 +66,29 @@ migrate-down-user:
 
 migrate-up-user:
 	DATABASE_URI=$(DATABASE_URI) MIGRATE_MODE=true MIGRATE_DOWN=false ./bin/user-service
+
+######### flutter dev #########
+
+start-ngrok:
+	@echo "Starting ngrok..."
+	@ngrok start --all > /dev/null & \
+	sleep 5 && \
+	make update-env
+
+## Fetch public URLs from ngrok and write them into .env
+update-env:
+	@echo "Fetching ngrok tunnel URLs..."
+	@curl -s $(NGROK_TUNNELS_URL) > tunnels.json
+
+	@USER_URL=$$(jq -r '.tunnels[] | select(.name=="user-service") | .public_url' tunnels.json) && \
+	ARTIST_URL=$$(jq -r '.tunnels[] | select(.name=="artist-service") | .public_url' tunnels.json) && \
+	echo "USER_SERVICE_BASE_URL=$${USER_URL}" > $(ENV_FILE) && \
+	echo "ARTIST_SERVICE_BASE_URL=$${ARTIST_URL}" >> $(ENV_FILE) && \
+	echo "✅ Updated .env file at $(ENV_FILE)" && \
+	cat $(ENV_FILE) && \
+	rm tunnels.json
+
+## Kill any running ngrok process
+stop-ngrok:
+	@echo "Stopping ngrok..."
+	@pkill ngrok || echo "No ngrok process found."
