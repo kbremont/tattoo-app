@@ -7,6 +7,7 @@ import 'package:tattooapp/src/features/onboarding/presentation/welcome_carousel_
 import 'package:tattooapp/src/features/user/presentation/name_entry_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/user_type_selection_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/style_preference_screen.dart';
+import 'package:tattooapp/src/features/artist/presentation/artist_profile_entry_screen.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -29,6 +30,7 @@ class AppRoot extends ConsumerWidget {
         '/user/name-entry': (_) => const NameEntryScreen(),
         '/user/type-selection': (_) => const UserTypeSelectionScreen(),
         '/user/style-preference': (_) => const StylePreferenceScreen(),
+        '/artist/profile-entry': (_) => const ArtistProfileEntryScreen(),
         '/profile': (context) => const ProfileScreen(),
       },
     );

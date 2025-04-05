@@ -23,7 +23,7 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
 
   final Set<String> _selectedStyles = {};
 
-  void _onContinue() {
+  void _onContinue() async {
     // update user state with selected styles
     ref
         .read(newUserStateProvider.notifier)
@@ -40,10 +40,19 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
       return;
     }
 
-    // create user
-    final user = userState.toUser();
-    ref.read(createUserUseCaseProvider).execute(user);
-    Navigator.of(context).pushReplacementNamed('/profile');
+    // check if user is artist
+    if (userState.role == UserRole.artist) {
+      // navigate to artist profile entry screen
+      Navigator.of(context).pushNamed('/artist/profile-entry');
+      return;
+    } else {
+      // create user
+      final user = userState.toUser();
+      await ref.read(createUserUseCaseProvider).execute(user);
+
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed('/profile');
+    }
   }
 
   @override
