@@ -18,7 +18,9 @@ class GetStartedButton extends ConsumerWidget {
 
         switch (destination) {
           case SessionDestination.profile:
-            Navigator.of(context).pushReplacementNamed('/profile');
+            Navigator.of(
+              context,
+            ).pushNamedAndRemoveUntil('/profile', (route) => false);
             break;
           case SessionDestination.onboarding:
             Navigator.of(context).pushReplacementNamed('/user/type-selection');

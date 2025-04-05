@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
 import 'package:tattooapp/src/features/user/domain/user.dart';
+import 'package:tattooapp/src/features/auth/auth_providers.dart';
 
 class StylePreferenceScreen extends ConsumerStatefulWidget {
   const StylePreferenceScreen({super.key});
@@ -40,6 +41,16 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
       return;
     }
 
+    // get access token
+    final accessToken = ref.read(accessTokenProvider);
+    if (accessToken == null) {
+      // show error message
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please login again')));
+      return;
+    }
+
     // check if user is artist
     if (userState.role == UserRole.artist) {
       // navigate to artist profile entry screen
@@ -48,10 +59,14 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
     } else {
       // create user
       final user = userState.toUser();
-      await ref.read(createUserUseCaseProvider).execute(user);
+      await ref
+          .read(createUserUseCaseProvider)
+          .execute(accessToken: accessToken, user: user);
 
       if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed('/profile');
+      Navigator.of(
+        context,
+      ).pushNamedAndRemoveUntil('/profile', (route) => false);
     }
   }
 
