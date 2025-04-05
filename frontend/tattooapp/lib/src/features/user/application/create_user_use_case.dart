@@ -10,7 +10,10 @@ class CreateUserUseCase {
 
   CreateUserUseCase(this._repository, this._ref);
 
-  Future<void> execute(User user) async {
+  Future<void> execute({
+    required String accessToken,
+    required User user,
+  }) async {
     final accessToken = _ref.read(accessTokenProvider);
     if (accessToken == null) {
       throw Exception('Access token is null');

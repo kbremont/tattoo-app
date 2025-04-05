@@ -18,6 +18,7 @@ final userRepositoryProvider = Provider((ref) {
   return UserRepository(client);
 });
 
+// provides the current user
 final userProvider = FutureProvider<User>((ref) async {
   final getUser = ref.read(getUserUseCaseProvider);
   final accessToken = ref.watch(accessTokenProvider);
@@ -25,6 +26,16 @@ final userProvider = FutureProvider<User>((ref) async {
 
   if (accessToken == null) throw Exception('Missing accessToken');
   if (id == null) throw Exception('Missing id');
+
+  return await getUser.execute(accessToken: accessToken, id: id);
+});
+
+// provides the given user
+final getUserProvider = FutureProvider.family<User, String>((ref, id) async {
+  final getUser = ref.read(getUserUseCaseProvider);
+  final accessToken = ref.watch(accessTokenProvider);
+
+  if (accessToken == null) throw Exception('Missing accessToken');
 
   return await getUser.execute(accessToken: accessToken, id: id);
 });

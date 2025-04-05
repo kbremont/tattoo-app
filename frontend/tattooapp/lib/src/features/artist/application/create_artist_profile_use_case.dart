@@ -11,7 +11,10 @@ class CreateArtistProfileUseCase {
 
   CreateArtistProfileUseCase(this._artistProfilesRepository, this._ref);
 
-  Future<void> execute(ArtistProfile artist) async {
+  Future<void> execute({
+    required String accessToken,
+    required ArtistProfile artist,
+  }) async {
     final accessToken = _ref.read(accessTokenProvider);
     if (accessToken == null) {
       throw Exception('Access token is null');
