@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
 import 'package:tattooapp/src/features/user/domain/user.dart';
-import 'package:tattooapp/src/core/clients/user_service_client.dart';
+import 'package:tattooapp/src/features/user/data/user_service_client.dart';
 import 'package:tattooapp/src/features/user/data/user_repository.dart';
 import 'package:tattooapp/src/features/user/application/create_user_use_case.dart';
 import 'package:tattooapp/src/features/user/application/get_user_use_case.dart';
