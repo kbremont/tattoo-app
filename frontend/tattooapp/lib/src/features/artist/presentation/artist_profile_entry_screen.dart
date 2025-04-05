@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/artist/artist_providers.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
+import 'package:tattooapp/src/features/auth/auth_providers.dart';
 
 class ArtistProfileEntryScreen extends ConsumerStatefulWidget {
   const ArtistProfileEntryScreen({super.key});
@@ -50,14 +51,31 @@ class _ArtistProfileEntryScreenState
         return;
       }
 
-      await ref.read(createUserUseCaseProvider).execute(userState.toUser());
+      // get access token
+      final accessToken = ref.read(accessTokenProvider);
+      if (accessToken == null) {
+        // show error message
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Please login again')));
+        return;
+      }
+
+      await ref
+          .read(createUserUseCaseProvider)
+          .execute(accessToken: accessToken, user: userState.toUser());
       await ref
           .read(createArtistProfileUseCaseProvider)
-          .execute(artistProfileState.toArtistProfile(userState.toUser().id));
+          .execute(
+            accessToken: accessToken,
+            artist: artistProfileState.toArtistProfile(userState.toUser().id),
+          );
 
       if (!mounted) return;
       // navigate to artist profile screen
-      Navigator.of(context).pushReplacementNamed('/profile');
+      Navigator.of(
+        context,
+      ).pushNamedAndRemoveUntil('/profile', (route) => false);
     }
   }
 

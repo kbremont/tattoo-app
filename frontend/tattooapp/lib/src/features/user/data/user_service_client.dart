@@ -1,13 +1,15 @@
 import 'package:connectrpc/http2.dart';
 import 'package:connectrpc/protobuf.dart';
 import 'package:connectrpc/protocol/connect.dart' as protocol;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.connect.client.dart';
+
+final baseUrl = dotenv.env['USER_SERVICE_BASE_URL'];
 
 class UserServiceClientFactory {
   static UserServiceClient create() {
     final transport = protocol.Transport(
-      // baseUrl: 'http://localhost:9001', // or production URL
-      baseUrl: 'https://bf7f-136-29-96-96.ngrok-free.app', // or production URL
+      baseUrl: baseUrl!, // or production URL
       // baseUrl: 'https://user-service-xj0e.onrender.com',
       codec: const ProtoCodec(),
       httpClient: createHttpClient(),

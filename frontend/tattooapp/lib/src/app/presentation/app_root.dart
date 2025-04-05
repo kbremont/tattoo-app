@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/core/theme/theme.dart';
 import 'package:tattooapp/src/app/presentation/splash_screen.dart';
-import 'package:tattooapp/src/features/user/presentation/profile_screen.dart';
 import 'package:tattooapp/src/features/onboarding/presentation/welcome_carousel_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/name_entry_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/user_type_selection_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/style_preference_screen.dart';
 import 'package:tattooapp/src/features/artist/presentation/artist_profile_entry_screen.dart';
+import 'package:tattooapp/src/features/session/presentation/profile_redirect_screen.dart';
+import 'package:tattooapp/src/features/artist/presentation/artist_profile_screen.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -31,7 +32,9 @@ class AppRoot extends ConsumerWidget {
         '/user/type-selection': (_) => const UserTypeSelectionScreen(),
         '/user/style-preference': (_) => const StylePreferenceScreen(),
         '/artist/profile-entry': (_) => const ArtistProfileEntryScreen(),
-        '/profile': (context) => const ProfileScreen(),
+        '/profile': (context) => const ProfileRedirectScreen(),
+        // '/profile/client': (context) => const ClientProfileScreen(),
+        '/profile/artist': (context) => ArtistProfileScreen(),
       },
     );
   }
