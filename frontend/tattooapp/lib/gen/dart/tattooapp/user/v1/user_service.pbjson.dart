@@ -74,16 +74,14 @@ final $typed_data.Uint8List getUserResponseDescriptor = $convert.base64Decode(
 const UpdateUserRequest$json = {
   '1': 'UpdateUserRequest',
   '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.user.v1.User', '10': 'user'},
   ],
 };
 
 /// Descriptor for `UpdateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode(
-    'ChFVcGRhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSHQoKZmlyc3RfbmFtZRgCIAEoCV'
-    'IJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgDIAEoCVIIbGFzdE5hbWU=');
+    'ChFVcGRhdGVVc2VyUmVxdWVzdBIrCgR1c2VyGAEgASgLMhcudGF0dG9vYXBwLnVzZXIudjEuVX'
+    'NlclIEdXNlcg==');
 
 @$core.Deprecated('Use updateUserResponseDescriptor instead')
 const UpdateUserResponse$json = {

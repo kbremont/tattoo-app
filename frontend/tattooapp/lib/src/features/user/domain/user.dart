@@ -6,6 +6,7 @@ class User {
   final String firstName;
   final String lastName;
   final List<String> stylePreferences;
+  final String? avatarUrl;
 
   const User({
     required this.id,
@@ -13,5 +14,6 @@ class User {
     required this.firstName,
     required this.lastName,
     required this.stylePreferences,
+    this.avatarUrl,
   });
 }
