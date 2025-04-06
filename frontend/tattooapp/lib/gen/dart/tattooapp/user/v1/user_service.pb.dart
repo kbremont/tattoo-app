@@ -270,19 +270,11 @@ class GetUserResponse extends $pb.GeneratedMessage {
 /// information required to update a user
 class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest({
-    $core.String? id,
-    $core.String? firstName,
-    $core.String? lastName,
+    $2.User? user,
   }) {
     final $result = create();
-    if (id != null) {
-      $result.id = id;
-    }
-    if (firstName != null) {
-      $result.firstName = firstName;
-    }
-    if (lastName != null) {
-      $result.lastName = lastName;
+    if (user != null) {
+      $result.user = user;
     }
     return $result;
   }
@@ -291,9 +283,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOS(2, _omitFieldNames ? '' : 'firstName')
-    ..aOS(3, _omitFieldNames ? '' : 'lastName')
+    ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -319,31 +309,15 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   static UpdateUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  $2.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
+  set user($2.User v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get firstName => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set firstName($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasFirstName() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearFirstName() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get lastName => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set lastName($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasLastName() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearLastName() => clearField(3);
+  void clearUser() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.User ensureUser() => $_ensure(0);
 }
 
 /// information returned after updating a user

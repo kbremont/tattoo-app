@@ -16,6 +16,7 @@ type User struct {
 	Role      UserRole
 	FirstName string
 	LastName  string
+	AvatarUrl string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

@@ -33,18 +33,30 @@ const User$json = {
   '1': 'User',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.user.v1.UserRole', '10': 'role'},
-    {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
-    {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
-    {'1': 'created_at', '3': 5, '4': 1, '5': 9, '10': 'createdAt'},
-    {'1': 'updated_at', '3': 6, '4': 1, '5': 9, '10': 'updatedAt'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.user.v1.UserRole', '9': 0, '10': 'role', '17': true},
+    {'1': 'first_name', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'firstName', '17': true},
+    {'1': 'last_name', '3': 4, '4': 1, '5': 9, '9': 2, '10': 'lastName', '17': true},
+    {'1': 'avatar_url', '3': 5, '4': 1, '5': 9, '9': 3, '10': 'avatarUrl', '17': true},
+    {'1': 'created_at', '3': 6, '4': 1, '5': 9, '9': 4, '10': 'createdAt', '17': true},
+    {'1': 'updated_at', '3': 7, '4': 1, '5': 9, '9': 5, '10': 'updatedAt', '17': true},
+  ],
+  '8': [
+    {'1': '_role'},
+    {'1': '_first_name'},
+    {'1': '_last_name'},
+    {'1': '_avatar_url'},
+    {'1': '_created_at'},
+    {'1': '_updated_at'},
   ],
 };
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBIvCgRyb2xlGAIgASgOMhsudGF0dG9vYXBwLnVzZXIudj'
-    'EuVXNlclJvbGVSBHJvbGUSHQoKZmlyc3RfbmFtZRgDIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3Rf'
-    'bmFtZRgEIAEoCVIIbGFzdE5hbWUSHQoKY3JlYXRlZF9hdBgFIAEoCVIJY3JlYXRlZEF0Eh0KCn'
-    'VwZGF0ZWRfYXQYBiABKAlSCXVwZGF0ZWRBdA==');
+    'CgRVc2VyEg4KAmlkGAEgASgJUgJpZBI0CgRyb2xlGAIgASgOMhsudGF0dG9vYXBwLnVzZXIudj'
+    'EuVXNlclJvbGVIAFIEcm9sZYgBARIiCgpmaXJzdF9uYW1lGAMgASgJSAFSCWZpcnN0TmFtZYgB'
+    'ARIgCglsYXN0X25hbWUYBCABKAlIAlIIbGFzdE5hbWWIAQESIgoKYXZhdGFyX3VybBgFIAEoCU'
+    'gDUglhdmF0YXJVcmyIAQESIgoKY3JlYXRlZF9hdBgGIAEoCUgEUgljcmVhdGVkQXSIAQESIgoK'
+    'dXBkYXRlZF9hdBgHIAEoCUgFUgl1cGRhdGVkQXSIAQFCBwoFX3JvbGVCDQoLX2ZpcnN0X25hbW'
+    'VCDAoKX2xhc3RfbmFtZUINCgtfYXZhdGFyX3VybEINCgtfY3JlYXRlZF9hdEINCgtfdXBkYXRl'
+    'ZF9hdA==');
 

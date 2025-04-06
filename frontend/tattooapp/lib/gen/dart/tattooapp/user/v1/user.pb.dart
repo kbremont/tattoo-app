@@ -23,6 +23,7 @@ class User extends $pb.GeneratedMessage {
     UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
+    $core.String? avatarUrl,
     $core.String? createdAt,
     $core.String? updatedAt,
   }) {
@@ -38,6 +39,9 @@ class User extends $pb.GeneratedMessage {
     }
     if (lastName != null) {
       $result.lastName = lastName;
+    }
+    if (avatarUrl != null) {
+      $result.avatarUrl = avatarUrl;
     }
     if (createdAt != null) {
       $result.createdAt = createdAt;
@@ -56,8 +60,9 @@ class User extends $pb.GeneratedMessage {
     ..e<UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: UserRole.USER_ROLE_UNSPECIFIED, valueOf: UserRole.valueOf, enumValues: UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
     ..aOS(4, _omitFieldNames ? '' : 'lastName')
-    ..aOS(5, _omitFieldNames ? '' : 'createdAt')
-    ..aOS(6, _omitFieldNames ? '' : 'updatedAt')
+    ..aOS(5, _omitFieldNames ? '' : 'avatarUrl')
+    ..aOS(6, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(7, _omitFieldNames ? '' : 'updatedAt')
     ..hasRequiredFields = false
   ;
 
@@ -119,22 +124,31 @@ class User extends $pb.GeneratedMessage {
   void clearLastName() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get createdAt => $_getSZ(4);
+  $core.String get avatarUrl => $_getSZ(4);
   @$pb.TagNumber(5)
-  set createdAt($core.String v) { $_setString(4, v); }
+  set avatarUrl($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
+  $core.bool hasAvatarUrl() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCreatedAt() => clearField(5);
+  void clearAvatarUrl() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get updatedAt => $_getSZ(5);
+  $core.String get createdAt => $_getSZ(5);
   @$pb.TagNumber(6)
-  set updatedAt($core.String v) { $_setString(5, v); }
+  set createdAt($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasUpdatedAt() => $_has(5);
+  $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(6)
-  void clearUpdatedAt() => clearField(6);
+  void clearCreatedAt() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get updatedAt => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set updatedAt($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasUpdatedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearUpdatedAt() => clearField(7);
 }
 
 
