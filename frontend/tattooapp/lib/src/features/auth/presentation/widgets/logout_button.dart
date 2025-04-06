@@ -10,7 +10,7 @@ class LogoutButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final logoutUseCase = ref.watch(logoutUseCaseProvider);
 
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: () async {
         final shouldLogout = await showModalBottomSheet<bool>(
           context: context,
@@ -59,7 +59,8 @@ class LogoutButton extends ConsumerWidget {
           }
         }
       },
-      child: const Text('Log Out'),
+      icon: const Icon(Icons.logout),
+      label: const Text('Log Out'),
     );
   }
 }

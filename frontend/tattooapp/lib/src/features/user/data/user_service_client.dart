@@ -9,8 +9,7 @@ final baseUrl = dotenv.env['USER_SERVICE_BASE_URL'];
 class UserServiceClientFactory {
   static UserServiceClient create() {
     final transport = protocol.Transport(
-      baseUrl: baseUrl!, // or production URL
-      // baseUrl: 'https://user-service-xj0e.onrender.com',
+      baseUrl: baseUrl!,
       codec: const ProtoCodec(),
       httpClient: createHttpClient(),
     );
