@@ -50,8 +50,8 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 	return connect.NewResponse(&v1pb.CreateUserResponse{User: &v1pb.User{
 		Id:        u.Id,
 		Role:      mapModelUserRoleToPbUserRole(u.Role),
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
+		FirstName: &u.FirstName,
+		LastName:  &u.LastName,
 	}}), nil
 }
 
@@ -75,37 +75,51 @@ func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.Get
 	return connect.NewResponse(&v1pb.GetUserResponse{User: &v1pb.User{
 		Id:        u.Id,
 		Role:      mapModelUserRoleToPbUserRole(u.Role),
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
+		FirstName: &u.FirstName,
+		LastName:  &u.LastName,
+		AvatarUrl: &u.AvatarUrl,
 	}}), nil
 }
 
 // UpdateUser implements tattooapp.v1.UserService.UpdateUser.
 func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.UpdateUserRequest]) (*connect.Response[v1pb.UpdateUserResponse], error) {
 	logger := log.FromContext(ctx)
-	logger.Info(ctx, "handling UpdateUser request", "id", req.Msg.GetId())
+	logger.Info(ctx, "handling UpdateUser request", "id", req.Msg.GetUser().Id)
 
-	if err := auth.EnsureSameUser(ctx, req.Msg.GetId()); err != nil {
-		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetId())
+	if err := auth.EnsureSameUser(ctx, req.Msg.GetUser().Id); err != nil {
+		logger.Warn(ctx, "unauthorized access attempt", "target_id", req.Msg.GetUser().Id)
 		return nil, connect.NewError(connect.CodePermissionDenied, err)
 	}
 
-	u := &models.User{
-		Id:        req.Msg.GetId(),
-		FirstName: req.Msg.GetFirstName(),
-		LastName:  req.Msg.GetLastName(),
+	// get the existing user
+	u, err := s.repository.GetUser(ctx, req.Msg.GetUser().Id)
+	if err != nil {
+		logger.WithError(err).Error(ctx, "failed to get user", "id", req.Msg.GetUser().Id)
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// only update the fields that are set
+	if req.Msg.GetUser().FirstName != nil {
+		u.FirstName = *req.Msg.GetUser().FirstName
+	}
+	if req.Msg.GetUser().LastName != nil {
+		u.LastName = *req.Msg.GetUser().LastName
+	}
+	if req.Msg.GetUser().AvatarUrl != nil {
+		u.AvatarUrl = *req.Msg.GetUser().AvatarUrl
 	}
 
 	if err := s.repository.UpdateUser(ctx, u); err != nil {
-		logger.WithError(err).Error(ctx, "failed to update user", "id", req.Msg.GetId())
+		logger.WithError(err).Error(ctx, "failed to update user", "id", req.Msg.GetUser().Id)
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
 	logger.Info(ctx, "user updated successfully", "user_id", u.Id)
 	return connect.NewResponse(&v1pb.UpdateUserResponse{User: &v1pb.User{
 		Id:        u.Id,
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
+		FirstName: &u.FirstName,
+		LastName:  &u.LastName,
+		AvatarUrl: &u.AvatarUrl,
 	}}), nil
 }
 
@@ -139,13 +153,16 @@ func mapPbUserRoleToModelUserRole(role v1pb.UserRole) models.UserRole {
 	}
 }
 
-func mapModelUserRoleToPbUserRole(role models.UserRole) v1pb.UserRole {
+func mapModelUserRoleToPbUserRole(role models.UserRole) *v1pb.UserRole {
 	switch role {
 	case models.UserRoleArtist:
-		return v1pb.UserRole_USER_ROLE_ARTIST
+		r := v1pb.UserRole_USER_ROLE_ARTIST
+		return &r
 	case models.UserRoleClient:
-		return v1pb.UserRole_USER_ROLE_CLIENT
+		r := v1pb.UserRole_USER_ROLE_CLIENT
+		return &r
 	default:
-		return v1pb.UserRole_USER_ROLE_CLIENT
+		r := v1pb.UserRole_USER_ROLE_CLIENT
+		return &r
 	}
 }
