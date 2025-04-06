@@ -5,6 +5,7 @@ import 'package:tattooapp/src/features/user/data/user_service_client.dart';
 import 'package:tattooapp/src/features/user/data/user_repository.dart';
 import 'package:tattooapp/src/features/user/application/create_user_use_case.dart';
 import 'package:tattooapp/src/features/user/application/get_user_use_case.dart';
+import 'package:tattooapp/src/features/user/application/update_user_use_case.dart';
 import 'package:tattooapp/src/features/user/application/new_user_state.dart';
 
 // UserServiceClient Provider
@@ -43,13 +44,19 @@ final getUserProvider = FutureProvider.family<User, String>((ref, id) async {
 // CreateUserUseCase Provider
 final createUserUseCaseProvider = Provider((ref) {
   final repo = ref.watch(userRepositoryProvider);
-  return CreateUserUseCase(repo, ref);
+  return CreateUserUseCase(repo);
 });
 
 // GetUserUseCase Provider
 final getUserUseCaseProvider = Provider((ref) {
   final repo = ref.watch(userRepositoryProvider);
   return GetUserUseCase(repo);
+});
+
+// UpdateUserUseCase Provider
+final updateUserUseCaseProvider = Provider((ref) {
+  final repo = ref.watch(userRepositoryProvider);
+  return UpdateUserUseCase(repo);
 });
 
 class NewUserStateNotifier extends StateNotifier<NewUserState> {

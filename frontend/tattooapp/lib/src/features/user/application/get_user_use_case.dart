@@ -39,5 +39,6 @@ User _mapProtoUserToUser(proto.User protoUser) {
     firstName: protoUser.firstName,
     lastName: protoUser.lastName,
     stylePreferences: [], // TODO: Add style preferences
+    avatarUrl: protoUser.hasAvatarUrl() ? protoUser.avatarUrl : null,
   );
 }
