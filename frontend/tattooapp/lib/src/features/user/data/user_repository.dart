@@ -34,4 +34,14 @@ class UserRepository {
 
     return response.user;
   }
+
+  Future<void> updateUser({
+    required String accessToken,
+    required User user,
+  }) async {
+    await _client.updateUser(
+      UpdateUserRequest(user: user),
+      headers: authHeaders(accessToken),
+    );
+  }
 }
