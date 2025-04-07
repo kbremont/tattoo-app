@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"database/sql"
 
 	"connectrpc.com/connect"
 	v1pb "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/user/v1"
@@ -36,7 +37,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 
 	u := &models.User{
 		Id:        req.Msg.GetId(),
-		Role:      mapPbUserRoleToModelUserRole(req.Msg.GetRole()),
+		Role:      mapProtoUserRoleToUserRole(req.Msg.GetRole()),
 		FirstName: req.Msg.GetFirstName(),
 		LastName:  req.Msg.GetLastName(),
 	}
@@ -47,12 +48,7 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 	}
 
 	logger.Info(ctx, "user created successfully", "id", req.Msg.GetId())
-	return connect.NewResponse(&v1pb.CreateUserResponse{User: &v1pb.User{
-		Id:        u.Id,
-		Role:      mapModelUserRoleToPbUserRole(u.Role),
-		FirstName: &u.FirstName,
-		LastName:  &u.LastName,
-	}}), nil
+	return connect.NewResponse(&v1pb.CreateUserResponse{User: mapUserToProto(u)}), nil
 }
 
 // GetUser implements tattooapp.v1.UserService.GetUser.
@@ -72,13 +68,7 @@ func (s *UserService) GetUser(ctx context.Context, req *connect.Request[v1pb.Get
 	}
 
 	logger.Info(ctx, "user retrieved successfully", "user_id", u.Id)
-	return connect.NewResponse(&v1pb.GetUserResponse{User: &v1pb.User{
-		Id:        u.Id,
-		Role:      mapModelUserRoleToPbUserRole(u.Role),
-		FirstName: &u.FirstName,
-		LastName:  &u.LastName,
-		AvatarUrl: &u.AvatarUrl,
-	}}), nil
+	return connect.NewResponse(&v1pb.GetUserResponse{User: mapUserToProto(u)}), nil
 }
 
 // UpdateUser implements tattooapp.v1.UserService.UpdateUser.
@@ -106,7 +96,7 @@ func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.
 		u.LastName = *req.Msg.GetUser().LastName
 	}
 	if req.Msg.GetUser().AvatarUrl != nil {
-		u.AvatarUrl = *req.Msg.GetUser().AvatarUrl
+		u.AvatarUrl = sql.NullString{String: *req.Msg.GetUser().AvatarUrl, Valid: true}
 	}
 
 	if err := s.repository.UpdateUser(ctx, u); err != nil {
@@ -115,12 +105,7 @@ func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.
 	}
 
 	logger.Info(ctx, "user updated successfully", "user_id", u.Id)
-	return connect.NewResponse(&v1pb.UpdateUserResponse{User: &v1pb.User{
-		Id:        u.Id,
-		FirstName: &u.FirstName,
-		LastName:  &u.LastName,
-		AvatarUrl: &u.AvatarUrl,
-	}}), nil
+	return connect.NewResponse(&v1pb.UpdateUserResponse{User: mapUserToProto(u)}), nil
 }
 
 // DeleteUser implements tattooapp.v1.UserService.DeleteUser.
@@ -142,7 +127,37 @@ func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.
 	return connect.NewResponse(&v1pb.DeleteUserResponse{Success: true}), nil
 }
 
-func mapPbUserRoleToModelUserRole(role v1pb.UserRole) models.UserRole {
+func mapUserToProto(u *models.User) *v1pb.User {
+	au := ""
+	if u.AvatarUrl.Valid {
+		au = u.AvatarUrl.String
+	}
+
+	return &v1pb.User{
+		Id:        u.Id,
+		Role:      mapUserRoleToProtoUserRole(u.Role),
+		FirstName: &u.FirstName,
+		LastName:  &u.LastName,
+		AvatarUrl: &au,
+	}
+}
+
+func mapProtoToUser(u *v1pb.User) *models.User {
+	au := sql.NullString{String: "", Valid: false}
+	if *u.AvatarUrl != "" {
+		au = sql.NullString{String: *u.AvatarUrl, Valid: true}
+	}
+
+	return &models.User{
+		Id:        u.Id,
+		Role:      mapProtoUserRoleToUserRole(u.GetRole()),
+		FirstName: u.GetFirstName(),
+		LastName:  u.GetLastName(),
+		AvatarUrl: au,
+	}
+}
+
+func mapProtoUserRoleToUserRole(role v1pb.UserRole) models.UserRole {
 	switch role {
 	case v1pb.UserRole_USER_ROLE_ARTIST:
 		return models.UserRoleArtist
@@ -153,7 +168,7 @@ func mapPbUserRoleToModelUserRole(role v1pb.UserRole) models.UserRole {
 	}
 }
 
-func mapModelUserRoleToPbUserRole(role models.UserRole) *v1pb.UserRole {
+func mapUserRoleToProtoUserRole(role models.UserRole) *v1pb.UserRole {
 	switch role {
 	case models.UserRoleArtist:
 		r := v1pb.UserRole_USER_ROLE_ARTIST
