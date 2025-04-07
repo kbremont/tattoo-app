@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"time"
 )
 
@@ -16,7 +17,7 @@ type User struct {
 	Role      UserRole
 	FirstName string
 	LastName  string
-	AvatarUrl string
+	AvatarUrl sql.NullString
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
