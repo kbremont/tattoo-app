@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package tattooapp.user.v1;
 
+import "google/protobuf/field_mask.proto";
 import "tattooapp/user/v1/user.proto";
 
 option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/user/v1;pb";
@@ -39,6 +40,7 @@ message GetUserResponse {
 // information required to update a user
 message UpdateUserRequest {
     User user = 1;
+    google.protobuf.FieldMask update_mask = 2;
 }
 
 // information returned after updating a user
