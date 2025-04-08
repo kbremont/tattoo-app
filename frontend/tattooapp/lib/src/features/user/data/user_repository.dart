@@ -1,6 +1,7 @@
 import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.pb.dart';
 import 'package:tattooapp/gen/dart/tattooapp/user/v1/user.pb.dart';
 import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.connect.client.dart';
+import 'package:tattooapp/gen/dart/google/protobuf/field_mask.pb.dart';
 import 'package:tattooapp/src/core/utils/auth_headers.dart';
 
 class UserRepository {
@@ -38,9 +39,13 @@ class UserRepository {
   Future<void> updateUser({
     required String accessToken,
     required User user,
+    required List<String> fieldMaskPaths,
   }) async {
     await _client.updateUser(
-      UpdateUserRequest(user: user),
+      UpdateUserRequest(
+        user: user,
+        updateMask: FieldMask(paths: fieldMaskPaths),
+      ),
       headers: authHeaders(accessToken),
     );
   }

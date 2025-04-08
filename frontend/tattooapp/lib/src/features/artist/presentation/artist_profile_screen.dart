@@ -2,11 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/artist/artist_providers.dart';
-import 'package:tattooapp/src/features/auth/presentation/widgets/logout_button.dart';
-import 'package:tattooapp/src/core/widgets/editable_avatar.dart';
-import 'package:tattooapp/src/core/utils/cloudinary_upload.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
+import 'package:tattooapp/src/features/user/domain/partial_user_update.dart';
+import 'package:tattooapp/src/core/widgets/editable_avatar.dart';
+import 'package:tattooapp/src/core/utils/cloudinary_upload.dart';
+import 'package:tattooapp/src/features/auth/presentation/widgets/logout_button.dart';
 
 class ArtistProfileScreen extends ConsumerStatefulWidget {
   const ArtistProfileScreen({super.key});
@@ -68,7 +69,10 @@ class _ArtistProfileScreenState extends ConsumerState<ArtistProfileScreen> {
                           await updateUser.execute(
                             accessToken: accessToken,
                             userId: user.id,
-                            avatarUrl: avatarUrl,
+                            originalUser: user,
+                            updatedUser: PartialUserUpdate(
+                              avatarUrl: avatarUrl,
+                            ),
                           );
 
                           // // Optionally: refresh the userProvider manually
