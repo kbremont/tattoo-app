@@ -10,6 +10,7 @@ import (
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/auth"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/log"
 	"github.com/kbremont/tattoo-app/backend/internal/pkg/models"
+	"google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 // UserService is the implementation of tattooapp.v1.UserService.
@@ -89,14 +90,14 @@ func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.
 	}
 
 	// only update the fields that are set
-	if req.Msg.GetUser().FirstName != nil {
-		u.FirstName = *req.Msg.GetUser().FirstName
+	if shouldUpdate("first_name", req.Msg.GetUpdateMask()) {
+		u.FirstName = req.Msg.GetUser().FirstName
 	}
-	if req.Msg.GetUser().LastName != nil {
-		u.LastName = *req.Msg.GetUser().LastName
+	if shouldUpdate("last_name", req.Msg.GetUpdateMask()) {
+		u.LastName = req.Msg.GetUser().LastName
 	}
-	if req.Msg.GetUser().AvatarUrl != nil {
-		u.AvatarUrl = sql.NullString{String: *req.Msg.GetUser().AvatarUrl, Valid: true}
+	if shouldUpdate("avatar_url", req.Msg.GetUpdateMask()) {
+		u.AvatarUrl = sql.NullString{String: req.Msg.GetUser().AvatarUrl, Valid: true}
 	}
 
 	if err := s.repository.UpdateUser(ctx, u); err != nil {
@@ -127,6 +128,15 @@ func (s *UserService) DeleteUser(ctx context.Context, req *connect.Request[v1pb.
 	return connect.NewResponse(&v1pb.DeleteUserResponse{Success: true}), nil
 }
 
+func shouldUpdate(field string, mask *fieldmaskpb.FieldMask) bool {
+	for _, path := range mask.GetPaths() {
+		if path == field {
+			return true
+		}
+	}
+	return false
+}
+
 func mapUserToProto(u *models.User) *v1pb.User {
 	au := ""
 	if u.AvatarUrl.Valid {
@@ -136,16 +146,16 @@ func mapUserToProto(u *models.User) *v1pb.User {
 	return &v1pb.User{
 		Id:        u.Id,
 		Role:      mapUserRoleToProtoUserRole(u.Role),
-		FirstName: &u.FirstName,
-		LastName:  &u.LastName,
-		AvatarUrl: &au,
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
+		AvatarUrl: au,
 	}
 }
 
 func mapProtoToUser(u *v1pb.User) *models.User {
 	au := sql.NullString{String: "", Valid: false}
-	if *u.AvatarUrl != "" {
-		au = sql.NullString{String: *u.AvatarUrl, Valid: true}
+	if u.AvatarUrl != "" {
+		au = sql.NullString{String: u.AvatarUrl, Valid: true}
 	}
 
 	return &models.User{
@@ -168,16 +178,13 @@ func mapProtoUserRoleToUserRole(role v1pb.UserRole) models.UserRole {
 	}
 }
 
-func mapUserRoleToProtoUserRole(role models.UserRole) *v1pb.UserRole {
+func mapUserRoleToProtoUserRole(role models.UserRole) v1pb.UserRole {
 	switch role {
 	case models.UserRoleArtist:
-		r := v1pb.UserRole_USER_ROLE_ARTIST
-		return &r
+		return v1pb.UserRole_USER_ROLE_ARTIST
 	case models.UserRoleClient:
-		r := v1pb.UserRole_USER_ROLE_CLIENT
-		return &r
+		return v1pb.UserRole_USER_ROLE_CLIENT
 	default:
-		r := v1pb.UserRole_USER_ROLE_CLIENT
-		return &r
+		return v1pb.UserRole_USER_ROLE_CLIENT
 	}
 }
