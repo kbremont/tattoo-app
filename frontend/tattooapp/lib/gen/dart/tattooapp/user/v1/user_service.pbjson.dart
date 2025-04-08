@@ -13,6 +13,7 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+import '../../../google/protobuf/field_mask.pbjson.dart' as $3;
 import 'user.pbjson.dart' as $2;
 
 @$core.Deprecated('Use createUserRequestDescriptor instead')
@@ -75,13 +76,15 @@ const UpdateUserRequest$json = {
   '1': 'UpdateUserRequest',
   '2': [
     {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.tattooapp.user.v1.User', '10': 'user'},
+    {'1': 'update_mask', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
   ],
 };
 
 /// Descriptor for `UpdateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode(
     'ChFVcGRhdGVVc2VyUmVxdWVzdBIrCgR1c2VyGAEgASgLMhcudGF0dG9vYXBwLnVzZXIudjEuVX'
-    'NlclIEdXNlcg==');
+    'NlclIEdXNlchI7Cgt1cGRhdGVfbWFzaxgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE1h'
+    'c2tSCnVwZGF0ZU1hc2s=');
 
 @$core.Deprecated('Use updateUserResponseDescriptor instead')
 const UpdateUserResponse$json = {
@@ -138,6 +141,7 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UserServic
   '.tattooapp.user.v1.GetUserRequest': GetUserRequest$json,
   '.tattooapp.user.v1.GetUserResponse': GetUserResponse$json,
   '.tattooapp.user.v1.UpdateUserRequest': UpdateUserRequest$json,
+  '.google.protobuf.FieldMask': $3.FieldMask$json,
   '.tattooapp.user.v1.UpdateUserResponse': UpdateUserResponse$json,
   '.tattooapp.user.v1.DeleteUserRequest': DeleteUserRequest$json,
   '.tattooapp.user.v1.DeleteUserResponse': DeleteUserResponse$json,

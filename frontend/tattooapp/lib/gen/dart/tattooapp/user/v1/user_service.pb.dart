@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../../google/protobuf/field_mask.pb.dart' as $3;
 import 'user.pb.dart' as $2;
 import 'user.pbenum.dart' as $2;
 
@@ -271,10 +272,14 @@ class GetUserResponse extends $pb.GeneratedMessage {
 class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest({
     $2.User? user,
+    $3.FieldMask? updateMask,
   }) {
     final $result = create();
     if (user != null) {
       $result.user = user;
+    }
+    if (updateMask != null) {
+      $result.updateMask = updateMask;
     }
     return $result;
   }
@@ -284,6 +289,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
     ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
+    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -318,6 +324,17 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
   $2.User ensureUser() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.FieldMask get updateMask => $_getN(1);
+  @$pb.TagNumber(2)
+  set updateMask($3.FieldMask v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUpdateMask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpdateMask() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 /// information returned after updating a user

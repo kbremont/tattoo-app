@@ -1,4 +1,5 @@
-import 'package:tattooapp/gen/dart/tattooapp/user/v1/user_service.pb.dart';
+import 'package:tattooapp/src/features/user/domain/user.dart';
+import 'package:tattooapp/src/features/user/domain/partial_user_update.dart';
 import 'package:tattooapp/src/features/user/data/user_repository.dart';
 import 'package:tattooapp/gen/dart/tattooapp/user/v1/user.pb.dart' as proto;
 
@@ -10,21 +11,24 @@ class UpdateUserUseCase {
   Future<void> execute({
     required String accessToken,
     required String userId,
-    String? firstName,
-    String? lastName,
-    String? avatarUrl,
+    required User originalUser,
+    required PartialUserUpdate updatedUser,
   }) async {
-    final user = proto.User(id: userId);
+    final fieldMask = updatedUser.computeFieldMask(originalUser);
 
-    if (firstName != null) {
-      user.firstName = firstName;
-    }
-    if (lastName != null) {
-      user.lastName = lastName;
-    }
-    if (avatarUrl != null) {
-      user.avatarUrl = avatarUrl;
-    }
-    await _repo.updateUser(accessToken: accessToken, user: user);
+    final updatedProto = proto.User(
+      id: originalUser.id,
+      // Only set fields that are not null
+      firstName: updatedUser.firstName ?? originalUser.firstName,
+      lastName: updatedUser.lastName ?? originalUser.lastName,
+      avatarUrl: updatedUser.avatarUrl ?? originalUser.avatarUrl,
+      // stylePreferences: updatedUser.stylePreferences ?? originalUser.stylePreferences,
+    );
+
+    await _repo.updateUser(
+      accessToken: accessToken,
+      user: updatedProto,
+      fieldMaskPaths: fieldMask,
+    );
   }
 }
