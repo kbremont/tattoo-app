@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/artist/artist_providers.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
+import 'package:tattooapp/src/features/user/domain/user.dart';
 import 'package:tattooapp/src/features/user/domain/partial_user_update.dart';
 import 'package:tattooapp/src/core/widgets/editable_avatar.dart';
 import 'package:tattooapp/src/core/utils/cloudinary_upload.dart';
@@ -19,6 +20,19 @@ class ArtistProfileScreen extends ConsumerStatefulWidget {
 
 class _ArtistProfileScreenState extends ConsumerState<ArtistProfileScreen> {
   File? _selectedAvatar;
+
+  String _styleLabel(TattooStyles style) {
+    switch (style) {
+      case TattooStyles.americanTraditional:
+        return 'American Traditional';
+      case TattooStyles.japaneseTraditional:
+        return 'Japanese Traditional';
+      case TattooStyles.realism:
+        return 'Realism';
+      case TattooStyles.watercolor:
+        return 'Watercolor';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +138,28 @@ class _ArtistProfileScreenState extends ConsumerState<ArtistProfileScreen> {
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),
+                    if (user.stylePreferences.isNotEmpty) ...[
+                      const SizedBox(height: 24),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Styles',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children:
+                              user.stylePreferences.map((style) {
+                                return Chip(label: Text(_styleLabel(style)));
+                              }).toList(),
+                        ),
+                      ),
+                    ],
                     const Spacer(),
                     const LogoutButton(),
                   ],

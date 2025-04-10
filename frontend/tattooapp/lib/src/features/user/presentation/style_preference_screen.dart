@@ -13,16 +13,14 @@ class StylePreferenceScreen extends ConsumerStatefulWidget {
 }
 
 class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
-  final List<String> _styles = [
-    'Traditional',
-    'Neo-traditional',
-    'Blackwork',
-    'Japanese',
-    'Realism',
-    'Minimalist',
-  ];
+  final Map<TattooStyles, String> _styles = {
+    TattooStyles.americanTraditional: 'American Traditional',
+    TattooStyles.japaneseTraditional: 'Japanese Traditional',
+    TattooStyles.realism: 'Realism',
+    TattooStyles.watercolor: 'Watercolor',
+  };
 
-  final Set<String> _selectedStyles = {};
+  final Set<TattooStyles> _selectedStyles = {};
 
   void _onContinue() async {
     // update user state with selected styles
@@ -76,6 +74,8 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
     final userState = ref.watch(newUserStateProvider);
     final isArtist = userState.role == UserRole.artist;
 
+    final stylesKeys = _styles.keys.toList();
+
     final title =
         isArtist
             ? 'What styles do you specialize in?'
@@ -98,12 +98,12 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
             const SizedBox(height: 24),
             Expanded(
               child: ListView.builder(
-                itemCount: _styles.length,
+                itemCount: stylesKeys.length,
                 itemBuilder: (context, index) {
-                  final style = _styles[index];
+                  final style = stylesKeys[index];
                   final isSelected = _selectedStyles.contains(style);
                   return CheckboxListTile(
-                    title: Text(style),
+                    title: Text(_styles[style]!),
                     value: isSelected,
                     onChanged: (selected) {
                       setState(() {
