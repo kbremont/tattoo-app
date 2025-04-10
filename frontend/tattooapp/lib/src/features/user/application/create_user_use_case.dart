@@ -18,6 +18,19 @@ class CreateUserUseCase {
   }
 }
 
+proto.TattooStyle _mapTattooStyleToProtoStyle(TattooStyles style) {
+  switch (style) {
+    case TattooStyles.americanTraditional:
+      return proto.TattooStyle.TATTOO_STYLE_AMERICAN_TRADITIONAL;
+    case TattooStyles.japaneseTraditional:
+      return proto.TattooStyle.TATTOO_STYLE_JAPANESE_TRADITIONAL;
+    case TattooStyles.realism:
+      return proto.TattooStyle.TATTOO_STYLE_REALISM;
+    case TattooStyles.watercolor:
+      return proto.TattooStyle.TATTOO_STYLE_WATER_COLOR;
+  }
+}
+
 proto.User _mapUserToProtoUser(User user) {
   proto.UserRole role;
   switch (user.role) {
@@ -34,6 +47,6 @@ proto.User _mapUserToProtoUser(User user) {
     role: role,
     firstName: user.firstName,
     lastName: user.lastName,
-    // stylePreferences: [], // TODO: Add style preferences
+    stylePreferences: user.stylePreferences.map(_mapTattooStyleToProtoStyle),
   );
 }
