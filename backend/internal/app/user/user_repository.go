@@ -53,16 +53,15 @@ func (r *UserRepository) GetUser(ctx context.Context, id string) (*models.User, 
 }
 
 func (r *UserRepository) UpdateUser(ctx context.Context, u *models.User) error {
-	var stylePrefs []string
+	stylePrefs := make([]string, len(u.StylePreferences))
+	for i, s := range u.StylePreferences {
+		stylePrefs[i] = string(s)
+	}
 	const exec = `UPDATE "users"
-  SET first_name = $1, last_name = $2, style_preferences = $3 avatar_url = $4, updated_at = NOW()
+  SET first_name = $1, last_name = $2, style_preferences = $3, avatar_url = $4, updated_at = NOW()
   WHERE id = $5;`
 
 	_, err := r.db.ExecContext(ctx, exec, u.FirstName, u.LastName, pq.Array(stylePrefs), u.AvatarUrl, u.Id)
-	u.StylePreferences = make([]models.TattooStyle, len(stylePrefs))
-	for i, s := range stylePrefs {
-		u.StylePreferences[i] = models.TattooStyle(s)
-	}
 	return err
 }
 
