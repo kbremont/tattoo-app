@@ -97,6 +97,9 @@ func (s *UserService) UpdateUser(ctx context.Context, req *connect.Request[v1pb.
 	if shouldUpdate("last_name", req.Msg.GetUpdateMask()) {
 		u.LastName = req.Msg.GetUser().LastName
 	}
+	if shouldUpdate("style_preferences", req.Msg.GetUpdateMask()) {
+		u.StylePreferences = mapProtoStylesToStyles(req.Msg.GetUser().StylePreferences)
+	}
 	if shouldUpdate("avatar_url", req.Msg.GetUpdateMask()) {
 		u.AvatarUrl = sql.NullString{String: req.Msg.GetUser().AvatarUrl, Valid: true}
 	}
