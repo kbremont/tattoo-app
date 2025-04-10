@@ -26,6 +26,7 @@ class User extends $pb.GeneratedMessage {
     $core.String? avatarUrl,
     $core.String? createdAt,
     $core.String? updatedAt,
+    $core.Iterable<TattooStyle>? stylePreferences,
   }) {
     final $result = create();
     if (id != null) {
@@ -49,6 +50,9 @@ class User extends $pb.GeneratedMessage {
     if (updatedAt != null) {
       $result.updatedAt = updatedAt;
     }
+    if (stylePreferences != null) {
+      $result.stylePreferences.addAll(stylePreferences);
+    }
     return $result;
   }
   User._() : super();
@@ -63,6 +67,7 @@ class User extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'avatarUrl')
     ..aOS(6, _omitFieldNames ? '' : 'createdAt')
     ..aOS(7, _omitFieldNames ? '' : 'updatedAt')
+    ..pc<TattooStyle>(8, _omitFieldNames ? '' : 'stylePreferences', $pb.PbFieldType.KE, valueOf: TattooStyle.valueOf, enumValues: TattooStyle.values, defaultEnumValue: TattooStyle.TATTOO_STYLE_UNSPECIFIED)
     ..hasRequiredFields = false
   ;
 
@@ -149,6 +154,9 @@ class User extends $pb.GeneratedMessage {
   $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearUpdatedAt() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.List<TattooStyle> get stylePreferences => $_getList(7);
 }
 
 

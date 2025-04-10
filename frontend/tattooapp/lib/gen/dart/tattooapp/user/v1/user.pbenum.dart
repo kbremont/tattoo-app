@@ -30,5 +30,26 @@ class UserRole extends $pb.ProtobufEnum {
   const UserRole._($core.int v, $core.String n) : super(v, n);
 }
 
+class TattooStyle extends $pb.ProtobufEnum {
+  static const TattooStyle TATTOO_STYLE_UNSPECIFIED = TattooStyle._(0, _omitEnumNames ? '' : 'TATTOO_STYLE_UNSPECIFIED');
+  static const TattooStyle TATTOO_STYLE_AMERICAN_TRADITIONAL = TattooStyle._(1, _omitEnumNames ? '' : 'TATTOO_STYLE_AMERICAN_TRADITIONAL');
+  static const TattooStyle TATTOO_STYLE_REALISM = TattooStyle._(2, _omitEnumNames ? '' : 'TATTOO_STYLE_REALISM');
+  static const TattooStyle TATTOO_STYLE_WATER_COLOR = TattooStyle._(3, _omitEnumNames ? '' : 'TATTOO_STYLE_WATER_COLOR');
+  static const TattooStyle TATTOO_STYLE_JAPANESE_TRADITIONAL = TattooStyle._(4, _omitEnumNames ? '' : 'TATTOO_STYLE_JAPANESE_TRADITIONAL');
+
+  static const $core.List<TattooStyle> values = <TattooStyle> [
+    TATTOO_STYLE_UNSPECIFIED,
+    TATTOO_STYLE_AMERICAN_TRADITIONAL,
+    TATTOO_STYLE_REALISM,
+    TATTOO_STYLE_WATER_COLOR,
+    TATTOO_STYLE_JAPANESE_TRADITIONAL,
+  ];
+
+  static final $core.Map<$core.int, TattooStyle> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TattooStyle? valueOf($core.int value) => _byValue[value];
+
+  const TattooStyle._($core.int v, $core.String n) : super(v, n);
+}
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

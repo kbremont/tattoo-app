@@ -25,6 +25,7 @@ class CreateUserRequest extends $pb.GeneratedMessage {
     $2.UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
+    $core.Iterable<$2.TattooStyle>? stylePreferences,
   }) {
     final $result = create();
     if (id != null) {
@@ -39,6 +40,9 @@ class CreateUserRequest extends $pb.GeneratedMessage {
     if (lastName != null) {
       $result.lastName = lastName;
     }
+    if (stylePreferences != null) {
+      $result.stylePreferences.addAll(stylePreferences);
+    }
     return $result;
   }
   CreateUserRequest._() : super();
@@ -50,6 +54,7 @@ class CreateUserRequest extends $pb.GeneratedMessage {
     ..e<$2.UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $2.UserRole.USER_ROLE_UNSPECIFIED, valueOf: $2.UserRole.valueOf, enumValues: $2.UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
     ..aOS(4, _omitFieldNames ? '' : 'lastName')
+    ..pc<$2.TattooStyle>(5, _omitFieldNames ? '' : 'stylePreferences', $pb.PbFieldType.KE, valueOf: $2.TattooStyle.valueOf, enumValues: $2.TattooStyle.values, defaultEnumValue: $2.TattooStyle.TATTOO_STYLE_UNSPECIFIED)
     ..hasRequiredFields = false
   ;
 
@@ -109,6 +114,9 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   $core.bool hasLastName() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<$2.TattooStyle> get stylePreferences => $_getList(4);
 }
 
 /// information returned after creating a new user
