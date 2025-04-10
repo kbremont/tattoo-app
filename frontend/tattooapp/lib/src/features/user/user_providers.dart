@@ -74,7 +74,7 @@ class NewUserStateNotifier extends StateNotifier<NewUserState> {
     state = state.copyWith(firstName: firstName, lastName: lastName);
   }
 
-  void updateStylePreferences(List<String> styles) {
+  void updateStylePreferences(List<TattooStyles> styles) {
     state = state.copyWith(stylePreferences: styles);
   }
 

@@ -19,6 +19,7 @@ class UserRepository {
         role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
+        stylePreferences: user.stylePreferences,
       ),
       headers: authHeaders(accessToken),
     );

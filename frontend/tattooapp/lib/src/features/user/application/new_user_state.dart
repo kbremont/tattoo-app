@@ -5,7 +5,7 @@ class NewUserState {
   final UserRole? role;
   final String? firstName;
   final String? lastName;
-  final List<String> stylePreferences;
+  final List<TattooStyles> stylePreferences;
 
   const NewUserState({
     this.id,
@@ -20,7 +20,7 @@ class NewUserState {
     UserRole? role,
     String? firstName,
     String? lastName,
-    List<String>? stylePreferences,
+    List<TattooStyles>? stylePreferences,
   }) {
     return NewUserState(
       id: id ?? this.id,
