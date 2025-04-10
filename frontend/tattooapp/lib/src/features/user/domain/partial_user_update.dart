@@ -1,4 +1,6 @@
 import 'package:tattooapp/src/features/user/domain/user.dart';
+import 'package:tattooapp/gen/dart/tattooapp/user/v1/user.pb.dart' as proto;
+import 'package:tattooapp/src/features/user/domain/tattoo_style_mapper.dart';
 
 class PartialUserUpdate {
   final String? firstName;
@@ -31,6 +33,21 @@ class PartialUserUpdate {
     }
 
     return paths;
+  }
+}
+
+extension PartialUserUpdateMapper on PartialUserUpdate {
+  proto.User toProto({required String userId, required User originalUser}) {
+    return proto.User(
+      id: userId,
+      firstName: firstName ?? originalUser.firstName,
+      lastName: lastName ?? originalUser.lastName,
+      avatarUrl: avatarUrl ?? originalUser.avatarUrl,
+      stylePreferences:
+          (stylePreferences ?? originalUser.stylePreferences)
+              .map(mapTattooStyleToProtoStyle)
+              .toList(),
+    );
   }
 }
 
