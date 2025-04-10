@@ -20,6 +20,21 @@ class GetUserUseCase {
   }
 }
 
+TattooStyles _mapProtoStyleToTattooStyle(proto.TattooStyle style) {
+  switch (style) {
+    case proto.TattooStyle.TATTOO_STYLE_AMERICAN_TRADITIONAL:
+      return TattooStyles.americanTraditional;
+    case proto.TattooStyle.TATTOO_STYLE_JAPANESE_TRADITIONAL:
+      return TattooStyles.japaneseTraditional;
+    case proto.TattooStyle.TATTOO_STYLE_REALISM:
+      return TattooStyles.realism;
+    case proto.TattooStyle.TATTOO_STYLE_WATER_COLOR:
+      return TattooStyles.watercolor;
+    default:
+      return TattooStyles.americanTraditional; // Default case
+  }
+}
+
 User _mapProtoUserToUser(proto.User protoUser) {
   UserRole role;
   switch (protoUser.role) {
@@ -38,7 +53,8 @@ User _mapProtoUserToUser(proto.User protoUser) {
     role: role,
     firstName: protoUser.firstName,
     lastName: protoUser.lastName,
-    stylePreferences: [], // TODO: Add style preferences
+    stylePreferences:
+        protoUser.stylePreferences.map(_mapProtoStyleToTattooStyle).toList(),
     avatarUrl: protoUser.hasAvatarUrl() ? protoUser.avatarUrl : null,
   );
 }

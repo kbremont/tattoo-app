@@ -24,6 +24,7 @@ const CreateUserRequest$json = {
     {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.tattooapp.user.v1.UserRole', '10': 'role'},
     {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
     {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
+    {'1': 'style_preferences', '3': 5, '4': 3, '5': 14, '6': '.tattooapp.user.v1.TattooStyle', '10': 'stylePreferences'},
   ],
 };
 
@@ -31,7 +32,8 @@ const CreateUserRequest$json = {
 final $typed_data.Uint8List createUserRequestDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVVc2VyUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQSLwoEcm9sZRgCIAEoDjIbLnRhdH'
     'Rvb2FwcC51c2VyLnYxLlVzZXJSb2xlUgRyb2xlEh0KCmZpcnN0X25hbWUYAyABKAlSCWZpcnN0'
-    'TmFtZRIbCglsYXN0X25hbWUYBCABKAlSCGxhc3ROYW1l');
+    'TmFtZRIbCglsYXN0X25hbWUYBCABKAlSCGxhc3ROYW1lEksKEXN0eWxlX3ByZWZlcmVuY2VzGA'
+    'UgAygOMh4udGF0dG9vYXBwLnVzZXIudjEuVGF0dG9vU3R5bGVSEHN0eWxlUHJlZmVyZW5jZXM=');
 
 @$core.Deprecated('Use createUserResponseDescriptor instead')
 const CreateUserResponse$json = {

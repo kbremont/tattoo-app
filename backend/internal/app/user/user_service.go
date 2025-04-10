@@ -37,10 +37,11 @@ func (s *UserService) CreateUser(ctx context.Context, req *connect.Request[v1pb.
 	logger.Info(ctx, "handling CreateUser request", "id", req.Msg.GetId())
 
 	u := &models.User{
-		Id:        req.Msg.GetId(),
-		Role:      mapProtoUserRoleToUserRole(req.Msg.GetRole()),
-		FirstName: req.Msg.GetFirstName(),
-		LastName:  req.Msg.GetLastName(),
+		Id:               req.Msg.GetId(),
+		Role:             mapProtoUserRoleToUserRole(req.Msg.GetRole()),
+		FirstName:        req.Msg.GetFirstName(),
+		LastName:         req.Msg.GetLastName(),
+		StylePreferences: mapProtoStylesToStyles(req.Msg.GetStylePreferences()),
 	}
 
 	if err := s.repository.CreateUser(ctx, u); err != nil {
@@ -144,11 +145,12 @@ func mapUserToProto(u *models.User) *v1pb.User {
 	}
 
 	return &v1pb.User{
-		Id:        u.Id,
-		Role:      mapUserRoleToProtoUserRole(u.Role),
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
-		AvatarUrl: au,
+		Id:               u.Id,
+		Role:             mapUserRoleToProtoUserRole(u.Role),
+		FirstName:        u.FirstName,
+		LastName:         u.LastName,
+		StylePreferences: mapStylesToProtoStyles(u.StylePreferences),
+		AvatarUrl:        au,
 	}
 }
 
@@ -159,11 +161,12 @@ func mapProtoToUser(u *v1pb.User) *models.User {
 	}
 
 	return &models.User{
-		Id:        u.Id,
-		Role:      mapProtoUserRoleToUserRole(u.GetRole()),
-		FirstName: u.GetFirstName(),
-		LastName:  u.GetLastName(),
-		AvatarUrl: au,
+		Id:               u.Id,
+		Role:             mapProtoUserRoleToUserRole(u.GetRole()),
+		FirstName:        u.GetFirstName(),
+		LastName:         u.GetLastName(),
+		StylePreferences: mapProtoStylesToStyles(u.GetStylePreferences()),
+		AvatarUrl:        au,
 	}
 }
 
@@ -187,4 +190,42 @@ func mapUserRoleToProtoUserRole(role models.UserRole) v1pb.UserRole {
 	default:
 		return v1pb.UserRole_USER_ROLE_CLIENT
 	}
+}
+
+func mapProtoStylesToStyles(styles []v1pb.TattooStyle) []models.TattooStyle {
+	mapped := make([]models.TattooStyle, len(styles))
+	for i, style := range styles {
+		switch style {
+		case v1pb.TattooStyle_TATTOO_STYLE_AMERICAN_TRADITIONAL:
+			mapped[i] = models.TattooStyleAmericanTraditional
+		case v1pb.TattooStyle_TATTOO_STYLE_JAPANESE_TRADITIONAL:
+			mapped[i] = models.TattooStyleJapaneseTraditional
+		case v1pb.TattooStyle_TATTOO_STYLE_REALISM:
+			mapped[i] = models.TattooStyleRealism
+		case v1pb.TattooStyle_TATTOO_STYLE_WATER_COLOR:
+			mapped[i] = models.TattooStyleWatercolor
+		default:
+			continue
+		}
+	}
+	return mapped
+}
+
+func mapStylesToProtoStyles(styles []models.TattooStyle) []v1pb.TattooStyle {
+	mapped := make([]v1pb.TattooStyle, len(styles))
+	for i, style := range styles {
+		switch style {
+		case models.TattooStyleAmericanTraditional:
+			mapped[i] = v1pb.TattooStyle_TATTOO_STYLE_AMERICAN_TRADITIONAL
+		case models.TattooStyleJapaneseTraditional:
+			mapped[i] = v1pb.TattooStyle_TATTOO_STYLE_JAPANESE_TRADITIONAL
+		case models.TattooStyleRealism:
+			mapped[i] = v1pb.TattooStyle_TATTOO_STYLE_REALISM
+		case models.TattooStyleWatercolor:
+			mapped[i] = v1pb.TattooStyle_TATTOO_STYLE_WATER_COLOR
+		default:
+			continue
+		}
+	}
+	return mapped
 }
