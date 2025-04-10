@@ -3,7 +3,7 @@ import 'package:tattooapp/src/features/user/domain/user.dart';
 class PartialUserUpdate {
   final String? firstName;
   final String? lastName;
-  final List<String>? stylePreferences;
+  final List<TattooStyles>? stylePreferences;
   final String? avatarUrl;
 
   const PartialUserUpdate({
@@ -34,7 +34,7 @@ class PartialUserUpdate {
   }
 }
 
-bool _listEquals(List<String> a, List<String> b) {
+bool _listEquals(List<TattooStyles> a, List<TattooStyles> b) {
   if (a.length != b.length) return false;
   for (var i = 0; i < a.length; i++) {
     if (a[i] != b[i]) return false;

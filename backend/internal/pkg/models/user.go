@@ -12,12 +12,22 @@ const (
 	UserRoleClient UserRole = "client"
 )
 
+type TattooStyle string
+
+const (
+	TattooStyleAmericanTraditional TattooStyle = "american_traditional"
+	TattooStyleJapaneseTraditional TattooStyle = "japanese_traditional"
+	TattooStyleRealism             TattooStyle = "realism"
+	TattooStyleWatercolor          TattooStyle = "watercolor"
+)
+
 type User struct {
-	Id        string
-	Role      UserRole
-	FirstName string
-	LastName  string
-	AvatarUrl sql.NullString
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Id               string
+	Role             UserRole
+	FirstName        string
+	LastName         string
+	StylePreferences []TattooStyle
+	AvatarUrl        sql.NullString
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 }
