@@ -1,5 +1,5 @@
 APP_NAME=tattoo-app
-DATABASE_URI?=postgresql://kyle.bremont@localhost:5432/tattoo_app?sslmode=disable
+DATABASE_URI?=postgresql://kyle.bremont@localhost:5432/tattooapp?sslmode=disable
 NGROK_TUNNELS_URL=http://localhost:4040/api/tunnels
 ENV_FILE=frontend/tattooapp/.env
 
@@ -37,6 +37,10 @@ build-artist-service:
 	mkdir -p bin
 	cd backend && go build -o bin/artist-service ./cmd/artist-service
 
+build-client-service:
+	mkdir -p bin
+	cd backend && go build -o bin/client-service ./cmd/client-service
+
 ######### go formatting #########
 
 fmt:
@@ -53,11 +57,27 @@ vendor:
 
 ######### go run #########
 
-run-user:
+start-services:
+	@echo "Starting all services..."
+	@make start-user &
+	@make start-artist &
+	@make start-client &
+	@wait
+
+start-user:
 	PORT=9001 DATABASE_URI=$(DATABASE_URI) ./backend/bin/user-service
 
-run-artist:
+start-artist:
 	PORT=9000 DATABASE_URI=$(DATABASE_URI) ./backend/bin/artist-service
+
+start-client:
+	PORT=9002 DATABASE_URI=$(DATABASE_URI) ./backend/bin/client-service
+
+stop-services:
+	@echo "Killing processes on ports 9000, 9001, 9002..."
+	@lsof -ti tcp:9000 | xargs kill -9 || true
+	@lsof -ti tcp:9001 | xargs kill -9 || true
+	@lsof -ti tcp:9002 | xargs kill -9 || true
 
 ######### db migrations #########
 
