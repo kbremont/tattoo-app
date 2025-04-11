@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package tattooapp.client.v1;
+
+import "tattooapp/client/v1/client_profile.proto";
+
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/client/v1;pb";
+
+service ClientService {
+    rpc CreateClientProfile(CreateClientProfileRequest) returns (CreateClientProfileResponse);
+    rpc GetClientProfile(GetClientProfileRequest) returns (GetClientProfileResponse);
+    rpc DeleteClientProfile(DeleteClientProfileRequest) returns (DeleteClientProfileResponse);
+}
+
+message CreateClientProfileRequest {
+    string user_id = 1;
+    string location = 2;
+}
+
+message CreateClientProfileResponse {
+    ClientProfile client_profile = 1;
+}
+
+message GetClientProfileRequest {
+    string user_id = 1;
+}
+
+message GetClientProfileResponse {
+    ClientProfile client_profile = 1;
+}
+
+message DeleteClientProfileRequest {
+    string user_id = 1;
+}
+
+message DeleteClientProfileResponse {
+    bool success = 1;
+}

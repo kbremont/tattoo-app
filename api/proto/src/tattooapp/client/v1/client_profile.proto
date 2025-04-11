@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tattooapp.client.v1;
+
+option go_package = "github.com/kbremont/tattoo-app/backend/api/proto/gen/go/tattooapp/client/v1;pb";
+
+message ClientProfile {
+    string user_id = 1;
+    string location = 2;
+    string created_at = 3;
+    string updated_at = 4;
+}

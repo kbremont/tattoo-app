@@ -14,18 +14,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/field_mask.pb.dart' as $3;
-import 'user.pb.dart' as $2;
-import 'user.pbenum.dart' as $2;
+import '../../../google/protobuf/field_mask.pb.dart' as $5;
+import 'user.pb.dart' as $4;
+import 'user.pbenum.dart' as $4;
 
 /// information required to create a new user
 class CreateUserRequest extends $pb.GeneratedMessage {
   factory CreateUserRequest({
     $core.String? id,
-    $2.UserRole? role,
+    $4.UserRole? role,
     $core.String? firstName,
     $core.String? lastName,
-    $core.Iterable<$2.TattooStyle>? stylePreferences,
+    $core.Iterable<$4.TattooStyle>? stylePreferences,
   }) {
     final $result = create();
     if (id != null) {
@@ -51,10 +51,10 @@ class CreateUserRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..e<$2.UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $2.UserRole.USER_ROLE_UNSPECIFIED, valueOf: $2.UserRole.valueOf, enumValues: $2.UserRole.values)
+    ..e<$4.UserRole>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $4.UserRole.USER_ROLE_UNSPECIFIED, valueOf: $4.UserRole.valueOf, enumValues: $4.UserRole.values)
     ..aOS(3, _omitFieldNames ? '' : 'firstName')
     ..aOS(4, _omitFieldNames ? '' : 'lastName')
-    ..pc<$2.TattooStyle>(5, _omitFieldNames ? '' : 'stylePreferences', $pb.PbFieldType.KE, valueOf: $2.TattooStyle.valueOf, enumValues: $2.TattooStyle.values, defaultEnumValue: $2.TattooStyle.TATTOO_STYLE_UNSPECIFIED)
+    ..pc<$4.TattooStyle>(5, _omitFieldNames ? '' : 'stylePreferences', $pb.PbFieldType.KE, valueOf: $4.TattooStyle.valueOf, enumValues: $4.TattooStyle.values, defaultEnumValue: $4.TattooStyle.TATTOO_STYLE_UNSPECIFIED)
     ..hasRequiredFields = false
   ;
 
@@ -89,9 +89,9 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $2.UserRole get role => $_getN(1);
+  $4.UserRole get role => $_getN(1);
   @$pb.TagNumber(2)
-  set role($2.UserRole v) { setField(2, v); }
+  set role($4.UserRole v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasRole() => $_has(1);
   @$pb.TagNumber(2)
@@ -116,13 +116,13 @@ class CreateUserRequest extends $pb.GeneratedMessage {
   void clearLastName() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.List<$2.TattooStyle> get stylePreferences => $_getList(4);
+  $core.List<$4.TattooStyle> get stylePreferences => $_getList(4);
 }
 
 /// information returned after creating a new user
 class CreateUserResponse extends $pb.GeneratedMessage {
   factory CreateUserResponse({
-    $2.User? user,
+    $4.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -135,7 +135,7 @@ class CreateUserResponse extends $pb.GeneratedMessage {
   factory CreateUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
-    ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
+    ..aOM<$4.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $4.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -161,15 +161,15 @@ class CreateUserResponse extends $pb.GeneratedMessage {
   static CreateUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $2.User get user => $_getN(0);
+  $4.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($2.User v) { setField(1, v); }
+  set user($4.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $2.User ensureUser() => $_ensure(0);
+  $4.User ensureUser() => $_ensure(0);
 }
 
 /// information required to get a user
@@ -226,7 +226,7 @@ class GetUserRequest extends $pb.GeneratedMessage {
 /// information returned after getting a user
 class GetUserResponse extends $pb.GeneratedMessage {
   factory GetUserResponse({
-    $2.User? user,
+    $4.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -239,7 +239,7 @@ class GetUserResponse extends $pb.GeneratedMessage {
   factory GetUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
-    ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
+    ..aOM<$4.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $4.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -265,22 +265,22 @@ class GetUserResponse extends $pb.GeneratedMessage {
   static GetUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $2.User get user => $_getN(0);
+  $4.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($2.User v) { setField(1, v); }
+  set user($4.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $2.User ensureUser() => $_ensure(0);
+  $4.User ensureUser() => $_ensure(0);
 }
 
 /// information required to update a user
 class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest({
-    $2.User? user,
-    $3.FieldMask? updateMask,
+    $4.User? user,
+    $5.FieldMask? updateMask,
   }) {
     final $result = create();
     if (user != null) {
@@ -296,8 +296,8 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   factory UpdateUserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
-    ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
-    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
+    ..aOM<$4.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $4.User.create)
+    ..aOM<$5.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $5.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -323,32 +323,32 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   static UpdateUserRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $2.User get user => $_getN(0);
+  $4.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($2.User v) { setField(1, v); }
+  set user($4.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $2.User ensureUser() => $_ensure(0);
+  $4.User ensureUser() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $3.FieldMask get updateMask => $_getN(1);
+  $5.FieldMask get updateMask => $_getN(1);
   @$pb.TagNumber(2)
-  set updateMask($3.FieldMask v) { setField(2, v); }
+  set updateMask($5.FieldMask v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasUpdateMask() => $_has(1);
   @$pb.TagNumber(2)
   void clearUpdateMask() => clearField(2);
   @$pb.TagNumber(2)
-  $3.FieldMask ensureUpdateMask() => $_ensure(1);
+  $5.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 /// information returned after updating a user
 class UpdateUserResponse extends $pb.GeneratedMessage {
   factory UpdateUserResponse({
-    $2.User? user,
+    $4.User? user,
   }) {
     final $result = create();
     if (user != null) {
@@ -361,7 +361,7 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   factory UpdateUserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'tattooapp.user.v1'), createEmptyInstance: create)
-    ..aOM<$2.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $2.User.create)
+    ..aOM<$4.User>(1, _omitFieldNames ? '' : 'user', subBuilder: $4.User.create)
     ..hasRequiredFields = false
   ;
 
@@ -387,15 +387,15 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   static UpdateUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $2.User get user => $_getN(0);
+  $4.User get user => $_getN(0);
   @$pb.TagNumber(1)
-  set user($2.User v) { setField(1, v); }
+  set user($4.User v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
   void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $2.User ensureUser() => $_ensure(0);
+  $4.User ensureUser() => $_ensure(0);
 }
 
 /// information required to delete a user
