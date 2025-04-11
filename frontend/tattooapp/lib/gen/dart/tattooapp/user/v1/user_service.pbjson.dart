@@ -13,8 +13,8 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-import '../../../google/protobuf/field_mask.pbjson.dart' as $3;
-import 'user.pbjson.dart' as $2;
+import '../../../google/protobuf/field_mask.pbjson.dart' as $5;
+import 'user.pbjson.dart' as $4;
 
 @$core.Deprecated('Use createUserRequestDescriptor instead')
 const CreateUserRequest$json = {
@@ -139,11 +139,11 @@ const $core.Map<$core.String, $core.dynamic> UserServiceBase$json = {
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UserServiceBase$messageJson = {
   '.tattooapp.user.v1.CreateUserRequest': CreateUserRequest$json,
   '.tattooapp.user.v1.CreateUserResponse': CreateUserResponse$json,
-  '.tattooapp.user.v1.User': $2.User$json,
+  '.tattooapp.user.v1.User': $4.User$json,
   '.tattooapp.user.v1.GetUserRequest': GetUserRequest$json,
   '.tattooapp.user.v1.GetUserResponse': GetUserResponse$json,
   '.tattooapp.user.v1.UpdateUserRequest': UpdateUserRequest$json,
-  '.google.protobuf.FieldMask': $3.FieldMask$json,
+  '.google.protobuf.FieldMask': $5.FieldMask$json,
   '.tattooapp.user.v1.UpdateUserResponse': UpdateUserResponse$json,
   '.tattooapp.user.v1.DeleteUserRequest': DeleteUserRequest$json,
   '.tattooapp.user.v1.DeleteUserResponse': DeleteUserResponse$json,

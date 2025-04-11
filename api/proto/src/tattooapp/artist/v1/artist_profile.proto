@@ -11,7 +11,6 @@ message ArtistProfile {
     string tattoo_shop = 4;
     string created_at = 5;
     string updated_at = 6;
-    // repeated string styles = 5; // List of tattoo styles the artist specializes in
     // repeated string portfolio_images = 6; // List of URLs to portfolio images
     // repeated string social_links = 7; // List of social media links
 }
