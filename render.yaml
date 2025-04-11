@@ -49,6 +49,31 @@ services:
           property: connectionString
       - key: PORT
         value: 8081
+  - name: client-service
+    type: web
+    plan: free
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: build/package/Dockerfile.client-service
+    branch: main
+    autoDeploy: true
+    region: oregon
+    buildFilter:
+      paths:
+        - cmd/client-service/*
+        - internal/app/database/*
+        - internal/app/server/*
+        - internal/app/client/*
+        - internal/pkg/*
+        - go.mod
+        - go.sum
+    envVars:
+      - key: DATABASE_URI
+        fromDatabase:
+          name: tattoo-app-db
+          property: connectionString
+      - key: PORT
+        value: 8082
 
 databases:
   - name: tattoo-app-db
