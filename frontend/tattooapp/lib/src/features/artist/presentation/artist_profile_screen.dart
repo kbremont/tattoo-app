@@ -9,6 +9,7 @@ import 'package:tattooapp/src/features/user/domain/partial_user_update.dart';
 import 'package:tattooapp/src/core/widgets/editable_avatar.dart';
 import 'package:tattooapp/src/core/utils/cloudinary_upload.dart';
 import 'package:tattooapp/src/features/auth/presentation/widgets/logout_button.dart';
+import 'package:tattooapp/src/core/widgets/dev_user_switcher.dart';
 
 class ArtistProfileScreen extends ConsumerStatefulWidget {
   const ArtistProfileScreen({super.key});
@@ -160,6 +161,7 @@ class _ArtistProfileScreenState extends ConsumerState<ArtistProfileScreen> {
                         ),
                       ),
                     ],
+                    const DevUserSwitcher(),
                     const Spacer(),
                     const LogoutButton(),
                   ],
