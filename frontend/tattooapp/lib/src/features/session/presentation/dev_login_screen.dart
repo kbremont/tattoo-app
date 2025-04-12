@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/session/session_providers.dart';
-// import 'package:tattooapp/src/features/session/application/session_coordinator.dart';
 
 class DevLoginScreen extends ConsumerWidget {
   const DevLoginScreen({super.key});
