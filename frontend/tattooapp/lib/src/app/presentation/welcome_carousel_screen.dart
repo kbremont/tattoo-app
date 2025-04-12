@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tattooapp/src/features/onboarding/presentation/widgets/welcome_screen_page.dart';
+import 'package:tattooapp/src/app/presentation/welcome_screen_page.dart';
 import 'package:tattooapp/src/core/widgets/page_indicator.dart';
 import 'package:tattooapp/src/features/session/presentation/widgets/get_started_button.dart';
 
