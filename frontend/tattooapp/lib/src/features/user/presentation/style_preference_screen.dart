@@ -51,20 +51,11 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
 
     // check if user is artist
     if (userState.role == UserRole.artist) {
-      // navigate to artist profile entry screen
       Navigator.of(context).pushNamed('/artist/profile-entry');
       return;
     } else {
-      // create user
-      final user = userState.toUser();
-      await ref
-          .read(createUserUseCaseProvider)
-          .execute(accessToken: accessToken, user: user);
-
-      if (!mounted) return;
-      Navigator.of(
-        context,
-      ).pushNamedAndRemoveUntil('/profile', (route) => false);
+      Navigator.of(context).pushNamed('/client/profile-entry');
+      return;
     }
   }
 
@@ -80,8 +71,6 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
         isArtist
             ? 'What styles do you specialize in?'
             : 'What styles are you into?';
-
-    final button = isArtist ? 'Continue' : 'Finish Setup';
 
     return Scaffold(
       appBar: AppBar(title: const Text('Your Style Preferences')),
@@ -120,7 +109,7 @@ class _StylePreferenceScreenState extends ConsumerState<StylePreferenceScreen> {
             ),
             ElevatedButton(
               onPressed: _selectedStyles.isNotEmpty ? _onContinue : null,
-              child: Text(button),
+              child: const Text('Continue'),
             ),
           ],
         ),

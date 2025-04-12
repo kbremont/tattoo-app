@@ -102,8 +102,10 @@ update-env:
 
 	@USER_URL=$$(jq -r '.tunnels[] | select(.name=="user-service") | .public_url' tunnels.json) && \
 	ARTIST_URL=$$(jq -r '.tunnels[] | select(.name=="artist-service") | .public_url' tunnels.json) && \
+	CLIENT_URL=$$(jq -r '.tunnels[] | select(.name=="client-service") | .public_url' tunnels.json) && \
 	echo "USER_SERVICE_BASE_URL=$${USER_URL}" > $(ENV_FILE) && \
 	echo "ARTIST_SERVICE_BASE_URL=$${ARTIST_URL}" >> $(ENV_FILE) && \
+	echo "CLIENT_SERVICE_BASE_URL=$${CLIENT_URL}" >> $(ENV_FILE) && \
 	echo "✅ Updated .env file at $(ENV_FILE)" && \
 	cat $(ENV_FILE) && \
 	rm tunnels.json
