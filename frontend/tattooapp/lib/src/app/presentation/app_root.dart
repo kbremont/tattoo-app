@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/core/theme/theme.dart';
 import 'package:tattooapp/src/app/presentation/splash_screen.dart';
 import 'package:tattooapp/src/app/presentation/welcome_carousel_screen.dart';
+import 'package:tattooapp/src/features/session/presentation/dev_login_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/name_entry_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/user_type_selection_screen.dart';
 import 'package:tattooapp/src/features/user/presentation/style_preference_screen.dart';
@@ -30,6 +31,7 @@ class AppRoot extends ConsumerWidget {
       routes: {
         '/splash': (context) => const SplashScreen(),
         '/welcome': (context) => const WelcomeCarouselScreen(),
+        '/dev-login': (context) => const DevLoginScreen(),
         '/user/name-entry': (_) => const NameEntryScreen(),
         '/user/type-selection': (_) => const UserTypeSelectionScreen(),
         '/user/style-preference': (_) => const StylePreferenceScreen(),
