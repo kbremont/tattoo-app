@@ -1,7 +1,22 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:http/http.dart' as http;
+
+class DevCredentials {
+  final String accessToken;
+  final String idToken;
+  final DateTime expiresAt;
+
+  DevCredentials({
+    required this.accessToken,
+    required this.idToken,
+    required this.expiresAt,
+  });
+}
 
 class Auth0Repository {
   final Auth0 _auth0;
@@ -41,6 +56,45 @@ class Auth0Repository {
     );
 
     return credentials;
+  }
+
+  // This method is for development purposes only
+  // and should not be used in production.
+  Future<DevCredentials> devLogin({
+    required String email,
+    required String password,
+  }) async {
+    final response = await http.post(
+      Uri.parse('https://dev-pqjo5e7nvurmgv1u.us.auth0.com/oauth/token'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'grant_type': 'password',
+        'username': email,
+        'password': password,
+        'audience': 'https://dev-pqjo5e7nvurmgv1u.us.auth0.com/api/v2/',
+        'client_id': 'idsGcSbT0rV3nZaxjeTY5XX69cDfJCsr',
+        'client_secret':
+            dotenv
+                .env['DEV_AUTH0_CLIENT_SECRET'], // only in trusted/test context
+        'scope': 'openid profile email',
+        'connection': 'Username-Password-Authentication',
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed login: ${response.body}');
+    }
+
+    final json = jsonDecode(response.body);
+    final accessToken = json['access_token'] as String;
+    final idToken = json['id_token'] as String;
+    final expiresIn = json['expires_in'] as int;
+
+    return DevCredentials(
+      accessToken: accessToken,
+      idToken: idToken,
+      expiresAt: DateTime.now().add(Duration(seconds: expiresIn)),
+    );
   }
 
   Future<void> logout() async {

@@ -6,6 +6,7 @@ import 'package:tattooapp/src/features/session/application/session_coordinator.d
 final sessionCoordinatorProvider = Provider((ref) {
   final loginUseCase = ref.watch(loginUseCaseProvider);
   final getUserUseCase = ref.watch(getUserUseCaseProvider);
+  final devLoginUseCase = ref.watch(devLoginUseCaseProvider);
 
-  return SessionCoordinator(ref, loginUseCase, getUserUseCase);
+  return SessionCoordinator(ref, loginUseCase, getUserUseCase, devLoginUseCase);
 });
