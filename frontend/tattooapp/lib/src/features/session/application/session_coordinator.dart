@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/features/user/user_providers.dart';
 import 'package:tattooapp/src/features/auth/auth_providers.dart';
 import 'package:tattooapp/src/features/auth/application/login_use_case.dart';
+import 'package:tattooapp/src/features/auth/application/dev_login_use_case.dart';
 import 'package:tattooapp/src/features/user/application/get_user_use_case.dart';
 
 enum SessionDestination { profile, onboarding }
@@ -11,10 +12,16 @@ class SessionCoordinator {
   final Ref _ref;
   final LoginUseCase _loginUseCase;
   final GetUserUseCase _getUserUseCase;
+  final DevLoginUseCase _devLoginUseCase;
 
-  SessionCoordinator(this._ref, this._loginUseCase, this._getUserUseCase);
+  SessionCoordinator(
+    this._ref,
+    this._loginUseCase,
+    this._getUserUseCase,
+    this._devLoginUseCase,
+  );
 
-  Future<(SessionDestination, String)> startSession() async {
+  Future<SessionDestination> startSession() async {
     final credentials = await _loginUseCase.execute();
     final accessToken = credentials.accessToken;
     _ref.read(accessTokenProvider.notifier).state = accessToken;
@@ -28,7 +35,7 @@ class SessionCoordinator {
 
     try {
       await _getUserUseCase.execute(accessToken: accessToken, id: auth0UserId);
-      return (SessionDestination.profile, accessToken);
+      return SessionDestination.profile;
     } catch (_) {
       _ref
           .read(newUserStateProvider.notifier)
@@ -37,7 +44,23 @@ class SessionCoordinator {
             firstName: firstName,
             lastName: lastName,
           );
-      return (SessionDestination.onboarding, accessToken);
+      return SessionDestination.onboarding;
     }
+  }
+
+  Future<void> startDevSession(String userType) async {
+    final uType = switch (userType) {
+      "client" => UserType.client,
+      "artist" => UserType.artist,
+      _ => throw Exception("Invalid user type"),
+    };
+
+    final credentials = await _devLoginUseCase.execute(userType: uType);
+    final accessToken = credentials.accessToken;
+    _ref.read(accessTokenProvider.notifier).state = accessToken;
+
+    final decoded = JwtDecoder.decode(credentials.idToken);
+    final auth0UserId = decoded['sub'];
+    _ref.read(auth0UserIdProvider.notifier).state = auth0UserId;
   }
 }
