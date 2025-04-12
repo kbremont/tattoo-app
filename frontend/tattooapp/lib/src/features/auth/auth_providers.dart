@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:tattooapp/src/features/auth/data/auth0_repository.dart';
 import 'package:tattooapp/src/features/auth/application/login_use_case.dart';
+import 'package:tattooapp/src/features/auth/application/dev_login_use_case.dart';
 import 'package:tattooapp/src/features/auth/application/logout_use_case.dart';
 
 // Auth0 instance
@@ -25,6 +26,11 @@ final auth0RepositoryProvider = Provider((ref) {
 final loginUseCaseProvider = Provider((ref) {
   final repository = ref.read(auth0RepositoryProvider);
   return LoginUseCase(repository);
+});
+
+final devLoginUseCaseProvider = Provider((ref) {
+  final repository = ref.read(auth0RepositoryProvider);
+  return DevLoginUseCase(repository);
 });
 
 final logoutUseCaseProvider = Provider((ref) {

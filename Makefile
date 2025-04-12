@@ -95,7 +95,7 @@ start-ngrok:
 	sleep 5 && \
 	make update-env
 
-## Fetch public URLs from ngrok and write them into .env
+## Fetch public URLs from ngrok and update specific keys in .env
 update-env:
 	@echo "Fetching ngrok tunnel URLs..."
 	@curl -s $(NGROK_TUNNELS_URL) > tunnels.json
@@ -103,12 +103,16 @@ update-env:
 	@USER_URL=$$(jq -r '.tunnels[] | select(.name=="user-service") | .public_url' tunnels.json) && \
 	ARTIST_URL=$$(jq -r '.tunnels[] | select(.name=="artist-service") | .public_url' tunnels.json) && \
 	CLIENT_URL=$$(jq -r '.tunnels[] | select(.name=="client-service") | .public_url' tunnels.json) && \
-	echo "USER_SERVICE_BASE_URL=$${USER_URL}" > $(ENV_FILE) && \
-	echo "ARTIST_SERVICE_BASE_URL=$${ARTIST_URL}" >> $(ENV_FILE) && \
-	echo "CLIENT_SERVICE_BASE_URL=$${CLIENT_URL}" >> $(ENV_FILE) && \
-	echo "✅ Updated .env file at $(ENV_FILE)" && \
-	cat $(ENV_FILE) && \
-	rm tunnels.json
+	cp $(ENV_FILE) $(ENV_FILE).bak && \
+	awk -v u="USER_SERVICE_BASE_URL=$$USER_URL" \
+	    -v a="ARTIST_SERVICE_BASE_URL=$$ARTIST_URL" \
+	    -v c="CLIENT_SERVICE_BASE_URL=$$CLIENT_URL" \
+	    'BEGIN {keys["USER_SERVICE_BASE_URL"]=u; keys["ARTIST_SERVICE_BASE_URL"]=a; keys["CLIENT_SERVICE_BASE_URL"]=c} \
+	    {split($$0, kv, "="); key=kv[1]; if (key in keys) {print keys[key]; delete keys[key]} else {print}} \
+	    END {for (k in keys) print keys[k]}' \
+	    $(ENV_FILE).bak > $(ENV_FILE) && \
+	rm $(ENV_FILE).bak tunnels.json && \
+	echo "✅ Updated $(ENV_FILE):" && cat $(ENV_FILE)
 
 ## Kill any running ngrok process
 stop-ngrok:
