@@ -42,7 +42,7 @@ class _ArtistProfileEntryScreenState
       // get user state
       final userState = ref.read(newUserStateProvider);
 
-      // check if user state is complete
+      // check if artist profile state is complete
       if (!artistProfileState.isComplete) {
         // show error message
         ScaffoldMessenger.of(context).showSnackBar(
@@ -126,7 +126,7 @@ class _ArtistProfileEntryScreenState
               const Spacer(),
               ElevatedButton(
                 onPressed: _onContinue,
-                child: const Text('Continue'),
+                child: const Text('Finish Signup'),
               ),
             ],
           ),

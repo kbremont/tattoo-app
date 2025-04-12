@@ -20,12 +20,12 @@ final artistProfilesRepositoryProvider = Provider((ref) {
 
 final createArtistProfileUseCaseProvider = Provider((ref) {
   final repo = ref.watch(artistProfilesRepositoryProvider);
-  return CreateArtistProfileUseCase(repo, ref);
+  return CreateArtistProfileUseCase(repo);
 });
 
 final getArtistProfileUseCaseProvider = Provider((ref) {
   final repo = ref.watch(artistProfilesRepositoryProvider);
-  return GetArtistProfileUseCase(repo, ref);
+  return GetArtistProfileUseCase(repo);
 });
 
 // provides the current artist profile
