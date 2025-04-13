@@ -30,9 +30,11 @@ class DevUserSwitcher extends ConsumerWidget {
                   await coordinator.startDevSession("artist");
 
                   if (!context.mounted) return;
-                  Navigator.of(
-                    context,
-                  ).pushNamedAndRemoveUntil('/main', (route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/main',
+                    (route) => false,
+                    arguments: 2,
+                  );
                 },
                 child: const Text('Artist'),
               ),
@@ -42,9 +44,11 @@ class DevUserSwitcher extends ConsumerWidget {
                   await coordinator.startDevSession("client");
 
                   if (!context.mounted) return;
-                  Navigator.of(
-                    context,
-                  ).pushNamedAndRemoveUntil('/main', (route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/main',
+                    (route) => false,
+                    arguments: 2,
+                  );
                 },
                 child: const Text('Client'),
               ),

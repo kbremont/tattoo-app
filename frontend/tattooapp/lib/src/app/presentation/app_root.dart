@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tattooapp/src/core/theme/theme.dart';
-import 'package:tattooapp/src/app/presentation/splash_screen.dart';
-import 'package:tattooapp/src/app/presentation/welcome_carousel_screen.dart';
-import 'package:tattooapp/src/features/session/presentation/dev_login_screen.dart';
-import 'package:tattooapp/src/features/user/presentation/name_entry_screen.dart';
-import 'package:tattooapp/src/features/user/presentation/user_type_selection_screen.dart';
-import 'package:tattooapp/src/features/user/presentation/style_preference_screen.dart';
-import 'package:tattooapp/src/features/artist/presentation/artist_profile_entry_screen.dart';
-import 'package:tattooapp/src/features/client/presentation/client_profile_entry_screen.dart';
-import 'package:tattooapp/src/features/user/presentation/profile_display_screen.dart';
-import 'package:tattooapp/src/app/presentation/main_app_shell.dart';
+import 'package:tattooapp/src/core/utils/app_router.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -26,19 +17,8 @@ class AppRoot extends ConsumerWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
-      initialRoute: '/splash',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/welcome': (context) => const WelcomeCarouselScreen(),
-        '/dev-login': (context) => const DevLoginScreen(),
-        '/user/name-entry': (_) => const NameEntryScreen(),
-        '/user/type-selection': (_) => const UserTypeSelectionScreen(),
-        '/user/style-preference': (_) => const StylePreferenceScreen(),
-        '/artist/profile-entry': (_) => const ArtistProfileEntryScreen(),
-        '/client/profile-entry': (_) => const ClientProfileEntryScreen(),
-        '/profile': (context) => const ProfileDisplayScreen(),
-        '/main': (context) => const MainAppShell(),
-      },
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: '/',
     );
   }
 }
