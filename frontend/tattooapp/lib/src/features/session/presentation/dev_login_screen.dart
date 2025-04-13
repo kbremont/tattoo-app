@@ -23,7 +23,7 @@ class DevLoginScreen extends ConsumerWidget {
                 if (!context.mounted) return;
                 Navigator.of(
                   context,
-                ).pushNamedAndRemoveUntil('/profile', (route) => false);
+                ).pushNamedAndRemoveUntil('/main', (route) => false);
               },
               child: const Text('Login as Client'),
             ),
@@ -35,7 +35,7 @@ class DevLoginScreen extends ConsumerWidget {
                 if (!context.mounted) return;
                 Navigator.of(
                   context,
-                ).pushNamedAndRemoveUntil('/profile', (route) => false);
+                ).pushNamedAndRemoveUntil('/main', (route) => false);
               },
               child: const Text('Login as Artist'),
             ),

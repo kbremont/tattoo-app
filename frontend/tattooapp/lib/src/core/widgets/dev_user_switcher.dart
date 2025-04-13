@@ -32,7 +32,7 @@ class DevUserSwitcher extends ConsumerWidget {
                   if (!context.mounted) return;
                   Navigator.of(
                     context,
-                  ).pushNamedAndRemoveUntil('/profile', (route) => false);
+                  ).pushNamedAndRemoveUntil('/main', (route) => false);
                 },
                 child: const Text('Artist'),
               ),
@@ -44,7 +44,7 @@ class DevUserSwitcher extends ConsumerWidget {
                   if (!context.mounted) return;
                   Navigator.of(
                     context,
-                  ).pushNamedAndRemoveUntil('/profile', (route) => false);
+                  ).pushNamedAndRemoveUntil('/main', (route) => false);
                 },
                 child: const Text('Client'),
               ),

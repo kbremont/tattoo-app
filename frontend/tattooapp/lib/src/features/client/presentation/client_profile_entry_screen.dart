@@ -59,9 +59,7 @@ class _ClientProfileEntryScreenState
 
       if (!mounted) return;
       // navigate to client profile screen
-      Navigator.of(
-        context,
-      ).pushNamedAndRemoveUntil('/profile', (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
     } else {
       // show error message
       ScaffoldMessenger.of(context).showSnackBar(
