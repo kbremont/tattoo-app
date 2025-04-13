@@ -73,9 +73,7 @@ class _ArtistProfileEntryScreenState
 
       if (!mounted) return;
       // navigate to artist profile screen
-      Navigator.of(
-        context,
-      ).pushNamedAndRemoveUntil('/profile', (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
     }
   }
 
